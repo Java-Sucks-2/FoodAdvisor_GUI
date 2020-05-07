@@ -1,5 +1,5 @@
 package src.components;
 
-public class FAButton {
+public class FButton {
 
 }
