@@ -10,6 +10,9 @@ public class FWindow extends JFrame {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-        this.setBounds(100, 100, 960, 540);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setUndecorated(true);
+
+        this.setBounds(0,0,1920,1080);
     }
-}
+} 

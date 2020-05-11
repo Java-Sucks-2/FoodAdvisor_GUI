@@ -8,7 +8,7 @@ public class FPage extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public FPage() {
-        super();
+        super(null);
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 }
