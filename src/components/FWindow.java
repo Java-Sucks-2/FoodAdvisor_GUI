@@ -12,7 +12,6 @@ public class FWindow extends JFrame {
 		this.setResizable(false);
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //this.setUndecorated(true);
-        this.setVisible(true);
         this.setBounds(0,0,1920,1080);
         
     }

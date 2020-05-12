@@ -12,6 +12,7 @@ public class FButton extends JButton {
         super(text);
         AddStyle();
     }
+    
 
     private void AddStyle() {
         this.setForeground(Color.WHITE);

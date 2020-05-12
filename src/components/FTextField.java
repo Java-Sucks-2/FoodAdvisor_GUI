@@ -11,6 +11,9 @@ public class FTextField extends JTextField {
     public FTextField(String text) {
         super(text);
     }
+    public FTextField(int value) {
+        super(value);
+    }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {
         int xcoord = (win_width-width)/2;
