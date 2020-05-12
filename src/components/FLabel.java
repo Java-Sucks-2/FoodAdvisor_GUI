@@ -8,6 +8,10 @@ public class FLabel extends JLabel {
     /***/
     private static final long serialVersionUID = 1L;
     
+    public FLabel() {
+        super();
+    }
+
     public FLabel(String text, Font font) {
         super(text);
         this.setFont(font);
