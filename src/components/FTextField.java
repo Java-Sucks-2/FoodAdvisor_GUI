@@ -1,6 +1,8 @@
 package src.components;
 
+import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 public class FTextField extends JTextField {
     /***/
@@ -13,5 +15,6 @@ public class FTextField extends JTextField {
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {
         int xcoord = (win_width-width)/2;
         this.setBounds(xcoord, ycoord, width, height);
+       // this.setBorder(border);
     }
 }
