@@ -15,4 +15,7 @@ public class FPage extends JPanel {
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setBackground(Color.WHITE);
     }
+
+	public void setText(String string) {
+	}
 }
