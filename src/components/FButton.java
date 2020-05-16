@@ -13,11 +13,10 @@ public class FButton extends JButton {
         AddStyle();
     }
     
-
     private void AddStyle() {
         this.setForeground(Color.WHITE);
         this.setBackground(new Color(237, 71, 53));
-        this.setFont(new Font("Calibri", Font.PLAIN, 20));
+        this.setFont(new Font("Manrope Light", Font.PLAIN, 20));
         this.setFocusPainted(false);
         this.setContentAreaFilled(true);
         this.setBorderPainted(false);

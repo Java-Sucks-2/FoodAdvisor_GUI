@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
 
 public class FPage extends JPanel {
     /***/
@@ -12,5 +13,6 @@ public class FPage extends JPanel {
     public FPage() {
         super(new GridBagLayout());
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
+        this.setBackground(Color.WHITE);
     }
 }

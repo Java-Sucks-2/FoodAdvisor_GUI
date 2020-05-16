@@ -1,18 +1,19 @@
 package src.components;
 
-import java.awt.Color;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
+import java.awt.Font;
 
 public class FTextField extends JTextField {
     /***/
     private static final long serialVersionUID = 1L;
     
-    public FTextField(String text) {
+    public FTextField(String text, Font font) {
         super(text);
+        this.setFont(font);
     }
-    public FTextField(int value) {
+    public FTextField(int value, Font font) {
         super(value);
+        this.setFont(font);
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {
