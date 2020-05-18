@@ -141,7 +141,10 @@ public class Clienti {
     register_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent arg0) {
-        //mouse clicked
+        window.dispose();
+        Register register = new Register();
+        
+        
 			}
     });
 
