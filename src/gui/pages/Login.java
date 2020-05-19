@@ -49,17 +49,17 @@ public class Login {
         gbc.fill = GridBagConstraints.CENTER;
         setGridCoordinatesXY(gbc, 0, 0);
         // spacing Insets(int top, int left, int bottom, int right)
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(-30, 0, 0, 0);
         page.add(title_lbl, gbc);
 
         text = "Accedi ed iniza a cercare nuovi ristoranti";
         info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
         setGridCoordinatesXY(gbc, 0, 1);
-        gbc.insets = new Insets(20, 0, 15, 0);
+        gbc.insets = new Insets(-10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
         emailtxtAlreadyClicked = false;
-        email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         email_tf.setText("Email");
         email_tf.addMouseListener(new MouseAdapter() {
             @Override
@@ -83,11 +83,11 @@ public class Login {
         
         email_tf.setBorder(new LineBorder(Color.BLACK, 1));
         setGridCoordinatesXY(gbc, 0, 2);
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(30, 0, 0, 0);
         email_tf.setBackground(Color.WHITE);
         page.add(email_tf, gbc);
 
-        password_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 20));
+        password_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 22));
         password_pf.setText("Password");
         password_pf.addFocusListener(new FocusAdapter() {
             @Override
@@ -106,7 +106,7 @@ public class Login {
         });
 
         password_pf.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(password_pf, gbc);
@@ -120,14 +120,14 @@ public class Login {
         });
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 5, 0, 0);
+        gbc.insets = new Insets(20, 5, 0, 0);
         setGridCoordinatesXY(gbc, 1, 3);
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(questionMark_image, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 4);
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(30, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         page.add(bts_pane, gbc);
 
@@ -141,7 +141,7 @@ public class Login {
         
         gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         // gbc.insets = new Insets(0,0,0,294);
@@ -149,8 +149,8 @@ public class Login {
 
         FLabel gap_lbl = new FLabel();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 0, 0);
-        gbc.weightx = 0.1;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.weightx = 0.05;
         setGridCoordinatesXY(gbc, 1, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         // gbc.insets = new Insets(0,269,0,0);
@@ -158,14 +158,14 @@ public class Login {
 
         register_btn = new FButton("Registrati");
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
         gbc.weightx = 0.5;
         setGridCoordinatesXY(gbc, 2, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(register_btn, gbc);
 
-        guest_lb = new FLabel("<html>Oppure procedi come <font color='blue'>ospite</font></html>", new Font("Manrope", Font.PLAIN, 15));
+        guest_lb = new FLabel("<html>Oppure procedi come <font color='blue'>ospite</font></html>", new Font("Manrope", Font.PLAIN, 16));
         guest_lb.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
@@ -183,7 +183,7 @@ public class Login {
 
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(10, 0, 0, 0);
-        gbc.ipadx = -65;
+        gbc.ipadx = -100;
         bts_pane.add(guest_lb, gbc);
     }
 

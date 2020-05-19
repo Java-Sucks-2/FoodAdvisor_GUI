@@ -48,17 +48,17 @@ public class Register {
         gbc.fill = GridBagConstraints.CENTER;
         setGridCoordinatesXY(gbc, 0, 0);
         // spacing Insets(int top, int left, int bottom, int right)
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(-30, 0, 0, 0);
         page.add(title_lbl, gbc);
 
         text = "Registrati per avere accesso a tutte le funzioni";
         info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
         setGridCoordinatesXY(gbc, 0, 1);
-        gbc.insets = new Insets(20, 0, 15, 0);
+        gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
         nicktxtAlreadyClicked = false;
-        nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         nick_tf.setText("Nickname");
         nick_tf.addMouseListener(new MouseAdapter() {
             @Override
@@ -82,11 +82,11 @@ public class Register {
         
         nick_tf.setBorder(new LineBorder(Color.BLACK, 1));
         setGridCoordinatesXY(gbc, 0, 2);
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(30, 0, 0, 0);
         nick_tf.setBackground(Color.WHITE);
         page.add(nick_tf, gbc);
 
-        name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         name_tf.setText("Nome");
         name_tf.addFocusListener(new FocusAdapter() {
             @Override
@@ -105,12 +105,12 @@ public class Register {
             }
             });
             name_tf.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(name_tf, gbc);
 
-        surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         surname_tf.setText("Cognome");
         surname_tf.addFocusListener(new FocusAdapter() {
             @Override
@@ -129,21 +129,21 @@ public class Register {
             }
         });
         surname_tf.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 4);
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(surname_tf, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(30, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         page.add(bts_pane, gbc);
 
         back_btn = new FButton("Indietro");
         gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         // gbc.insets = new Insets(0,0,0,294);
@@ -151,7 +151,7 @@ public class Register {
 
         FLabel gap_lbl = new FLabel();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
         gbc.weightx = 0.1;
         setGridCoordinatesXY(gbc, 1, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -167,7 +167,7 @@ public class Register {
         });
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(0, 0, 0, 0);
         gbc.weightx = 0.5;
         setGridCoordinatesXY(gbc, 2, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -177,8 +177,8 @@ public class Register {
         procedure_lb = new FLabel("assets/Step1.png");
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
-        gbc.insets = new Insets(15, 0, 0, 0);
-        gbc.ipadx = -800;
+        gbc.insets = new Insets(30, 0, 0, 0);
+        gbc.ipadx = -600;
         bts_pane.add(procedure_lb, gbc);
     }
 

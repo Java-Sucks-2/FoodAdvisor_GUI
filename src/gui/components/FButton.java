@@ -1,6 +1,7 @@
 package src.gui.components;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 
@@ -16,10 +17,11 @@ public class FButton extends JButton {
     private void AddStyle() {
         this.setForeground(Color.WHITE);
         this.setBackground(new Color(237, 71, 53));
-        this.setFont(new Font("Manrope Light", Font.PLAIN, 20));
+        this.setFont(new Font("Manrope", Font.PLAIN, 22));
         this.setFocusPainted(false);
         this.setContentAreaFilled(true);
         this.setBorderPainted(false);
+        this.setPreferredSize(new Dimension(100, 45));
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {

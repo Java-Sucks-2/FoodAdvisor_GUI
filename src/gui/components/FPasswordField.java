@@ -1,6 +1,8 @@
 package src.gui.components;
 
 import javax.swing.JPasswordField;
+
+import java.awt.Dimension;
 import java.awt.Font;
 
 
@@ -12,6 +14,7 @@ public class FPasswordField extends JPasswordField {
         super(i);
         this.setFont(font);
         this.setHorizontalAlignment(JPasswordField.CENTER);
+        this.setPreferredSize(new Dimension(100, 40));
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {
