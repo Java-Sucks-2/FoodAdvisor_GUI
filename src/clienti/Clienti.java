@@ -7,17 +7,22 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import javax.swing.event.MouseInputAdapter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import src.gui.pages.Login;
 import src.gui.pages.Register;
+import src.gui.pages.Register2;
+import src.gui.pages.Register3;
 
 public class Clienti {
   private FWindow mainWindow;
   private Login loginPage;
   private Register registerPage;
+  private Register2 registerPage2;
+  private Register3 registerPage3;
   
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
@@ -35,6 +40,8 @@ public class Clienti {
 
     loginPage = new Login();
     registerPage = new Register();
+    registerPage2 = new Register2();
+    registerPage3 = new Register3();
 
     mainWindow.setIconImage(new ImageIcon("assets/icon.png").getImage());
 
@@ -51,6 +58,34 @@ public class Clienti {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
         changePage(loginPage.getPage(), loginPage.pageTitle);
+      }
+    });
+
+    registerPage.continue_btn.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(registerPage2.getPage(), registerPage.pageTitle);
+      }
+    });
+
+    registerPage2.back_btn.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(registerPage.getPage(), registerPage.pageTitle);
+      }
+    });
+
+    registerPage2.continue_btn.addMouseListener(new MouseInputAdapter() {
+      @Override
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(registerPage3.getPage(), registerPage3.pageTitle);
+      }
+    });
+
+    registerPage3.back_btn.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(registerPage2.getPage(), registerPage2.pageTitle);
       }
     });
 
