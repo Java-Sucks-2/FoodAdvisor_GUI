@@ -65,6 +65,7 @@ public class Register2 {
                 if(!towntxtAlreadyClicked || town_tf.getText().equals("Comune")) {
                     town_tf.setText("");
                     towntxtAlreadyClicked = true;
+                    town_tf.setForeground(Color.BLACK);
                 }
             }
         });
@@ -73,8 +74,10 @@ public class Register2 {
                 @Override
                 public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(town_tf.getText().equals(""))
+                    if(town_tf.getText().equals("")){
+                        town_tf.setForeground(Color.GRAY);
                         town_tf.setText("Comune");
+                    }
                 }
         });
         
@@ -90,8 +93,10 @@ public class Register2 {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(district_tf.getText().equals(""))
+                if(district_tf.getText().equals("")){
+                    district_tf.setForeground(Color.GRAY);
                     district_tf.setText("Provincia");
+                }
             }
             @Override
             public void focusGained(final FocusEvent e) {
@@ -99,6 +104,7 @@ public class Register2 {
                 if(!districttxtAlreadyClicked || district_tf.getText().equals("Provincia")) {
                     district_tf.setText("");
                     districttxtAlreadyClicked = true;
+                    district_tf.setForeground(Color.BLACK);
                 }
             }
             });

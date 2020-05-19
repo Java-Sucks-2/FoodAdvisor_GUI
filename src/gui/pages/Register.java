@@ -67,6 +67,7 @@ public class Register {
                 if(!nicktxtAlreadyClicked || nick_tf.getText().equals("Nickname")) {
                     nick_tf.setText("");
                     nicktxtAlreadyClicked = true;
+                    nick_tf.setForeground(Color.BLACK);
                 }
             }
         });
@@ -75,8 +76,10 @@ public class Register {
                 @Override
                 public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(nick_tf.getText().equals(""))
+                    if(nick_tf.getText().equals("")){
+                        nick_tf.setForeground(Color.GRAY);
                         nick_tf.setText("Nickname");
+                    }
                 }
         });
         
@@ -92,8 +95,10 @@ public class Register {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(name_tf.getText().equals(""))
+                if(name_tf.getText().equals("")){
+                    name_tf.setForeground(Color.GRAY);
                     name_tf.setText("Nome");
+                }
             }
             @Override
             public void focusGained(final FocusEvent e) {
@@ -101,6 +106,7 @@ public class Register {
                 if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
                     name_tf.setText("");
                     nametxtAlreadyClicked = true;
+                    name_tf.setForeground(Color.BLACK);
                 }
             }
             });
@@ -116,8 +122,11 @@ public class Register {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(surname_tf.getText().equals(""))
-                surname_tf.setText("Cognome");
+                if(surname_tf.getText().equals("")){
+                    surname_tf.setForeground(Color.GRAY);
+                    surname_tf.setText("Cognome");
+                    
+                }
             }
             @Override
             public void focusGained(final FocusEvent e) {
@@ -125,6 +134,7 @@ public class Register {
                 if(!surnametxtAlreadyClicked || surname_tf.getText().equals("Cognome")) {
                     surname_tf.setText("");
                     surnametxtAlreadyClicked = true;
+                    surname_tf.setForeground(Color.BLACK);
                 }
             }
         });
