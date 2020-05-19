@@ -1,4 +1,4 @@
-package src.components;
+package src.gui.components;
 
 import javax.swing.JFrame;
 
@@ -12,7 +12,7 @@ public class FWindow extends JFrame {
 		this.setResizable(false);
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //this.setUndecorated(true);
-        this.setBounds(0,0,1920,1080);
+        this.setBounds(0,0,1280,720);
         
     }
 } 

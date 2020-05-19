@@ -1,6 +1,6 @@
 package src.clienti;
 
-import src.components.*;
+import src.gui.components.*;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;

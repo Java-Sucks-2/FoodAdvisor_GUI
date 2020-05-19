@@ -1,4 +1,4 @@
-package src.components;
+package src.gui.components;
 
 import java.awt.GridBagLayout;
 

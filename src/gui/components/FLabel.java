@@ -1,4 +1,4 @@
-package src.components;
+package src.gui.components;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,7 +19,6 @@ public class FLabel extends JLabel {
     
     public FLabel(String imgPath) {
         super(new ImageIcon(imgPath));
-        this.setBounds(0, 0, 1914, 1040);
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {

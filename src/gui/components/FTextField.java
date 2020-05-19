@@ -1,4 +1,4 @@
-package src.components;
+package src.gui.components;
 
 import javax.swing.JTextField;
 import java.awt.Font;
