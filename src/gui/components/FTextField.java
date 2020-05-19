@@ -10,10 +10,12 @@ public class FTextField extends JTextField {
     public FTextField(String text, Font font) {
         super(text);
         this.setFont(font);
+        this.setHorizontalAlignment(JTextField.CENTER);
     }
     public FTextField(int value, Font font) {
         super(value);
         this.setFont(font);
+        this.setHorizontalAlignment(JTextField.CENTER);
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {

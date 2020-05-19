@@ -8,11 +8,16 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import src.gui.pages.Login;
+import src.gui.pages.Register;
 
 public class Clienti {
   private FWindow mainWindow;
   private Login loginPage;
+  private Register registerPage;
   
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
@@ -29,11 +34,35 @@ public class Clienti {
     mainWindow = new FWindow("Login");
 
     loginPage = new Login();
-    mainWindow.add(loginPage.getPage());
+    registerPage = new Register();
+
     mainWindow.setIconImage(new ImageIcon("assets/icon.png").getImage());
+
+    changePage(loginPage.getPage());
+
+    loginPage.register_btn.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(final MouseEvent arg0) {
+        changePage(registerPage.getPage());
+      }
+    });
+    
+    registerPage.back_btn.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(final MouseEvent arg0) {
+        changePage(loginPage.getPage());
+      }
+    });
+
     mainWindow.setVisible(true);
   }
 
+  public void changePage(FPage newPage) {
+    mainWindow.getContentPane().removeAll();
+    mainWindow.getContentPane().add(newPage);
+    mainWindow.repaint();
+    mainWindow.revalidate();
+  }
 
   public static void registerFonts() {
     try {
@@ -46,8 +75,8 @@ public class Clienti {
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Regular.ttf")));
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-SemiBold.ttf")));
     }
-    catch(final Exception e) {
-      System.err.println(e);
+    catch(Exception e) {
+      e.printStackTrace();
     }
   }
 }

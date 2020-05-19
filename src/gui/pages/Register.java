@@ -23,8 +23,8 @@ public class Register {
     private FTextField name_tf;
     private FTextField surname_tf;
     private FPage bts_pane;
-    private FButton back_btn;
-    private FButton continue_btn;
+    public FButton back_btn;
+    public FButton continue_btn;
     private FLabel procedure_lb;
 
     public FPage getPage() {
@@ -43,27 +43,32 @@ public class Register {
         setGridCoordinatesXY(gbc, 0, 0);
         // spacing Insets(int top, int left, int bottom, int right)
         gbc.insets = new Insets(0, 0, 0, 0);
-        loginPane.add(title_lbl, gbc);
+        page.add(title_lbl, gbc);
 
         text = "Registrati per avere accesso a tutte le funzioni";
         info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(20, 0, 15, 0);
-        loginPane.add(info_lbl, gbc);
+        page.add(info_lbl, gbc);
 
-
+        nicktxtAlreadyClicked = false;
         nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
         nick_tf.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent arg0) {
             //mouse pressed
+                if(!nicktxtAlreadyClicked || email_tf.getText().equals("Email")) {
+                    email_tf.setText("");
+                    emailtxtAlreadyClicked = true;
             }
         });
 
         nick_tf.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent e) {
-            //focus lost
+                //focus lost
+                    if(email_tf.getText().equals(""))
+                        email_tf.setText("Email");
                 }
         });
         
@@ -71,7 +76,7 @@ public class Register {
         setGridCoordinatesXY(gbc, 0, 2);
         gbc.insets = new Insets(10, 0, 0, 0);
         nick_tf.setBackground(Color.WHITE);
-        loginPane.add(nick_tf, gbc);
+        page.add(nick_tf, gbc);
 
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
         name_tf.addFocusListener(new FocusAdapter() {
@@ -88,7 +93,7 @@ public class Register {
         gbc.insets = new Insets(10, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         // gbc.insets = new Insets(-60,0,50,0);
-        loginPane.add(name_tf, gbc);
+        page.add(name_tf, gbc);
 
         surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
         surname_tf.addFocusListener(new FocusAdapter() {
@@ -105,22 +110,15 @@ public class Register {
         gbc.insets = new Insets(10, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 4);
         // gbc.insets = new Insets(-60,0,50,0);
-        loginPane.add(surname_tf, gbc);
+        page.add(surname_tf, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        loginPane.add(bts_pane, gbc);
+        page.add(bts_pane, gbc);
 
         back_btn = new FButton("Indietro");
-        back_btn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(final MouseEvent arg0) {
-                //mouse clicked
-            
-            }
-        });
         gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 0, 0);
@@ -128,6 +126,15 @@ public class Register {
         // gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         // gbc.insets = new Insets(0,0,0,294);
         bts_pane.add(back_btn, gbc);
+
+        FLabel gap_lbl = new FLabel();
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.weightx = 0.1;
+        setGridCoordinatesXY(gbc, 1, 0);
+        // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        // gbc.insets = new Insets(0,269,0,0);
+        bts_pane.add(gap_lbl, gbc);
 
         continue_btn = new FButton("Continua");
         continue_btn.addMouseListener(new MouseAdapter() {
@@ -140,7 +147,7 @@ public class Register {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.weightx = 0.5;
-        setGridCoordinatesXY(gbc, 1, 0);
+        setGridCoordinatesXY(gbc, 2, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(continue_btn, gbc);

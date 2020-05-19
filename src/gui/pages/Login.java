@@ -4,6 +4,7 @@ import src.gui.components.*;
 import java.awt.*;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -12,15 +13,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Login {
-
+   
     private FPage page;
     private FLabel title_lbl;
     private FTextField email_tf;
     private FPasswordField password_pf;
     private FLabel questionMark_image;
-    final FButton register_btn;
-    final FPage bts_pane;
+    public FButton register_btn;
+    private FPage bts_pane;
+    private FButton login_btn;
+    final FLabel info_lbl;
     FLabel guest_lb; 
+
+    final String text;
+    boolean emailtxtAlreadyClicked;
+    boolean passtxtAlreadyClicked;
 
     //private Register register;
     private GridBagConstraints gbc;
@@ -42,18 +49,23 @@ public class Login {
         gbc.insets = new Insets(0, 0, 0, 0);
         page.add(title_lbl, gbc);
 
-        final String text = "Accedi ed iniza a cercare nuovi ristoranti";
-        final FLabel info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
+        text = "Accedi ed iniza a cercare nuovi ristoranti";
+        info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(20, 0, 15, 0);
         page.add(info_lbl, gbc);
 
-
+        emailtxtAlreadyClicked = false;
         email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        email_tf.setText("Email");
         email_tf.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent arg0) {
                 //mouse pressed
+                if(!emailtxtAlreadyClicked || email_tf.getText().equals("Email")) {
+                    email_tf.setText("");
+                    emailtxtAlreadyClicked = true;
+                }
             }
         });
 
@@ -61,6 +73,8 @@ public class Login {
             @Override
             public void focusLost(final FocusEvent e) {
                 //focus lost
+                if(email_tf.getText().equals(""))
+                email_tf.setText("Email");
             }
         });
         
@@ -71,14 +85,20 @@ public class Login {
         page.add(email_tf, gbc);
 
         password_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 20));
+        password_pf.setText("Password");
         password_pf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
-                //focus lost
+                if(String.valueOf(password_pf.getPassword()).equals(""))
+                    password_pf.setText("Password");
             }
             @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
+                if(!passtxtAlreadyClicked || String.valueOf(password_pf.getPassword()).equals("Password")) {
+                    password_pf.setText("");
+                    passtxtAlreadyClicked = true;
+                }
             }
         });
 
@@ -109,12 +129,11 @@ public class Login {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         page.add(bts_pane, gbc);
 
-        final FButton login_btn = new FButton("Accedi");
+        login_btn = new FButton("Accedi");
         login_btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent arg0) {
-            //mouse clicked
-            
+                
             }
         });
         
@@ -126,18 +145,21 @@ public class Login {
         // gbc.insets = new Insets(0,0,0,294);
         bts_pane.add(login_btn, gbc);
 
+        FLabel gap_lbl = new FLabel();
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.weightx = 0.1;
+        setGridCoordinatesXY(gbc, 1, 0);
+        // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        // gbc.insets = new Insets(0,269,0,0);
+        bts_pane.add(gap_lbl, gbc);
+
+
         register_btn = new FButton("Registrati");
-        register_btn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(final MouseEvent arg0) {
-
-            }
-        });
-
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.weightx = 0.5;
-        setGridCoordinatesXY(gbc, 1, 0);
+        setGridCoordinatesXY(gbc, 2, 0);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(register_btn, gbc);
@@ -160,7 +182,7 @@ public class Login {
 
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(10, 0, 0, 0);
-        gbc.ipadx = -100;
+        gbc.ipadx = -65;
         bts_pane.add(guest_lb, gbc);
     }
 
