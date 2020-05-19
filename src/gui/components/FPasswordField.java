@@ -3,6 +3,7 @@ package src.gui.components;
 import javax.swing.JPasswordField;
 import java.awt.Font;
 
+
 public class FPasswordField extends JPasswordField {
     /***/
     private static final long serialVersionUID = 1L;
@@ -10,6 +11,7 @@ public class FPasswordField extends JPasswordField {
     public FPasswordField(int i, Font font) {
         super(i);
         this.setFont(font);
+        this.setHorizontalAlignment(JPasswordField.CENTER);
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {

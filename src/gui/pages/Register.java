@@ -2,7 +2,6 @@ package src.gui.pages;
 
 import java.awt.*;
 
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -15,6 +14,9 @@ import src.gui.components.*;
 public class Register { 
 
     private FPage page;
+
+    public String pageTitle;
+
     private GridBagConstraints gbc;
     private FLabel title_lbl;
     private String text;
@@ -27,14 +29,18 @@ public class Register {
     public FButton continue_btn;
     private FLabel procedure_lb;
 
+    boolean nicktxtAlreadyClicked;
+    boolean nametxtAlreadyClicked;
+    boolean surnametxtAlreadyClicked;
+
     public FPage getPage() {
         return page;
     }
 
-    public Register(){
+    public Register() {
 
         page = new FPage();
-
+        pageTitle = "Register 1/3";
         gbc = new GridBagConstraints();
 
         title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));
@@ -53,13 +59,15 @@ public class Register {
 
         nicktxtAlreadyClicked = false;
         nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        nick_tf.setText("Nickname");
         nick_tf.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent arg0) {
             //mouse pressed
-                if(!nicktxtAlreadyClicked || email_tf.getText().equals("Email")) {
-                    email_tf.setText("");
-                    emailtxtAlreadyClicked = true;
+                if(!nicktxtAlreadyClicked || nick_tf.getText().equals("Nickname")) {
+                    nick_tf.setText("");
+                    nicktxtAlreadyClicked = true;
+                }
             }
         });
 
@@ -67,8 +75,8 @@ public class Register {
                 @Override
                 public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(email_tf.getText().equals(""))
-                        email_tf.setText("Email");
+                    if(nick_tf.getText().equals(""))
+                        nick_tf.setText("Nickname");
                 }
         });
         
@@ -79,15 +87,22 @@ public class Register {
         page.add(nick_tf, gbc);
 
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        name_tf.setText("Nome");
         name_tf.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusLost(final FocusEvent arg0) {
-            //focus lost
+            @Override
+            public void focusLost(final FocusEvent arg0) {
+                //focus lost
+                if(name_tf.getText().equals(""))
+                    name_tf.setText("Nome");
+            }
+            @Override
+            public void focusGained(final FocusEvent e) {
+                //focus gained
+                if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
+                    name_tf.setText("");
+                    nametxtAlreadyClicked = true;
                 }
-                @Override
-                public void focusGained(final FocusEvent e) {
-            //focus gained
-                }
+            }
             });
             name_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(10, 0, 0, 0);
@@ -96,14 +111,21 @@ public class Register {
         page.add(name_tf, gbc);
 
         surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        surname_tf.setText("Cognome");
         surname_tf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
+                if(surname_tf.getText().equals(""))
+                surname_tf.setText("Cognome");
             }
             @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
+                if(!surnametxtAlreadyClicked || surname_tf.getText().equals("Cognome")) {
+                    surname_tf.setText("");
+                    surnametxtAlreadyClicked = true;
+                }
             }
         });
         surname_tf.setBorder(new LineBorder(Color.BLACK, 1));
@@ -152,10 +174,11 @@ public class Register {
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(continue_btn, gbc);
 
-        procedure_lb = new FLabel("1/3", new Font("Manrope", Font.PLAIN, 15));
+        procedure_lb = new FLabel("assets/Step1.png");
         setGridCoordinatesXY(gbc, 0, 1);
-        gbc.insets = new Insets(10, 0, 0, 0);
-        gbc.ipadx = -100;
+        gbc.gridwidth = 3;
+        gbc.insets = new Insets(15, 0, 0, 0);
+        gbc.ipadx = -800;
         bts_pane.add(procedure_lb, gbc);
     }
 
@@ -163,4 +186,5 @@ public class Register {
         gbc.gridx = x;
         gbc.gridy = y;
     }
+
 }

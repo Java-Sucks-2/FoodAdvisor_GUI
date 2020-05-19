@@ -38,26 +38,27 @@ public class Clienti {
 
     mainWindow.setIconImage(new ImageIcon("assets/icon.png").getImage());
 
-    changePage(loginPage.getPage());
+    changePage(loginPage.getPage(), loginPage.pageTitle);
 
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
       @Override
-      public void mouseClicked(final MouseEvent arg0) {
-        changePage(registerPage.getPage());
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(registerPage.getPage(), registerPage.pageTitle);
       }
     });
     
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
       @Override
-      public void mouseClicked(final MouseEvent arg0) {
-        changePage(loginPage.getPage());
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(loginPage.getPage(), loginPage.pageTitle);
       }
     });
 
     mainWindow.setVisible(true);
   }
 
-  public void changePage(FPage newPage) {
+  public void changePage(FPage newPage, String title) {
+    mainWindow.setTitle(title);
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);
     mainWindow.repaint();

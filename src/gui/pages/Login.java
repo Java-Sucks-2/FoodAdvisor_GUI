@@ -4,7 +4,6 @@ import src.gui.components.*;
 import java.awt.*;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -15,6 +14,9 @@ import java.awt.event.MouseEvent;
 public class Login {
    
     private FPage page;
+
+    public String pageTitle;
+
     private FLabel title_lbl;
     private FTextField email_tf;
     private FPasswordField password_pf;
@@ -39,6 +41,7 @@ public class Login {
     public Login(){
         
         page = new FPage();
+        pageTitle = "Login";
         gbc = new GridBagConstraints();
 
         title_lbl = new FLabel("Benvenuto!", new Font("Manrope ExtraBold", Font.PLAIN, 99));
@@ -111,9 +114,8 @@ public class Login {
         questionMark_image = new FLabel("assets/QM_Red_32.png");
         questionMark_image.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(final MouseEvent arg0) {
+            public void mousePressed(final MouseEvent arg0) {
                 JOptionPane.showMessageDialog(null, "Inserisci in questo campo la tua password", "Help", JOptionPane.PLAIN_MESSAGE);
-            
             }
         });
 
@@ -153,7 +155,6 @@ public class Login {
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(gap_lbl, gbc);
-
 
         register_btn = new FButton("Registrati");
         gbc.fill = GridBagConstraints.HORIZONTAL;
