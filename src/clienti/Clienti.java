@@ -11,9 +11,9 @@ import javax.swing.SwingUtilities;
 import src.gui.pages.Login;
 
 public class Clienti {
-  ImageIcon img = new ImageIcon("assets/icon.png");
-  Login loginPage;
-
+  private FWindow mainWindow;
+  private Login loginPage;
+  
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
 
@@ -25,14 +25,12 @@ public class Clienti {
   }
 
   public Clienti() {
-
     registerFonts();
-
-    FWindow mainWindow = new FWindow("Login");
+    mainWindow = new FWindow("Login");
 
     loginPage = new Login();
     mainWindow.add(loginPage.getPage());
-
+    mainWindow.setIconImage(new ImageIcon("assets/icon.png").getImage());
     mainWindow.setVisible(true);
   }
 
