@@ -1,5 +1,6 @@
 package src.gui.components;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class FWindow extends JFrame {
@@ -13,6 +14,7 @@ public class FWindow extends JFrame {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //this.setUndecorated(true);
         this.setBounds(0,0,1280,760);
+        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
         
     }
 } 

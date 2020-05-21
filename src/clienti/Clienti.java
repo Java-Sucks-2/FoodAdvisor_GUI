@@ -43,8 +43,6 @@ public class Clienti {
     registerPage2 = new Register2();
     registerPage3 = new Register3();
 
-    mainWindow.setIconImage(new ImageIcon("assets/icon.png").getImage());
-
     changePage(loginPage.getPage(), loginPage.pageTitle);
 
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
