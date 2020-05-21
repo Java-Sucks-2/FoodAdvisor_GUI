@@ -2,6 +2,7 @@ package src.gui.pages;
 
 import java.awt.*;
 
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -28,6 +29,8 @@ public class Register3 {
     public FButton back_btn;
     public FButton continue_btn;
     private FLabel procedure_lb;
+    private FLabel questionMark1_image;
+    private FLabel questionMark2_image;
 
     boolean emailtxtAlreadyClicked;
     boolean pass1txtAlreadyClicked;
@@ -67,6 +70,7 @@ public class Register3 {
                 if(!emailtxtAlreadyClicked || email_tf.getText().equals("Email")) {
                     email_tf.setText("");
                     emailtxtAlreadyClicked = true;
+                    email_tf.setForeground(Color.BLACK);
                 }
             }
         });
@@ -75,8 +79,10 @@ public class Register3 {
                 @Override
                 public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(email_tf.getText().equals(""))
+                    if(email_tf.getText().equals("")){
+                        email_tf.setForeground(Color.gray);
                         email_tf.setText("Email");
+                    }
                 }
         });
         
@@ -87,13 +93,16 @@ public class Register3 {
         page.add(email_tf, gbc);
 
         password1_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 22));
+        password1_pf.setForeground(Color.GRAY);
         password1_pf.setText("Password");
         password1_pf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(String.valueOf(password1_pf.getPassword()).equals(""))
+                if(String.valueOf(password1_pf.getPassword()).equals("")){
+                    password1_pf.setForeground(Color.GRAY);
                     password1_pf.setText("Password");
+                }
             }
             @Override
             public void focusGained(final FocusEvent e) {
@@ -101,6 +110,7 @@ public class Register3 {
                 if(!pass1txtAlreadyClicked || String.valueOf(password1_pf.getPassword()).equals("Password")) {
                     password1_pf.setText("");
                     pass1txtAlreadyClicked = true;
+                    password1_pf.setForeground(Color.BLACK);
                 }
             }
             });
@@ -110,21 +120,38 @@ public class Register3 {
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(password1_pf, gbc);
 
+        questionMark1_image = new FLabel("assets/QM_Red_32.png");
+        questionMark1_image.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent arg0) {
+                JOptionPane.showMessageDialog(null, "Inserisci in questo campo la password", "Help", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 5, 0, 0);
+        setGridCoordinatesXY(gbc, 1, 3);
+        // gbc.insets = new Insets(-60,0,50,0);
+        page.add(questionMark1_image, gbc);
+
         password2_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 22));
+        password2_pf.setForeground(Color.GRAY);
         password2_pf.setText("Password");
         password2_pf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(String.valueOf(password2_pf.getPassword()).equals(""))
-                password2_pf.setText("Password");
+                if(String.valueOf(password2_pf.getPassword()).equals("")){
+                    password2_pf.setForeground(Color.GRAY);
+                    password2_pf.setText("Password");
+                }
             }
             @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
-                if(!pass2txtAlreadyClicked || String.valueOf(password2_pf.getPassword()).equals("Cognome")) {
+                if(!pass2txtAlreadyClicked || String.valueOf(password2_pf.getPassword()).equals("Password")) {
                     password2_pf.setText("");
                     pass2txtAlreadyClicked = true;
+                    password2_pf.setForeground(Color.BLACK);
                 }
             }
         });
@@ -133,6 +160,19 @@ public class Register3 {
         setGridCoordinatesXY(gbc, 0, 4);
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(password2_pf, gbc);
+
+        questionMark2_image = new FLabel("assets/QM_Red_32.png");
+        questionMark2_image.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent arg0) {
+                JOptionPane.showMessageDialog(null, "Ripeti la tua password", "Help", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 5, 0, 0);
+        setGridCoordinatesXY(gbc, 1, 4);
+        // gbc.insets = new Insets(-60,0,50,0);
+        page.add(questionMark2_image, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
