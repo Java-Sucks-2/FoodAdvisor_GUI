@@ -2,7 +2,6 @@ package src.gui.pages;
 
 import java.awt.*;
 
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -12,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 import src.gui.components.*;
 
-public class Register3 { 
+public class L_Register { 
 
     private FPage page;
 
@@ -22,28 +21,26 @@ public class Register3 {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    private FTextField email_tf;
-    private FPasswordField password1_pf;
-    private FPasswordField password2_pf;
+    private FTextField nick_tf;
+    private FTextField name_tf;
+    private FTextField surname_tf;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
     private FLabel procedure_lb;
-    private FLabel questionMark1_image;
-    private FLabel questionMark2_image;
 
-    boolean emailtxtAlreadyClicked;
-    boolean pass1txtAlreadyClicked;
-    boolean pass2txtAlreadyClicked;
+    boolean nicktxtAlreadyClicked;
+    boolean nametxtAlreadyClicked;
+    boolean surnametxtAlreadyClicked;
 
     public FPage getPage() {
         return page;
     }
 
-    public Register3() {
+    public L_Register() {
 
         page = new FPage();
-        pageTitle = "Register 3/3";
+        pageTitle = "Register 1/3";
         gbc = new GridBagConstraints();
 
         title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));
@@ -60,119 +57,92 @@ public class Register3 {
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
-        emailtxtAlreadyClicked = false;
-        email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
-        email_tf.setText("Email");
-        email_tf.addMouseListener(new MouseAdapter() {
+        nicktxtAlreadyClicked = false;
+        nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        nick_tf.setText("Nickname");
+        nick_tf.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent arg0) {
             //mouse pressed
-                if(!emailtxtAlreadyClicked || email_tf.getText().equals("Email")) {
-                    email_tf.setText("");
-                    emailtxtAlreadyClicked = true;
-                    email_tf.setForeground(Color.BLACK);
+                if(!nicktxtAlreadyClicked || nick_tf.getText().equals("Nickname")) {
+                    nick_tf.setText("");
+                    nicktxtAlreadyClicked = true;
+                    nick_tf.setForeground(Color.BLACK);
                 }
             }
         });
 
-        email_tf.addFocusListener(new FocusAdapter() {
+        nick_tf.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(email_tf.getText().equals("")){
-                        email_tf.setForeground(Color.gray);
-                        email_tf.setText("Email");
+                    if(nick_tf.getText().equals("")){
+                        nick_tf.setForeground(Color.GRAY);
+                        nick_tf.setText("Nickname");
                     }
                 }
         });
         
-        email_tf.setBorder(new LineBorder(Color.BLACK, 1));
+        nick_tf.setBorder(new LineBorder(Color.BLACK, 1));
         setGridCoordinatesXY(gbc, 0, 2);
         gbc.insets = new Insets(30, 0, 0, 0);
-        email_tf.setBackground(Color.WHITE);
-        page.add(email_tf, gbc);
+        nick_tf.setBackground(Color.WHITE);
+        page.add(nick_tf, gbc);
 
-        password1_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 22));
-        password1_pf.setForeground(Color.GRAY);
-        password1_pf.setText("Password");
-        password1_pf.addFocusListener(new FocusAdapter() {
+        name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        name_tf.setText("Nome");
+        name_tf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(String.valueOf(password1_pf.getPassword()).equals("")){
-                    password1_pf.setForeground(Color.GRAY);
-                    password1_pf.setText("Password");
+                if(name_tf.getText().equals("")){
+                    name_tf.setForeground(Color.GRAY);
+                    name_tf.setText("Nome");
                 }
             }
             @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
-                if(!pass1txtAlreadyClicked || String.valueOf(password1_pf.getPassword()).equals("Password")) {
-                    password1_pf.setText("");
-                    pass1txtAlreadyClicked = true;
-                    password1_pf.setForeground(Color.BLACK);
+                if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
+                    name_tf.setText("");
+                    nametxtAlreadyClicked = true;
+                    name_tf.setForeground(Color.BLACK);
                 }
             }
             });
-            password1_pf.setBorder(new LineBorder(Color.BLACK, 1));
+            name_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         // gbc.insets = new Insets(-60,0,50,0);
-        page.add(password1_pf, gbc);
+        page.add(name_tf, gbc);
 
-        questionMark1_image = new FLabel("assets/QM_Red_32.png");
-        questionMark1_image.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent arg0) {
-                JOptionPane.showMessageDialog(null, "Inserisci in questo campo la password", "Help", JOptionPane.PLAIN_MESSAGE);
-            }
-        });
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 5, 0, 0);
-        setGridCoordinatesXY(gbc, 1, 3);
-        // gbc.insets = new Insets(-60,0,50,0);
-        page.add(questionMark1_image, gbc);
-
-        password2_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 22));
-        password2_pf.setForeground(Color.GRAY);
-        password2_pf.setText("Password");
-        password2_pf.addFocusListener(new FocusAdapter() {
+        surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        surname_tf.setText("Cognome");
+        surname_tf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(String.valueOf(password2_pf.getPassword()).equals("")){
-                    password2_pf.setForeground(Color.GRAY);
-                    password2_pf.setText("Password");
+                if(surname_tf.getText().equals("")){
+                    surname_tf.setForeground(Color.GRAY);
+                    surname_tf.setText("Cognome");
+                    
                 }
             }
             @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
-                if(!pass2txtAlreadyClicked || String.valueOf(password2_pf.getPassword()).equals("Password")) {
-                    password2_pf.setText("");
-                    pass2txtAlreadyClicked = true;
-                    password2_pf.setForeground(Color.BLACK);
+                if(!surnametxtAlreadyClicked || surname_tf.getText().equals("Cognome")) {
+                    surname_tf.setText("");
+                    surnametxtAlreadyClicked = true;
+                    surname_tf.setForeground(Color.BLACK);
                 }
             }
         });
-        password2_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        surname_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 4);
         // gbc.insets = new Insets(-60,0,50,0);
-        page.add(password2_pf, gbc);
-
-        questionMark2_image = new FLabel("assets/QM_Red_32.png");
-        questionMark2_image.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent arg0) {
-                JOptionPane.showMessageDialog(null, "Ripeti la tua password", "Help", JOptionPane.PLAIN_MESSAGE);
-            }
-        });
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(20, 5, 0, 0);
-        setGridCoordinatesXY(gbc, 1, 4);
-        // gbc.insets = new Insets(-60,0,50,0);
-        page.add(questionMark2_image, gbc);
+        page.add(surname_tf, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
@@ -214,7 +184,7 @@ public class Register3 {
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(continue_btn, gbc);
 
-        procedure_lb = new FLabel("assets/Step3.png");
+        procedure_lb = new FLabel("assets/Step1.png");
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
         gbc.insets = new Insets(30, 0, 0, 0);

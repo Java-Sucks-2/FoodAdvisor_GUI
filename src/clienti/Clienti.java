@@ -12,17 +12,17 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import src.gui.pages.Login;
-import src.gui.pages.Register;
-import src.gui.pages.Register2;
-import src.gui.pages.Register3;
+import src.gui.pages.L_Login;
+import src.gui.pages.L_Register;
+import src.gui.pages.L_Register2;
+import src.gui.pages.L_Register3;
 
 public class Clienti {
   private FWindow mainWindow;
-  private Login loginPage;
-  private Register registerPage;
-  private Register2 registerPage2;
-  private Register3 registerPage3;
+  private L_Login loginPage;
+  private L_Register registerPage;
+  private L_Register2 registerPage2;
+  private L_Register3 registerPage3;
   
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
@@ -36,62 +36,61 @@ public class Clienti {
 
   public Clienti() {
     registerFonts();
-    mainWindow = new FWindow("Login");
+    mainWindow = new FWindow("Clienti");
 
-    loginPage = new Login();
-    registerPage = new Register();
-    registerPage2 = new Register2();
-    registerPage3 = new Register3();
+    loginPage = new L_Login();
+    registerPage = new L_Register();
+    registerPage2 = new L_Register2();
+    registerPage3 = new L_Register3();
 
-    changePage(loginPage.getPage(), loginPage.pageTitle);
+    changePage(loginPage.getPage());
 
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage.getPage(), registerPage.pageTitle);
+        changePage(registerPage.getPage());
       }
     });
     
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(loginPage.getPage(), loginPage.pageTitle);
+        changePage(loginPage.getPage());
       }
     });
 
     registerPage.continue_btn.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage2.getPage(), registerPage.pageTitle);
+        changePage(registerPage2.getPage());
       }
     });
 
     registerPage2.back_btn.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage.getPage(), registerPage.pageTitle);
+        changePage(registerPage.getPage());
       }
     });
 
     registerPage2.continue_btn.addMouseListener(new MouseInputAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage3.getPage(), registerPage3.pageTitle);
+        changePage(registerPage3.getPage());
       }
     });
 
     registerPage3.back_btn.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage2.getPage(), registerPage2.pageTitle);
+        changePage(registerPage2.getPage());
       }
     });
 
     mainWindow.setVisible(true);
   }
 
-  public void changePage(FPage newPage, String title) {
-    mainWindow.setTitle(title);
+  public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);
     mainWindow.repaint();

@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 import src.gui.components.*;
 
-public class Register2 { 
+public class L_Register2 { 
 
     private FPage page;
 
@@ -35,7 +35,7 @@ public class Register2 {
         return page;
     }
 
-    public Register2() {
+    public L_Register2() {
 
         page = new FPage();
         pageTitle = "Register 2/3";

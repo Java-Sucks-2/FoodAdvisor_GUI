@@ -11,7 +11,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Login {
+public class L_Login {
    
     private FPage page;
 
@@ -38,7 +38,7 @@ public class Login {
         return page; 
     }
     
-    public Login(){
+    public L_Login(){
         
         page = new FPage();
         pageTitle = "Login";
