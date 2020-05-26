@@ -22,9 +22,9 @@ public class C_Register3 {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    private FTextField email_tf;
-    private FPasswordField password1_pf;
-    private FPasswordField password2_pf;
+    public FTextField email_tf;
+    public FPasswordField password1_pf;
+    public FPasswordField password2_pf;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
@@ -198,7 +198,7 @@ public class C_Register3 {
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(gap_lbl, gbc);
 
-        continue_btn = new FButton("Continua");
+        continue_btn = new FButton("Finito");
         continue_btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent arg0) {

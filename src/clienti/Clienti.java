@@ -2,12 +2,14 @@ package src.clienti;
 
 import src.gui.components.*;
 import java.awt.Font;
+import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,7 +25,8 @@ public class Clienti {
   private C_Register registerPage;
   private C_Register2 registerPage2;
   private C_Register3 registerPage3;
-  
+  private boolean canChangePage;
+
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
 
@@ -36,6 +39,7 @@ public class Clienti {
 
   public Clienti() {
     registerFonts();
+
     mainWindow = new FWindow("Clienti");
 
     loginPage     = new C_Login();
@@ -44,6 +48,9 @@ public class Clienti {
     registerPage3 = new C_Register3();
 
     changePage(loginPage.getPage());
+
+    Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
+    Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
       @Override
@@ -62,8 +69,32 @@ public class Clienti {
     registerPage.continue_btn.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage2.getPage());
-      }
+         /* TO DO: Controllo nickname */
+         canChangePage = true;
+
+         if(registerPage.nick_tf.getText().equals("Nickname")) {
+           registerPage.nick_tf.setBorder(redBorder);
+           canChangePage = false;
+         } else registerPage.nick_tf.setBorder(border);
+ 
+         if(registerPage.name_tf.getText().equals("Nome")) {
+           registerPage.name_tf.setBorder(redBorder);
+           canChangePage = false;
+         } else registerPage.name_tf.setBorder(border);
+ 
+         if(registerPage.surname_tf.getText().equals("Cognome")) {
+           registerPage.surname_tf.setBorder(redBorder);
+           canChangePage = false;
+         } else registerPage.surname_tf.setBorder(border);
+ 
+         if(canChangePage){ 
+           registerPage.nick_tf.setBorder(border);
+           registerPage.name_tf.setBorder(border);
+           registerPage.surname_tf.setBorder(border);
+
+           changePage(registerPage2.getPage());
+         }
+        }
     });
 
     registerPage2.back_btn.addMouseListener(new MouseAdapter() {
@@ -76,7 +107,24 @@ public class Clienti {
     registerPage2.continue_btn.addMouseListener(new MouseInputAdapter() {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        changePage(registerPage3.getPage());
+        canChangePage = true;
+
+        if(registerPage2.town_tf.getText().equals("Comune")) {
+          registerPage2.town_tf.setBorder(redBorder);
+          canChangePage = false;
+        } else registerPage2.town_tf.setBorder(border);
+
+        if(registerPage2.district_tf.getText().equals("Provincia")) {
+          registerPage2.district_tf.setBorder(redBorder);
+          canChangePage = false;
+        } else registerPage2.district_tf.setBorder(border);
+
+        if(canChangePage){ 
+          registerPage2.town_tf.setBorder(border);
+          registerPage2.district_tf.setBorder(border);
+
+          changePage(registerPage3.getPage());
+        }
       }
     });
 
@@ -84,6 +132,36 @@ public class Clienti {
       @Override
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage2.getPage());
+      }
+    });
+
+    registerPage3.continue_btn.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseReleased(final MouseEvent arg0) {
+        canChangePage = true;
+
+        if(registerPage3.email_tf.getText().equals("Email")) {
+          registerPage3.email_tf.setBorder(redBorder);
+          canChangePage = false;
+        } else registerPage3.email_tf.setBorder(border);
+
+        if(String.valueOf(registerPage3.password1_pf.getPassword()).equals("Password")) {
+          registerPage3.password1_pf.setBorder(redBorder);
+          canChangePage = false;
+        } else registerPage3.password1_pf.setBorder(border);
+
+        if(String.valueOf(registerPage3.password2_pf.getPassword()).equals("Password")) {
+          registerPage3.password2_pf.setBorder(redBorder);
+          canChangePage = false;
+        } else registerPage3.password2_pf.setBorder(border);
+
+        if(canChangePage){ 
+          registerPage3.email_tf.setBorder(border);
+          registerPage3.password1_pf.setBorder(border);
+          registerPage3.password2_pf.setBorder(border);
+          
+          // REGISTRA LO STRACAZZO DI UTENTEEEEEEE
+        }
       }
     });
 

@@ -21,8 +21,8 @@ public class C_Register2 {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    private FTextField town_tf;
-    private FTextField district_tf;
+    public FTextField town_tf;
+    public FTextField district_tf;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;

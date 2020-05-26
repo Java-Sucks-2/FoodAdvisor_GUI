@@ -21,9 +21,9 @@ public class C_Register {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    private FTextField nick_tf;
-    private FTextField name_tf;
-    private FTextField surname_tf;
+    public FTextField nick_tf;
+    public FTextField name_tf;
+    public FTextField surname_tf;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
@@ -173,7 +173,6 @@ public class C_Register {
             @Override
             public void mouseClicked(final MouseEvent arg0) {
                 //mouse clicked
-                //check campi non vuoti
             }
         });
 

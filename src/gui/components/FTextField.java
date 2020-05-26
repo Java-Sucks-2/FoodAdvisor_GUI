@@ -9,7 +9,8 @@ import java.awt.Font;
 public class FTextField extends JTextField {
     /***/
     private static final long serialVersionUID = 1L;
-    
+
+
     public FTextField(String text, Font font) {
         super(text);
         this.setFont(font);
