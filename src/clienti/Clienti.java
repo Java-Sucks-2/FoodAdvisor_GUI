@@ -12,17 +12,17 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import src.gui.pages.L_Login;
-import src.gui.pages.L_Register;
-import src.gui.pages.L_Register2;
-import src.gui.pages.L_Register3;
+import src.gui.pages.C_Login;
+import src.gui.pages.C_Register;
+import src.gui.pages.C_Register2;
+import src.gui.pages.C_Register3;
 
 public class Clienti {
   private FWindow mainWindow;
-  private L_Login loginPage;
-  private L_Register registerPage;
-  private L_Register2 registerPage2;
-  private L_Register3 registerPage3;
+  private C_Login loginPage;
+  private C_Register registerPage;
+  private C_Register2 registerPage2;
+  private C_Register3 registerPage3;
   
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
@@ -38,10 +38,10 @@ public class Clienti {
     registerFonts();
     mainWindow = new FWindow("Clienti");
 
-    loginPage = new L_Login();
-    registerPage = new L_Register();
-    registerPage2 = new L_Register2();
-    registerPage3 = new L_Register3();
+    loginPage     = new C_Login();
+    registerPage  = new C_Register();
+    registerPage2 = new C_Register2();
+    registerPage3 = new C_Register3();
 
     changePage(loginPage.getPage());
 
