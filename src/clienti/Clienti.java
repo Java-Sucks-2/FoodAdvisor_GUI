@@ -29,11 +29,7 @@ public class Clienti {
 
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
-      
-      
-      public void run() {
-        new Clienti();
-      }
+      public void run() { new Clienti(); }
     });
   }
 
@@ -49,29 +45,23 @@ public class Clienti {
 
     changePage(loginPage.getPage());
 
-    Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
-    Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+    addLoginPageListeners();
+    addRegisterPageListeners();
+    addRegisterPage2Listeners();
+    addRegisterPage3Listeners();
 
+    mainWindow.setVisible(true);
+  }
+
+  public void addLoginPageListeners() {
     loginPage.login_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if(loginPage.email_tf.getText().equals("Email")) {
-          loginPage.email_tf.setBorder(redBorder);
-          canChangePage = false;
-        } else loginPage.email_tf.setBorder(border);
+        canChangePage &= validateField(loginPage.email_tf, "Email");
+        canChangePage &= validateField(loginPage.password_pf, "Password");
 
-        if(String.valueOf(loginPage.password_pf.getPassword()).equals("Password")) {
-          loginPage.password_pf.setBorder(redBorder);
-          canChangePage = false;
-        } else loginPage.password_pf.setBorder(border);
-
-        if(canChangePage) {
-          loginPage.email_tf.setBorder(border);
-          loginPage.password_pf.setBorder(border);
-
-          // LOGGA LO STRACAZZO DI UTENTE
-        }
+        if(canChangePage) {/* Logga l'utente */}
       }
     });
 
@@ -80,7 +70,9 @@ public class Clienti {
         changePage(registerPage.getPage());
       }
     });
-    
+  }
+
+  public void addRegisterPageListeners() {
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         changePage(loginPage.getPage());
@@ -92,31 +84,16 @@ public class Clienti {
          /* TO DO: Controllo nickname */
          canChangePage = true;
 
-         if(registerPage.nick_tf.getText().equals("Nickname")) {
-           registerPage.nick_tf.setBorder(redBorder);
-           canChangePage = false;
-         } else registerPage.nick_tf.setBorder(border);
+         canChangePage &= validateField(registerPage.nick_tf, "Nickname");
+         canChangePage &= validateField(registerPage.name_tf, "Nome");
+         canChangePage &= validateField(registerPage.surname_tf, "Cognome");
  
-         if(registerPage.name_tf.getText().equals("Nome")) {
-           registerPage.name_tf.setBorder(redBorder);
-           canChangePage = false;
-         } else registerPage.name_tf.setBorder(border);
- 
-         if(registerPage.surname_tf.getText().equals("Cognome")) {
-           registerPage.surname_tf.setBorder(redBorder);
-           canChangePage = false;
-         } else registerPage.surname_tf.setBorder(border);
- 
-         if(canChangePage){ 
-           registerPage.nick_tf.setBorder(border);
-           registerPage.name_tf.setBorder(border);
-           registerPage.surname_tf.setBorder(border);
-
-           changePage(registerPage2.getPage());
-         }
+         if(canChangePage) changePage(registerPage2.getPage());
         }
     });
+  }
 
+  public void addRegisterPage2Listeners() {
     registerPage2.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage.getPage());
@@ -127,25 +104,15 @@ public class Clienti {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if(registerPage2.town_tf.getText().equals("Comune")) {
-          registerPage2.town_tf.setBorder(redBorder);
-          canChangePage = false;
-        } else registerPage2.town_tf.setBorder(border);
+        canChangePage &= validateField(registerPage2.town_tf, "Comune");
+        canChangePage &= validateField(registerPage2.district_tf, "Provincia");
 
-        if(registerPage2.district_tf.getText().equals("Provincia")) {
-          registerPage2.district_tf.setBorder(redBorder);
-          canChangePage = false;
-        } else registerPage2.district_tf.setBorder(border);
-
-        if(canChangePage){ 
-          registerPage2.town_tf.setBorder(border);
-          registerPage2.district_tf.setBorder(border);
-
-          changePage(registerPage3.getPage());
-        }
+        if(canChangePage) changePage(registerPage3.getPage());
       }
     });
+  }
 
+  public void addRegisterPage3Listeners() {
     registerPage3.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage2.getPage());
@@ -156,35 +123,38 @@ public class Clienti {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if(registerPage3.email_tf.getText().equals("Email")) {
-          registerPage3.email_tf.setBorder(redBorder);
-          canChangePage = false;
-        } else registerPage3.email_tf.setBorder(border);
+        canChangePage &= validateField(registerPage3.email_tf, "Email");
+        canChangePage &= validateField(registerPage3.password1_pf, "Password");
+        canChangePage &= validateField(registerPage3.password2_pf, "Password");
 
-        if(String.valueOf(registerPage3.password1_pf.getPassword()).equals("Password")) {
-          registerPage3.password1_pf.setBorder(redBorder);
-          canChangePage = false;
-        } else registerPage3.password1_pf.setBorder(border);
-
-        if(String.valueOf(registerPage3.password2_pf.getPassword()).equals("Password")) {
-          registerPage3.password2_pf.setBorder(redBorder);
-          canChangePage = false;
-        } else registerPage3.password2_pf.setBorder(border);
-
-        if(canChangePage){ 
-          registerPage3.email_tf.setBorder(border);
-          registerPage3.password1_pf.setBorder(border);
-          registerPage3.password2_pf.setBorder(border);
-          
-          // REGISTRA LO STRACAZZO DI UTENTEEEEEEE
-        }
+        if(canChangePage){/*REGISTRA LO STRACAZZO DI UTENTEEEEEEE*/}
       }
     });
-
-    mainWindow.setVisible(true);
   }
 
-  public boolean checkField(T field, String placeholder){}
+  public boolean validateField(Object field, String placeholder) {
+    if(field instanceof FTextField) {
+      String value = ((FTextField)field).getText();
+      if(value.equals(placeholder)) {
+        ((FTextField)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+        return false;
+      } else {
+        ((FTextField)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        return true;
+      }
+
+    } else if(field instanceof FPasswordField) {
+      String value = String.valueOf(((FPasswordField)field).getPassword());
+      if(value.equals(placeholder)) {
+        ((FPasswordField)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+        return false;
+      } else {
+        ((FPasswordField)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        return true;
+      }
+    }
+    return false;
+  }
 
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
