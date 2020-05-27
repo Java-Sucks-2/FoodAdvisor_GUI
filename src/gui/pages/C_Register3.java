@@ -43,7 +43,6 @@ public class C_Register3 {
     public C_Register3() {
 
         page = new FPage();
-        pageTitle = "Register 3/3";
         gbc = new GridBagConstraints();
 
         title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));
@@ -64,7 +63,6 @@ public class C_Register3 {
         email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         email_tf.setText("Email");
         email_tf.addMouseListener(new MouseAdapter() {
-            @Override
             public void mousePressed(final MouseEvent arg0) {
             //mouse pressed
                 if(!emailtxtAlreadyClicked || email_tf.getText().equals("Email")) {
@@ -76,7 +74,6 @@ public class C_Register3 {
         });
 
         email_tf.addFocusListener(new FocusAdapter() {
-                @Override
                 public void focusLost(final FocusEvent e) {
                 //focus lost
                     if(email_tf.getText().equals("")){
@@ -96,7 +93,6 @@ public class C_Register3 {
         password1_pf.setForeground(Color.GRAY);
         password1_pf.setText("Password");
         password1_pf.addFocusListener(new FocusAdapter() {
-            @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
                 if(String.valueOf(password1_pf.getPassword()).equals("")){
@@ -104,7 +100,6 @@ public class C_Register3 {
                     password1_pf.setText("Password");
                 }
             }
-            @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
                 if(!pass1txtAlreadyClicked || String.valueOf(password1_pf.getPassword()).equals("Password")) {
@@ -122,7 +117,6 @@ public class C_Register3 {
 
         questionMark1_image = new FLabel("assets/QM_Red_32.png");
         questionMark1_image.addMouseListener(new MouseAdapter() {
-            @Override
             public void mousePressed(final MouseEvent arg0) {
                 JOptionPane.showMessageDialog(null, "Inserisci in questo campo la password", "Help", JOptionPane.PLAIN_MESSAGE);
             }
@@ -137,7 +131,6 @@ public class C_Register3 {
         password2_pf.setForeground(Color.GRAY);
         password2_pf.setText("Password");
         password2_pf.addFocusListener(new FocusAdapter() {
-            @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
                 if(String.valueOf(password2_pf.getPassword()).equals("")){
@@ -145,7 +138,6 @@ public class C_Register3 {
                     password2_pf.setText("Password");
                 }
             }
-            @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
                 if(!pass2txtAlreadyClicked || String.valueOf(password2_pf.getPassword()).equals("Password")) {
@@ -163,7 +155,6 @@ public class C_Register3 {
 
         questionMark2_image = new FLabel("assets/QM_Red_32.png");
         questionMark2_image.addMouseListener(new MouseAdapter() {
-            @Override
             public void mousePressed(final MouseEvent arg0) {
                 JOptionPane.showMessageDialog(null, "Ripeti la tua password", "Help", JOptionPane.PLAIN_MESSAGE);
             }
@@ -200,7 +191,6 @@ public class C_Register3 {
 
         continue_btn = new FButton("Finito");
         continue_btn.addMouseListener(new MouseAdapter() {
-            @Override
             public void mouseClicked(final MouseEvent arg0) {
                 //mouse clicked
             }

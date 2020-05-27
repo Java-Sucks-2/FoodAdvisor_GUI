@@ -23,26 +23,26 @@ public class Ristoratori {
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        new Ristoratori();
-      }
+      public void run() { new Ristoratori(); }
     });
   }
 
   public Ristoratori() {
     registerFonts();
-    mainWindow = new FWindow("Ristoratori");
+    mainWindow = new FWindow("FoodAdvisor Ristoratori");
+
     registerPage = new R_Register();
     registerPage2 = new R_Register2();
-    changePage(registerPage.getPage());
 
-    mainWindow.setVisible(true);
+    changePage(registerPage2.getPage());
 
     registerPage.continue_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage2.getPage());
       }
     });
+
+    mainWindow.setVisible(true);
   }
 
   public void changePage(FPage newPage) {
