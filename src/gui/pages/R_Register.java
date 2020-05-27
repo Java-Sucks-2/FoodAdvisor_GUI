@@ -23,7 +23,8 @@ public class R_Register {
     private FTextField name_tf;
     private FTextField number_tf;
     private FTextField website_tf;
-    private FTextField type_cb;
+    private FComboBox type_cb;
+    private FPage txt_cb_pane;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
@@ -56,6 +57,12 @@ public class R_Register {
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
+        txt_cb_pane = new FPage();
+        setGridCoordinatesXY(gbc, 0, 2);
+        gbc.insets = new Insets(30, 0, 0, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        page.add(txt_cb_pane, gbc);
+
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         name_tf.setText("Nome");
         name_tf.addFocusListener(new FocusAdapter() {
@@ -75,11 +82,22 @@ public class R_Register {
                 }
             }
             });
-            name_tf.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.insets = new Insets(20, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 0, 3);
-        // gbc.insets = new Insets(-60,0,50,0);
-        page.add(name_tf, gbc);
+        name_tf.setBorder(new LineBorder(Color.BLACK, 1));
+
+        //gbc.weightx = 0.5;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        setGridCoordinatesXY(gbc, 0, 0);
+        txt_cb_pane.add(name_tf, gbc);
+
+        String[] values = new String[] {"Tipologia","Italiano","Etnico","Fusion"};
+        type_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
+        type_cb.setBorder(new LineBorder(Color.BLACK, 1));
+        //gbc.weightx = 0.5;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        setGridCoordinatesXY(gbc, 1, 0);
+        txt_cb_pane.add(type_cb, gbc);
 
         number_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         number_tf.setText("Numero di Telefono");
@@ -102,22 +120,22 @@ public class R_Register {
 
         number_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 0, 4);
+        setGridCoordinatesXY(gbc, 0, 3);
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(number_tf, gbc);
 
         website_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
-        website_tf.setText("Numero di Telefono");
+        website_tf.setText("Sito Web");
         website_tf.addFocusListener(new FocusAdapter() {
             public void focusLost(final FocusEvent arg0) {
                 if(website_tf.getText().equals("")){
                     website_tf.setForeground(Color.GRAY);
-                    website_tf.setText("Numero di Telefono");
+                    website_tf.setText("Sito Web");
                     
                 }
             }
             public void focusGained(final FocusEvent e) {
-                if(!websitetxtAlreadyClicked || website_tf.getText().equals("Numero di Telefono")) {
+                if(!websitetxtAlreadyClicked || website_tf.getText().equals("Sito Web")) {
                     website_tf.setText("");
                     websitetxtAlreadyClicked = true;
                     website_tf.setForeground(Color.BLACK);
