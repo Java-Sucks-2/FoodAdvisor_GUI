@@ -30,7 +30,7 @@ public class Clienti {
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
 
-      @Override
+      
       public void run() {
         new Clienti();
       }
@@ -40,7 +40,7 @@ public class Clienti {
   public Clienti() {
     registerFonts();
 
-    mainWindow = new FWindow("Clienti");
+    mainWindow = new FWindow("FoodAdvisor Clienti");
 
     loginPage     = new C_Login();
     registerPage  = new C_Register();
@@ -52,22 +52,42 @@ public class Clienti {
     Border redBorder = BorderFactory.createLineBorder(Color.RED, 3);
     Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
+    loginPage.login_btn.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        canChangePage = true;
+
+        if(loginPage.email_tf.getText().equals("Email")) {
+          loginPage.email_tf.setBorder(redBorder);
+          canChangePage = false;
+        } else loginPage.email_tf.setBorder(border);
+
+        if(String.valueOf(loginPage.password_pf.getPassword()).equals("Password")) {
+          loginPage.password_pf.setBorder(redBorder);
+          canChangePage = false;
+        } else loginPage.password_pf.setBorder(border);
+
+        if(canChangePage) {
+          loginPage.email_tf.setBorder(border);
+          loginPage.password_pf.setBorder(border);
+
+          // LOGGA LO STRACAZZO DI UTENTE
+        }
+      }
+    });
+
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage.getPage());
       }
     });
     
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
         changePage(loginPage.getPage());
       }
     });
 
     registerPage.continue_btn.addMouseListener(new MouseAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
          /* TO DO: Controllo nickname */
          canChangePage = true;
@@ -98,14 +118,12 @@ public class Clienti {
     });
 
     registerPage2.back_btn.addMouseListener(new MouseAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage.getPage());
       }
     });
 
     registerPage2.continue_btn.addMouseListener(new MouseInputAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
@@ -129,14 +147,12 @@ public class Clienti {
     });
 
     registerPage3.back_btn.addMouseListener(new MouseAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
         changePage(registerPage2.getPage());
       }
     });
 
     registerPage3.continue_btn.addMouseListener(new MouseAdapter() {
-      @Override
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
