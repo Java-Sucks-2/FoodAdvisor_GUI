@@ -20,17 +20,18 @@ public class R_Register {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    private FTextField nick_tf;
     private FTextField name_tf;
-    private FTextField surname_tf;
+    private FTextField number_tf;
+    private FTextField website_tf;
+    private FTextField type_cb;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
     private FLabel procedure_lb;
 
-    boolean nicktxtAlreadyClicked;
     boolean nametxtAlreadyClicked;
-    boolean surnametxtAlreadyClicked;
+    boolean numbertxtAlreadyClicked;
+    boolean websitetxtAlreadyClicked;
 
     public FPage getPage() {
         return page;
@@ -55,42 +56,9 @@ public class R_Register {
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
-        nicktxtAlreadyClicked = false;
-        nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
-        nick_tf.setText("Nome");
-        nick_tf.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent arg0) {
-            //mouse pressed
-                if(!nicktxtAlreadyClicked || nick_tf.getText().equals("Nickname")) {
-                    nick_tf.setText("");
-                    nicktxtAlreadyClicked = true;
-                    nick_tf.setForeground(Color.BLACK);
-                }
-            }
-        });
-
-        nick_tf.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusLost(final FocusEvent e) {
-                //focus lost
-                    if(nick_tf.getText().equals("")){
-                        nick_tf.setForeground(Color.GRAY);
-                        nick_tf.setText("Nickname");
-                    }
-                }
-        });
-        
-        nick_tf.setBorder(new LineBorder(Color.BLACK, 1));
-        setGridCoordinatesXY(gbc, 0, 2);
-        gbc.insets = new Insets(30, 0, 0, 0);
-        nick_tf.setBackground(Color.WHITE);
-        page.add(nick_tf, gbc);
-
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         name_tf.setText("Nome");
         name_tf.addFocusListener(new FocusAdapter() {
-            @Override
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
                 if(name_tf.getText().equals("")){
@@ -98,7 +66,6 @@ public class R_Register {
                     name_tf.setText("Nome");
                 }
             }
-            @Override
             public void focusGained(final FocusEvent e) {
                 //focus gained
                 if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
@@ -114,33 +81,55 @@ public class R_Register {
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(name_tf, gbc);
 
-        surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
-        surname_tf.setText("Cognome");
-        surname_tf.addFocusListener(new FocusAdapter() {
-            @Override
+        number_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        number_tf.setText("Numero di Telefono");
+        number_tf.addFocusListener(new FocusAdapter() {
             public void focusLost(final FocusEvent arg0) {
-                //focus lost
-                if(surname_tf.getText().equals("")){
-                    surname_tf.setForeground(Color.GRAY);
-                    surname_tf.setText("Cognome");
+                if(number_tf.getText().equals("")){
+                    number_tf.setForeground(Color.GRAY);
+                    number_tf.setText("Numero di Telefono");
                     
                 }
             }
-            @Override
             public void focusGained(final FocusEvent e) {
-                //focus gained
-                if(!surnametxtAlreadyClicked || surname_tf.getText().equals("Cognome")) {
-                    surname_tf.setText("");
-                    surnametxtAlreadyClicked = true;
-                    surname_tf.setForeground(Color.BLACK);
+                if(!numbertxtAlreadyClicked || number_tf.getText().equals("Numero di Telefono")) {
+                    number_tf.setText("");
+                    numbertxtAlreadyClicked = true;
+                    number_tf.setForeground(Color.BLACK);
                 }
             }
         });
-        surname_tf.setBorder(new LineBorder(Color.BLACK, 1));
+
+        number_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 4);
         // gbc.insets = new Insets(-60,0,50,0);
-        page.add(surname_tf, gbc);
+        page.add(number_tf, gbc);
+
+        website_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        website_tf.setText("Numero di Telefono");
+        website_tf.addFocusListener(new FocusAdapter() {
+            public void focusLost(final FocusEvent arg0) {
+                if(website_tf.getText().equals("")){
+                    website_tf.setForeground(Color.GRAY);
+                    website_tf.setText("Numero di Telefono");
+                    
+                }
+            }
+            public void focusGained(final FocusEvent e) {
+                if(!websitetxtAlreadyClicked || website_tf.getText().equals("Numero di Telefono")) {
+                    website_tf.setText("");
+                    websitetxtAlreadyClicked = true;
+                    website_tf.setForeground(Color.BLACK);
+                }
+            }
+        });
+
+        website_tf.setBorder(new LineBorder(Color.BLACK, 1));
+        gbc.insets = new Insets(20, 0, 0, 0);
+        setGridCoordinatesXY(gbc, 0, 4);
+        // gbc.insets = new Insets(-60,0,50,0);
+        page.add(website_tf, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
@@ -168,7 +157,6 @@ public class R_Register {
 
         continue_btn = new FButton("Continua");
         continue_btn.addMouseListener(new MouseAdapter() {
-            @Override
             public void mouseClicked(final MouseEvent arg0) {
                 //mouse clicked
             }
