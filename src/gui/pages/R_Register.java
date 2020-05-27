@@ -24,8 +24,6 @@ public class R_Register {
     private FTextField number_tf;
     private FTextField website_tf;
     private FComboBox type_cb;
-    private FPage txt_cb_pane;
-    private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
     private FLabel procedure_lb;
@@ -57,12 +55,6 @@ public class R_Register {
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
-        txt_cb_pane = new FPage();
-        setGridCoordinatesXY(gbc, 0, 2);
-        gbc.insets = new Insets(30, 0, 0, 0);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        page.add(txt_cb_pane, gbc);
-
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         name_tf.setText("Nome");
         name_tf.addFocusListener(new FocusAdapter() {
@@ -73,31 +65,25 @@ public class R_Register {
                     name_tf.setText("Nome");
                 }
             }
-            public void focusGained(final FocusEvent e) {
-                //focus gained
+        });
+        name_tf.addMouseListener(new MouseAdapter() {
+            public void mousePressed(final MouseEvent arg0) {
                 if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
                     name_tf.setText("");
                     nametxtAlreadyClicked = true;
                     name_tf.setForeground(Color.BLACK);
                 }
-            }
-            });
+            } 
+        });
+
+
         name_tf.setBorder(new LineBorder(Color.BLACK, 1));
 
         //gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 0, 0);
-        txt_cb_pane.add(name_tf, gbc);
-
-        String[] values = new String[] {"Tipologia","Italiano","Etnico","Fusion"};
-        type_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
-        type_cb.setBorder(new LineBorder(Color.BLACK, 1));
-        //gbc.weightx = 0.5;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 1, 0);
-        txt_cb_pane.add(type_cb, gbc);
+        setGridCoordinatesXY(gbc, 0, 2);
+        page.add(name_tf, gbc);
 
         number_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         number_tf.setText("Numero di Telefono");
@@ -149,51 +135,34 @@ public class R_Register {
         // gbc.insets = new Insets(-60,0,50,0);
         page.add(website_tf, gbc);
 
-        bts_pane = new FPage();
+        String[] values = new String[] {"Tipologia","Italiano","Etnico","Fusion"};
+        type_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
+        type_cb.setBorder(new LineBorder(Color.BLACK, 1));
+        //gbc.weightx = 0.5;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 5);
-        gbc.insets = new Insets(30, 0, 0, 0);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        page.add(bts_pane, gbc);
-
-        back_btn = new FButton("Indietro");
-        gbc.weightx = 0.5;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 0, 0);
-        // gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        // gbc.insets = new Insets(0,0,0,294);
-        bts_pane.add(back_btn, gbc);
-
-        FLabel gap_lbl = new FLabel();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        gbc.weightx = 0.1;
-        setGridCoordinatesXY(gbc, 1, 0);
-        // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        // gbc.insets = new Insets(0,269,0,0);
-        bts_pane.add(gap_lbl, gbc);
-
+        page.add(type_cb, gbc);
+       
         continue_btn = new FButton("Continua");
+       // continue_btn.setPreferredSize(new Dimension(1,69) );
         continue_btn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(final MouseEvent arg0) {
                 //mouse clicked
             }
         });
-
+        
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        gbc.weightx = 0.5;
-        setGridCoordinatesXY(gbc, 2, 0);
+        gbc.insets = new Insets(20, 0, 0, 0);
+        setGridCoordinatesXY(gbc, 0, 6);
         // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         // gbc.insets = new Insets(0,269,0,0);
-        bts_pane.add(continue_btn, gbc);
+        page.add(continue_btn, gbc);
 
-        procedure_lb = new FLabel("assets/Step1.png");
-        setGridCoordinatesXY(gbc, 0, 1);
-        gbc.gridwidth = 3;
+        procedure_lb = new FLabel("assets/Step1-2.png");
+        setGridCoordinatesXY(gbc, 0, 7);
         gbc.insets = new Insets(30, 0, 0, 0);
-        gbc.ipadx = -600;
-        bts_pane.add(procedure_lb, gbc);
+        page.add(procedure_lb, gbc);
     }
 
     public static void setGridCoordinatesXY(final GridBagConstraints gbc, final int x, final int y) {

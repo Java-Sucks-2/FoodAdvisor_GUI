@@ -29,7 +29,7 @@ public class Clienti {
 
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
-
+      
       
       public void run() {
         new Clienti();
@@ -183,6 +183,8 @@ public class Clienti {
 
     mainWindow.setVisible(true);
   }
+
+  public boolean checkField(T field, String placeholder){}
 
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
