@@ -20,10 +20,10 @@ public class R_Register {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    private FTextField name_tf;
-    private FTextField number_tf;
-    private FTextField website_tf;
-    private FComboBox type_cb;
+    public FTextField name_tf;
+    public FTextField number_tf;
+    public FTextField website_tf;
+    public FComboBox type_cb;
     public FButton back_btn;
     public FButton continue_btn;
     private FLabel procedure_lb;
@@ -159,7 +159,7 @@ public class R_Register {
         // gbc.insets = new Insets(0,269,0,0);
         page.add(continue_btn, gbc);
 
-        procedure_lb = new FLabel("assets/Step1-2.png");
+        procedure_lb = new FLabel("assets/Step1.png");
         setGridCoordinatesXY(gbc, 0, 7);
         gbc.insets = new Insets(30, 0, 0, 0);
         page.add(procedure_lb, gbc);

@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 
 import src.gui.components.*;
 
-public class R_Register2 {
+public class R_Register3 {
     private FPage page;
     public String pageTitle;
 
@@ -20,22 +20,23 @@ public class R_Register2 {
     private FLabel title_lbl;
     private String text;
     private FLabel info_lbl;
-    public FComboBox addresstype_cb;
-    public FTextField addressname_tf;
-    public FTextField number_tf;
+    public FTextField town_tf;
+    public FTextField district_tf;
+    public FTextField zipcode_tf;
     private FPage bts_pane;
     public FButton back_btn;
     public FButton continue_btn;
     private FLabel procedure_lb;
 
-    boolean addressnameAlreadyClicked;
-    boolean numbertxtAlreadyClicked;
+    boolean towntxtAlreadyClicked;
+    boolean districttxtAlreadyClicked;
+    boolean zipcodetxtAlreadyClicked;
 
     public FPage getPage() {
         return page;
     }
 
-    public R_Register2() {
+    public R_Register3() {
         page = new FPage();
         gbc = new GridBagConstraints();
 
@@ -53,69 +54,91 @@ public class R_Register2 {
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
-        String[] values = new String[] {"Tipo Indirizzo","Via","Piazza"};
-        addresstype_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
-        addresstype_cb.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(30, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 0, 2);
-        page.add(addresstype_cb, gbc);
-
-        addressname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
-        addressname_tf.setForeground(Color.GRAY);
-        addressname_tf.setText("Nome della Via");
-        addressname_tf.addFocusListener(new FocusAdapter() {
+        town_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        town_tf.setForeground(Color.GRAY);
+        town_tf.setText("Comune");
+        town_tf.addFocusListener(new FocusAdapter() {
             public void focusLost(final FocusEvent arg0) {
                 //focus lost
-                if(addressname_tf.getText().equals("")){
-                    addressname_tf.setForeground(Color.GRAY);
-                    addressname_tf.setText("Nome della Via");
+                if(town_tf.getText().equals("")){
+                    town_tf.setForeground(Color.GRAY);
+                    town_tf.setText("Comune");
                 }
             }
             public void focusGained(final FocusEvent e) {
                 //focus gained
-                if(!addressnameAlreadyClicked || addressname_tf.getText().equals("Nome della Via")) {
-                    addressname_tf.setText("");
-                    addressnameAlreadyClicked = true;
-                    addressname_tf.setForeground(Color.BLACK);
+                if(!towntxtAlreadyClicked || town_tf.getText().equals("Comune")) {
+                    town_tf.setText("");
+                    towntxtAlreadyClicked = true;
+                    town_tf.setForeground(Color.BLACK);
                 }
             }
             });
-        addressname_tf.setBorder(new LineBorder(Color.BLACK, 1));
+        town_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
-        setGridCoordinatesXY(gbc, 0, 3);
-        page.add(addressname_tf, gbc);
+        setGridCoordinatesXY(gbc, 0, 2);
+        page.add(town_tf, gbc);
 
-        numbertxtAlreadyClicked = false;
-        number_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
-        number_tf.setText("Numero Civico");
-        number_tf.addMouseListener(new MouseAdapter() {
+        districttxtAlreadyClicked = false;
+        district_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        district_tf.setText("Provincia");
+        district_tf.addMouseListener(new MouseAdapter() {
             public void mousePressed(final MouseEvent arg0) {
             //mouse pressed
-                if(!numbertxtAlreadyClicked || number_tf.getText().equals("Numero Civico")) {
-                    number_tf.setText("");
-                    numbertxtAlreadyClicked = true;
-                    number_tf.setForeground(Color.BLACK);
+                if(!districttxtAlreadyClicked || district_tf.getText().equals("Provincia")) {
+                    district_tf.setText("");
+                    districttxtAlreadyClicked = true;
+                    district_tf.setForeground(Color.BLACK);
                 }
             }
         });
 
-        number_tf.addFocusListener(new FocusAdapter() {
+        district_tf.addFocusListener(new FocusAdapter() {
                 public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(number_tf.getText().equals("")){
-                        number_tf.setForeground(Color.gray);
-                        number_tf.setText("Numero Civico");
+                    if(district_tf.getText().equals("")){
+                        district_tf.setForeground(Color.gray);
+                        district_tf.setText("Provincia");
                     }
                 }
         });
         
-        number_tf.setBorder(new LineBorder(Color.BLACK, 1));
+        district_tf.setBorder(new LineBorder(Color.BLACK, 1));
+        setGridCoordinatesXY(gbc, 0, 3);
+        gbc.insets = new Insets(20, 0, 0, 0);
+        district_tf.setBackground(Color.WHITE);
+        page.add(district_tf, gbc);
+
+        zipcodetxtAlreadyClicked = false;
+        zipcode_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
+        zipcode_tf.setText("CAP");
+        zipcode_tf.addMouseListener(new MouseAdapter() {
+            public void mousePressed(final MouseEvent arg0) {
+            //mouse pressed
+                if(!zipcodetxtAlreadyClicked || zipcode_tf.getText().equals("CAP")) {
+                    zipcode_tf.setText("");
+                    zipcodetxtAlreadyClicked = true;
+                    zipcode_tf.setForeground(Color.BLACK);
+                }
+            }
+        });
+
+        zipcode_tf.addFocusListener(new FocusAdapter() {
+                public void focusLost(final FocusEvent e) {
+                //focus lost
+                    if(zipcode_tf.getText().equals("")){
+                        zipcode_tf.setForeground(Color.gray);
+                        zipcode_tf.setText("CAP");
+                    }
+                }
+        });
+        
+        zipcode_tf.setBorder(new LineBorder(Color.BLACK, 1));
         setGridCoordinatesXY(gbc, 0, 4);
         gbc.insets = new Insets(20, 0, 0, 0);
-        number_tf.setBackground(Color.WHITE);
-        page.add(number_tf, gbc);
+        zipcode_tf.setBackground(Color.WHITE);
+        page.add(zipcode_tf, gbc);
 
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
@@ -136,7 +159,7 @@ public class R_Register2 {
         setGridCoordinatesXY(gbc, 1, 0);
         bts_pane.add(gap_lbl, gbc);
 
-        continue_btn = new FButton("Continua");
+        continue_btn = new FButton("Registra");
         continue_btn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(final MouseEvent arg0) {
                 //mouse clicked
@@ -151,7 +174,7 @@ public class R_Register2 {
         // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(continue_btn, gbc);
 
-        procedure_lb = new FLabel("assets/Step2.png");
+        procedure_lb = new FLabel("assets/Step3.png");
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
         gbc.insets = new Insets(30, 0, 0, 0);
