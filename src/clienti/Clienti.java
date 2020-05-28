@@ -8,7 +8,6 @@ import java.io.File;
 
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
-import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 
 import java.awt.event.MouseAdapter;
