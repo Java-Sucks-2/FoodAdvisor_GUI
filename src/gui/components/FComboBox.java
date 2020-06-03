@@ -2,6 +2,7 @@ package src.gui.components;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Color;
 

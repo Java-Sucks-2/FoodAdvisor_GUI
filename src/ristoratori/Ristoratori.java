@@ -1,5 +1,8 @@
 package src.ristoratori;
 
+import src.classes.Address;
+import src.classes.Restaurant;
+import src.classes.Restaurant.TypeRestaurant;
 import src.gui.components.*;
 
 import java.awt.Font;
@@ -12,6 +15,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 
 import src.gui.pages.*;
+import src.util.FileManager;
 
 public class Ristoratori {
   private FWindow mainWindow;
@@ -93,7 +97,31 @@ public class Ristoratori {
         canChangePage &= validateField(registerPage3.district_tf, "Provincia");
         canChangePage &= validateField(registerPage3.zipcode_tf, "CAP");
 
-      if(canChangePage) {/* Registra ristorante */}
+      if(canChangePage) {
+        // Acquisizione del codice univoco
+        // 1. Se nel file EatAdvisor.dati non ci sono records assegno il primo id
+        // 2. Se esistono record incremento l'id finche' non ne trovo uno libero
+        int id;
+        if (FileManager.FileIsEmpty("EatAdvisor.dati")==true) {
+            id=0;
+            }else{
+              boolean alreadyTaken;
+              id=1;
+              do {
+                  alreadyTaken = FileManager.GetRecordFromID("EatAdvisor.dati", Integer.toString(id)) != null;
+                    if (alreadyTaken==true) { id++;}
+              } while(alreadyTaken);
+            }
+            // Creazione dell'oggetto indirizzo
+            Address tAddress = new Address(registerPage2.addresstype_cb.getSelectedIndex(), registerPage2.addressname_tf.getText(), registerPage2.number_tf.getText(), registerPage3.town_tf.getText(), registerPage3.district_tf.getText(), registerPage3.zipcode_tf.getText());
+                    
+            // Instanzio l'oggetto Ristorante
+            Restaurant tRestaurant = new Restaurant(id, registerPage.name_tf.getText(), tAddress, registerPage.number_tf.getText(), registerPage.website_tf.getText(), (String)registerPage.type_cb.getSelectedItem());
+                
+            //Effettuo il salvataggio nel file di testo
+            if (FileManager.SaveRestaurant(tRestaurant)) { System.out.println("Registrazione effettuata con successo");}
+            else{ System.out.println("errore");}  
+      }
       }
     });
   }

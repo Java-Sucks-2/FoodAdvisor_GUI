@@ -3,7 +3,7 @@ package src.classes;
 
 public class Address {
     public enum TypeAddress{
-        INSTANCE(4),Via(0), Piazza(1);
+        Via(0), Piazza(1);
         private final int value;
         // GETTER
         public int GetValue() {return value;}
