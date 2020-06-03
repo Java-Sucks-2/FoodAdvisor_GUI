@@ -2,7 +2,7 @@ package src.gui.pages;
 
 import java.awt.*;
 
-import javax.swing.JOptionPane;
+
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
