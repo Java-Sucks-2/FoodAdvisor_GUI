@@ -2,13 +2,17 @@ package src.classes;
 
 
 public class Address {
+    
     public enum TypeAddress{
+
         Via(0), Piazza(1);
         private final int value;
-        // GETTER
+        
+        /** Getter del valore intero 
+         * @return Valore intero corrispondente al valore enum attuale */
         public int GetValue() {return value;}
-        /**
-         * Costruttore della classe Address
+
+        /** Costruttore della classe Address
          * @param value */
         private TypeAddress(int value) {this.value = value;}
     }

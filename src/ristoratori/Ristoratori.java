@@ -1,6 +1,7 @@
 package src.ristoratori;
 
 import src.classes.Address;
+import src.classes.Address.TypeAddress;
 import src.classes.Restaurant;
 import src.classes.Restaurant.TypeRestaurant;
 import src.gui.components.*;
@@ -9,6 +10,9 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.swing.SwingUtilities;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -113,10 +117,28 @@ public class Ristoratori {
               } while(alreadyTaken);
             }
             // Creazione dell'oggetto indirizzo
-            Address tAddress = new Address(registerPage2.addresstype_cb.getSelectedIndex(), registerPage2.addressname_tf.getText(), registerPage2.number_tf.getText(), registerPage3.town_tf.getText(), registerPage3.district_tf.getText(), registerPage3.zipcode_tf.getText());
+            TypeAddress addressType =  TypeAddress.valueOf(registerPage2.addresstype_cb.getSelectedItem().toString());
+            String addressName      =  registerPage2.addressname_tf.getText();
+            int street_number       =  Integer.parseInt(registerPage2.number_tf.getText());
+            String town             =  registerPage3.town_tf.getText();
+            String district         =  registerPage3.district_tf.getText();
+            int zipcode             =  Integer.parseInt(registerPage3.zipcode_tf.getText());
+
+            Address tAddress = new Address(addressType, addressName, street_number, town, district, zipcode);
                     
+            String restName = registerPage.name_tf.getText();
+            long telNumber = Long.parseLong(registerPage.number_tf.getText());
+            URL website = null;
+            try {
+              website = new URL(registerPage.website_tf.getText());
+            } catch(MalformedURLException e) {
+              System.err.println(e);
+            }
+
+            TypeRestaurant restType = TypeRestaurant.valueOf(registerPage.type_cb.getSelectedItem().toString());
+
             // Instanzio l'oggetto Ristorante
-            Restaurant tRestaurant = new Restaurant(id, registerPage.name_tf.getText(), tAddress, registerPage.number_tf.getText(), registerPage.website_tf.getText(), (String)registerPage.type_cb.getSelectedItem());
+            Restaurant tRestaurant = new Restaurant(id, restName, tAddress, telNumber, website, restType);
                 
             //Effettuo il salvataggio nel file di testo
             if (FileManager.SaveRestaurant(tRestaurant)) { System.out.println("Registrazione effettuata con successo");}
