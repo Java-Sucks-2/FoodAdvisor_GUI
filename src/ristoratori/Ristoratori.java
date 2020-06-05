@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 import src.gui.pages.*;
 import src.util.FileManager;
@@ -128,25 +129,58 @@ public class Ristoratori {
             String restName = registerPage.name_tf.getText();
             long telNumber = Long.parseLong(registerPage.number_tf.getText());
             URL website = null;
-            try {
-              website = new URL(registerPage.website_tf.getText());
-            } catch(MalformedURLException e) {
-              System.err.println(e);
-            }
+
+            try { website = new URL(registerPage.website_tf.getText()); }
+            catch(MalformedURLException e) { System.err.println(e); }
 
             TypeRestaurant restType = TypeRestaurant.valueOf(registerPage.type_cb.getSelectedItem().toString());
 
             // Instanzio l'oggetto Ristorante
             Restaurant tRestaurant = new Restaurant(id, restName, tAddress, telNumber, website, restType);
                 
+            String result = "";
+
             //Effettuo il salvataggio nel file di testo
             if (FileManager.SaveRestaurant(tRestaurant)) 
-              System.out.println("Registrazione effettuata con successo");
+              result = "Registrazione del ristorante effettuata con successo!";
             else 
-              System.out.println("errore");
+              result = "Registrazione fallita, ritenta.";
+
+            JOptionPane.showMessageDialog(null, result, "Registrazione", JOptionPane.PLAIN_MESSAGE);
+
+            emptyFields();
+            changePage(registerPage.getPage());
         }
       }
     });
+  }
+
+  public void emptyFields() {
+    /*registerPage.name_tf.setText("Nome");
+    registerPage.number_tf.setText("Numero Telefono");
+    registerPage.website_tf.setText("Sito Web");
+    registerPage.type_cb.setSelectedIndex(0);
+
+    registerPage2.addresstype_cb.setSelectedIndex(0);
+    registerPage2.addressname_tf.setText("Nome della Via");
+    registerPage2.number_tf.setText("Numero Civico");
+
+    registerPage3.town_tf.setText("Comune");
+    registerPage3.district_tf.setText("Provincia");
+    registerPage3.zipcode_tf.setText("CAP");*/
+
+    registerPage.name_tf.setText("");
+    registerPage.number_tf.setText("");
+    registerPage.website_tf.setText("");
+    registerPage.type_cb.setSelectedIndex(0);
+
+    registerPage2.addresstype_cb.setSelectedIndex(0);
+    registerPage2.addressname_tf.setText("");
+    registerPage2.number_tf.setText("");
+
+    registerPage3.town_tf.setText("");
+    registerPage3.district_tf.setText("");
+    registerPage3.zipcode_tf.setText("");
   }
 
   public boolean validateField(Object field, String placeholder) {

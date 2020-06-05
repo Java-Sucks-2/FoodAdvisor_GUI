@@ -175,11 +175,6 @@ public class R_Register3 {
         bts_pane.add(gap_lbl, gbc);
 
         continue_btn = new FButton("Registra");
-        continue_btn.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(final MouseEvent arg0) {
-                //mouse clicked
-            }
-        });
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
