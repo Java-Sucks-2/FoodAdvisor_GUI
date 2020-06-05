@@ -106,16 +106,15 @@ public class Ristoratori {
         // 1. Se nel file EatAdvisor.dati non ci sono records assegno il primo id
         // 2. Se esistono record incremento l'id finche' non ne trovo uno libero
         int id;
-        if (FileManager.FileIsEmpty("EatAdvisor.dati")==true) {
-            id=0;
-            }else{
-              boolean alreadyTaken;
-              id=1;
-              do {
-                  alreadyTaken = FileManager.GetRecordFromID("EatAdvisor.dati", Integer.toString(id)) != null;
-                    if (alreadyTaken==true) { id++;}
-              } while(alreadyTaken);
-            }
+        if (FileManager.FileIsEmpty("EatAdvisor.dati")) id=0;
+        else {
+            boolean alreadyTaken;
+            id=1;
+            do {
+                alreadyTaken = FileManager.GetRecordFromID("EatAdvisor.dati", Integer.toString(id)) != null;
+                if (alreadyTaken) id++;
+            } while(alreadyTaken);
+        }
             // Creazione dell'oggetto indirizzo
             TypeAddress addressType =  TypeAddress.valueOf(registerPage2.addresstype_cb.getSelectedItem().toString());
             String addressName      =  registerPage2.addressname_tf.getText();
@@ -141,9 +140,11 @@ public class Ristoratori {
             Restaurant tRestaurant = new Restaurant(id, restName, tAddress, telNumber, website, restType);
                 
             //Effettuo il salvataggio nel file di testo
-            if (FileManager.SaveRestaurant(tRestaurant)) { System.out.println("Registrazione effettuata con successo");}
-            else{ System.out.println("errore");}  
-      }
+            if (FileManager.SaveRestaurant(tRestaurant)) 
+              System.out.println("Registrazione effettuata con successo");
+            else 
+              System.out.println("errore");
+        }
       }
     });
   }
