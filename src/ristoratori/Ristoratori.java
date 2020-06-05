@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 import src.gui.pages.*;
 import src.util.FileManager;
@@ -139,10 +140,20 @@ public class Ristoratori {
 
             // Instanzio l'oggetto Ristorante
             Restaurant tRestaurant = new Restaurant(id, restName, tAddress, telNumber, website, restType);
-                
+            
             //Effettuo il salvataggio nel file di testo
-            if (FileManager.SaveRestaurant(tRestaurant)) { System.out.println("Registrazione effettuata con successo");}
-            else{ System.out.println("errore");}  
+            if (FileManager.SaveRestaurant(tRestaurant)) {
+            //Messaggio registrazione completata
+            JOptionPane.showMessageDialog(mainWindow,"Registrazione effettuata con successo!");
+            }
+            else{
+            //Messaggio di errore
+            JOptionPane.showMessageDialog(mainWindow, "Regisrazione Fallita!", "Errore", JOptionPane.ERROR_MESSAGE);
+            }
+          registerPage = new R_Register();
+          registerPage2 = new R_Register2();
+          registerPage3 = new R_Register3();
+        changePage(registerPage.getPage());
       }
       }
     });
