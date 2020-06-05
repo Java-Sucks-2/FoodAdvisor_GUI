@@ -156,31 +156,26 @@ public class Ristoratori {
   }
 
   public void emptyFields() {
-    /*registerPage.name_tf.setText("Nome");
-    registerPage.number_tf.setText("Numero Telefono");
+    registerPage.name_tf.setText("Nome");
+    registerPage.name_tf.setForeground(Color.GRAY);
+    registerPage.number_tf.setText("Numero di Telefono");
+    registerPage.number_tf.setForeground(Color.GRAY);
     registerPage.website_tf.setText("Sito Web");
+    registerPage.website_tf.setForeground(Color.GRAY);
     registerPage.type_cb.setSelectedIndex(0);
 
     registerPage2.addresstype_cb.setSelectedIndex(0);
     registerPage2.addressname_tf.setText("Nome della Via");
+    registerPage2.addressname_tf.setForeground(Color.GRAY);
     registerPage2.number_tf.setText("Numero Civico");
+    registerPage2.number_tf.setForeground(Color.GRAY);
 
     registerPage3.town_tf.setText("Comune");
+    registerPage3.town_tf.setForeground(Color.GRAY);
     registerPage3.district_tf.setText("Provincia");
-    registerPage3.zipcode_tf.setText("CAP");*/
-
-    registerPage.name_tf.setText("");
-    registerPage.number_tf.setText("");
-    registerPage.website_tf.setText("");
-    registerPage.type_cb.setSelectedIndex(0);
-
-    registerPage2.addresstype_cb.setSelectedIndex(0);
-    registerPage2.addressname_tf.setText("");
-    registerPage2.number_tf.setText("");
-
-    registerPage3.town_tf.setText("");
-    registerPage3.district_tf.setText("");
-    registerPage3.zipcode_tf.setText("");
+    registerPage3.district_tf.setForeground(Color.GRAY);
+    registerPage3.zipcode_tf.setText("CAP");
+    registerPage3.zipcode_tf.setForeground(Color.GRAY);
   }
 
   public boolean validateField(Object field, String placeholder) {
