@@ -1,5 +1,6 @@
 package src.clienti;
 
+import src.classes.User;
 import src.gui.components.*;
 import java.awt.Font;
 import java.awt.Color;
@@ -17,6 +18,7 @@ import src.gui.pages.C_Login;
 import src.gui.pages.C_Register;
 import src.gui.pages.C_Register2;
 import src.gui.pages.C_Register3;
+import src.util.FileManager;
 
 public class Clienti {
   private FWindow mainWindow;
@@ -50,6 +52,13 @@ public class Clienti {
     addRegisterPage3Listeners();
 
     mainWindow.setVisible(true);
+  }
+
+  /** Registra un nuovo utente inserendolo nel file "Utenti.dati"
+  * @param user Oggetto User da registrare
+  * @return Esito della registrazione (boolean) */
+  public static boolean RegisterNewUser(User user) {
+      return FileManager.SaveUser(user);
   }
 
   public void addLoginPageListeners() {
