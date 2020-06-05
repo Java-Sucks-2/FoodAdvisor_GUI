@@ -1,17 +1,26 @@
 package src.ristoratori;
 
+import src.classes.Address;
+import src.classes.Address.TypeAddress;
+import src.classes.Restaurant;
+import src.classes.Restaurant.TypeRestaurant;
 import src.gui.components.*;
 
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.swing.SwingUtilities;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 import src.gui.pages.*;
+import src.util.FileManager;
 
 public class Ristoratori {
   private FWindow mainWindow;
@@ -93,9 +102,85 @@ public class Ristoratori {
         canChangePage &= validateField(registerPage3.district_tf, "Provincia");
         canChangePage &= validateField(registerPage3.zipcode_tf, "CAP");
 
-      if(canChangePage) {/* Registra ristorante */}
+      if(canChangePage) {
+        // Acquisizione del codice univoco
+        // 1. Se nel file EatAdvisor.dati non ci sono records assegno il primo id
+        // 2. Se esistono record incremento l'id finche' non ne trovo uno libero
+        int id;
+        if (FileManager.FileIsEmpty("EatAdvisor.dati")) id=0;
+        else {
+            boolean alreadyTaken;
+            id=1;
+            do {
+                alreadyTaken = FileManager.GetRecordFromID("EatAdvisor.dati", Integer.toString(id)) != null;
+                if (alreadyTaken) id++;
+            } while(alreadyTaken);
+        }
+            // Creazione dell'oggetto indirizzo
+            TypeAddress addressType =  TypeAddress.valueOf(registerPage2.addresstype_cb.getSelectedItem().toString());
+            String addressName      =  registerPage2.addressname_tf.getText();
+            int street_number       =  Integer.parseInt(registerPage2.number_tf.getText());
+            String town             =  registerPage3.town_tf.getText();
+            String district         =  registerPage3.district_tf.getText();
+            int zipcode             =  Integer.parseInt(registerPage3.zipcode_tf.getText());
+
+            Address tAddress = new Address(addressType, addressName, street_number, town, district, zipcode);
+                    
+            String restName = registerPage.name_tf.getText();
+            long telNumber = Long.parseLong(registerPage.number_tf.getText());
+            URL website = null;
+
+            try { website = new URL(registerPage.website_tf.getText()); }
+            catch(MalformedURLException e) { System.err.println(e); }
+
+            TypeRestaurant restType = TypeRestaurant.valueOf(registerPage.type_cb.getSelectedItem().toString());
+
+            // Instanzio l'oggetto Ristorante
+            Restaurant tRestaurant = new Restaurant(id, restName, tAddress, telNumber, website, restType);
+                
+            String result = "";
+
+            //Effettuo il salvataggio nel file di testo
+            if (FileManager.SaveRestaurant(tRestaurant)) 
+              result = "Registrazione del ristorante effettuata con successo!";
+            else 
+              result = "Registrazione fallita, ritenta.";
+
+            JOptionPane.showMessageDialog(null, result, "Registrazione", JOptionPane.PLAIN_MESSAGE);
+
+            emptyFields();
+            changePage(registerPage.getPage());
+        }
       }
     });
+  }
+
+  public void emptyFields() {
+    /*registerPage.name_tf.setText("Nome");
+    registerPage.number_tf.setText("Numero Telefono");
+    registerPage.website_tf.setText("Sito Web");
+    registerPage.type_cb.setSelectedIndex(0);
+
+    registerPage2.addresstype_cb.setSelectedIndex(0);
+    registerPage2.addressname_tf.setText("Nome della Via");
+    registerPage2.number_tf.setText("Numero Civico");
+
+    registerPage3.town_tf.setText("Comune");
+    registerPage3.district_tf.setText("Provincia");
+    registerPage3.zipcode_tf.setText("CAP");*/
+
+    registerPage.name_tf.setText("");
+    registerPage.number_tf.setText("");
+    registerPage.website_tf.setText("");
+    registerPage.type_cb.setSelectedIndex(0);
+
+    registerPage2.addresstype_cb.setSelectedIndex(0);
+    registerPage2.addressname_tf.setText("");
+    registerPage2.number_tf.setText("");
+
+    registerPage3.town_tf.setText("");
+    registerPage3.district_tf.setText("");
+    registerPage3.zipcode_tf.setText("");
   }
 
   public boolean validateField(Object field, String placeholder) {

@@ -2,7 +2,6 @@ package src.gui.pages;
 
 import java.awt.*;
 
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -80,7 +79,7 @@ public class R_Register2 {
                     addressname_tf.setForeground(Color.BLACK);
                 }
             }
-            });
+        });
         addressname_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
@@ -102,13 +101,22 @@ public class R_Register2 {
         });
 
         number_tf.addFocusListener(new FocusAdapter() {
-                public void focusLost(final FocusEvent e) {
+            public void focusLost(final FocusEvent e) {
                 //focus lost
-                    if(number_tf.getText().equals("")){
-                        number_tf.setForeground(Color.gray);
-                        number_tf.setText("Numero Civico");
-                    }
+                if(number_tf.getText().equals("")){
+                    number_tf.setForeground(Color.gray);
+                    number_tf.setText("Numero Civico");
                 }
+            }
+
+            public void focusGained(final FocusEvent e) {
+                //focus gained
+                if(!numbertxtAlreadyClicked || number_tf.getText().equals("Numero Civico")) {
+                    number_tf.setText("");
+                    numbertxtAlreadyClicked = true;
+                    number_tf.setForeground(Color.BLACK);
+                }
+            }
         });
         
         number_tf.setBorder(new LineBorder(Color.BLACK, 1));

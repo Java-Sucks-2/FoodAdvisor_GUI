@@ -2,7 +2,6 @@ package src.gui.pages;
 
 import java.awt.*;
 
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -102,6 +101,14 @@ public class R_Register3 {
                         district_tf.setText("Provincia");
                     }
                 }
+
+                public void focusGained(final FocusEvent e) {
+                    if(!districttxtAlreadyClicked || district_tf.getText().equals("Provincia")) {
+                        district_tf.setText("");
+                        districttxtAlreadyClicked = true;
+                        district_tf.setForeground(Color.BLACK);
+                    }
+                }
         });
         
         district_tf.setBorder(new LineBorder(Color.BLACK, 1));
@@ -132,6 +139,14 @@ public class R_Register3 {
                         zipcode_tf.setText("CAP");
                     }
                 }
+
+                public void focusGained(final FocusEvent e) {
+                    if(!zipcodetxtAlreadyClicked || zipcode_tf.getText().equals("CAP")) {
+                        zipcode_tf.setText("");
+                        zipcodetxtAlreadyClicked = true;
+                        zipcode_tf.setForeground(Color.BLACK);
+                    }
+                }
         });
         
         zipcode_tf.setBorder(new LineBorder(Color.BLACK, 1));
@@ -160,11 +175,6 @@ public class R_Register3 {
         bts_pane.add(gap_lbl, gbc);
 
         continue_btn = new FButton("Registra");
-        continue_btn.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(final MouseEvent arg0) {
-                //mouse clicked
-            }
-        });
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
