@@ -102,6 +102,14 @@ public class R_Register3 {
                         district_tf.setText("Provincia");
                     }
                 }
+
+                public void focusGained(final FocusEvent e) {
+                    if(!districttxtAlreadyClicked || district_tf.getText().equals("Provincia")) {
+                        district_tf.setText("");
+                        districttxtAlreadyClicked = true;
+                        district_tf.setForeground(Color.BLACK);
+                    }
+                }
         });
         
         district_tf.setBorder(new LineBorder(Color.BLACK, 1));
@@ -130,6 +138,14 @@ public class R_Register3 {
                     if(zipcode_tf.getText().equals("")){
                         zipcode_tf.setForeground(Color.gray);
                         zipcode_tf.setText("CAP");
+                    }
+                }
+
+                public void focusGained(final FocusEvent e) {
+                    if(!zipcodetxtAlreadyClicked || zipcode_tf.getText().equals("CAP")) {
+                        zipcode_tf.setText("");
+                        zipcodetxtAlreadyClicked = true;
+                        zipcode_tf.setForeground(Color.BLACK);
                     }
                 }
         });
