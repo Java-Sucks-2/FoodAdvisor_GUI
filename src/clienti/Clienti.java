@@ -10,6 +10,7 @@ import java.io.File;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,6 +20,7 @@ import src.gui.pages.C_Register;
 import src.gui.pages.C_Register2;
 import src.gui.pages.C_Register3;
 import src.util.FileManager;
+import src.util.Security;
 
 public class Clienti {
   private FWindow mainWindow;
@@ -61,6 +63,32 @@ public class Clienti {
       return FileManager.SaveUser(user);
   }
 
+  /** Autentica l'account di un cliente
+   * @param nickname Nickname da autenticare
+   * @param password Password da autenticare
+   * @return Esito dell'autenticazione (boolean) */
+  public static boolean AuthenticateUser(String email, String password) {
+    // Array di stringhe contenente l'intero contenuto del file Utenti.dati 
+    String[] records = FileManager.GetFileRecords("Utenti.dati");
+    // Se la stringa in posizione 0 ritornata dal metodo per leggere
+    // dal file è "Error" ritorno (false), l'autenticazione non è
+    // andata a buon fine, altrimenti continuo
+    if(records[0].equals("Error")) return false;
+    // Per ognuno dei record (utenti) controllo se l'email e
+    // la password inseriti dall'utente che desidera accedere corrispondono
+    for(String record: records) {
+        // Splitto il record corrente per i suoi campi
+        String[] fields = record.split("\\|");
+        // Field 5 => Email, Field 6 => Hashed password
+        String inputPasswordHash = Security.GetHash(password);
+        if(fields[5].equals(email) && fields[6].equals(inputPasswordHash)) {
+            // Accesso riuscito correttamente
+            return true;
+        }
+    }
+    return false;
+  }
+
   public void addLoginPageListeners() {
     loginPage.login_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -69,7 +97,19 @@ public class Clienti {
         canChangePage &= validateField(loginPage.email_tf, "Email");
         canChangePage &= validateField(loginPage.password_pf, "Password");
 
-        if(canChangePage) {/* Logga l'utente */}
+        if(canChangePage) {
+          String email = loginPage.email_tf.getText();
+          String password = String.valueOf(loginPage.password_pf.getPassword());
+
+          if(AuthenticateUser(email, password)) {
+            JOptionPane.showMessageDialog(null, "Accesso effettuato correttamente!", "Accesso", JOptionPane.PLAIN_MESSAGE);
+          } else {
+            emptyFields();
+            validateField(loginPage.email_tf, "Email");
+            validateField(loginPage.password_pf, "Password");
+          }
+
+        }
       }
     });
 
@@ -135,9 +175,58 @@ public class Clienti {
         canChangePage &= validateField(registerPage3.password1_pf, "Password");
         canChangePage &= validateField(registerPage3.password2_pf, "Password");
 
-        if(canChangePage){/*REGISTRA LO STRACAZZO DI UTENTEEEEEEE*/}
+        if(canChangePage) {
+          // Registra l'utente
+          // nickname, nome, cognome, comune, provincia, email, password(hash)
+          String nickname = registerPage.nick_tf.getText();
+          String name     = registerPage.name_tf.getText();
+          String surname  = registerPage.surname_tf.getText();
+
+          String town = registerPage2.town_tf.getText();
+          String district = registerPage2.district_tf.getText();
+
+          String email = registerPage3.email_tf.getText();
+          String password = String.valueOf(registerPage3.password1_pf.getPassword());
+          String hashedPsw = Security.GetHash(password);
+
+          User user = new User(nickname,name,surname,town,district,email,hashedPsw);
+          
+          String result = RegisterNewUser(user) ? "Registrazione effettuata con successo" 
+                                                : "Registrazione fallita, ritenta.";
+
+          JOptionPane.showMessageDialog(null, result, "Registrazione", JOptionPane.PLAIN_MESSAGE);
+          
+          emptyFields();
+          changePage(loginPage.getPage());
+        }
       }
     });
+  }
+
+  public void emptyFields() {
+    loginPage.email_tf.setText("Email");
+    loginPage.email_tf.setForeground(Color.GRAY);
+    loginPage.password_pf.setText("Password");
+    loginPage.password_pf.setForeground(Color.GRAY);
+
+    registerPage.nick_tf.setText("Nickname");
+    registerPage.nick_tf.setForeground(Color.GRAY);
+    registerPage.name_tf.setText("Nome");
+    registerPage.name_tf.setForeground(Color.GRAY);
+    registerPage.surname_tf.setText("Cognome");
+    registerPage.surname_tf.setForeground(Color.GRAY);
+
+    registerPage2.town_tf.setText("Comune");
+    registerPage2.town_tf.setForeground(Color.GRAY);
+    registerPage2.district_tf.setText("Provincia");
+    registerPage2.district_tf.setForeground(Color.GRAY);
+    
+    registerPage3.email_tf.setText("Email");
+    registerPage3.email_tf.setForeground(Color.GRAY);
+    registerPage3.password1_pf.setText("Password");
+    registerPage3.password1_pf.setForeground(Color.GRAY);
+    registerPage3.password2_pf.setText("Password");
+    registerPage3.password2_pf.setForeground(Color.GRAY);
   }
 
   public boolean validateField(Object field, String placeholder) {
