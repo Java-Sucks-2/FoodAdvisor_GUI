@@ -19,6 +19,7 @@ import src.gui.pages.C_Login;
 import src.gui.pages.C_Register;
 import src.gui.pages.C_Register2;
 import src.gui.pages.C_Register3;
+import src.gui.pages.C_Search;
 import src.util.FileManager;
 import src.util.Security;
 
@@ -28,6 +29,7 @@ public class Clienti {
   private C_Register registerPage;
   private C_Register2 registerPage2;
   private C_Register3 registerPage3;
+  private C_Search searchPage;
   private boolean canChangePage;
 
   public static void main(final String[] args) {
@@ -45,6 +47,7 @@ public class Clienti {
     registerPage  = new C_Register();
     registerPage2 = new C_Register2();
     registerPage3 = new C_Register3();
+    searchPage    = new C_Search();
 
     changePage(loginPage.getPage());
 
@@ -102,19 +105,19 @@ public class Clienti {
           String password = String.valueOf(loginPage.password_pf.getPassword());
 
           if(AuthenticateUser(email, password)) {
-            JOptionPane.showMessageDialog(null, "Accesso effettuato correttamente!", "Accesso", JOptionPane.PLAIN_MESSAGE);
+            changePage(searchPage.getPage());
           } else {
             emptyFields();
             validateField(loginPage.email_tf, "Email");
             validateField(loginPage.password_pf, "Password");
           }
-
         }
       }
     });
 
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
+        emptyFields();
         changePage(registerPage.getPage());
       }
     });
@@ -174,6 +177,14 @@ public class Clienti {
         canChangePage &= validateField(registerPage3.email_tf, "Email");
         canChangePage &= validateField(registerPage3.password1_pf, "Password");
         canChangePage &= validateField(registerPage3.password2_pf, "Password");
+        
+        String pass1 = String.valueOf(registerPage3.password1_pf.getPassword());
+        String pass2 = String.valueOf(registerPage3.password2_pf.getPassword());
+
+        if(!pass1.equals(pass2)) {
+          emptyField(registerPage3.password1_pf, "Password");
+          emptyField(registerPage3.password2_pf, "Password");
+        }
 
         if(canChangePage) {
           // Registra l'utente
@@ -186,8 +197,7 @@ public class Clienti {
           String district = registerPage2.district_tf.getText();
 
           String email = registerPage3.email_tf.getText();
-          String password = String.valueOf(registerPage3.password1_pf.getPassword());
-          String hashedPsw = Security.GetHash(password);
+          String hashedPsw = Security.GetHash(pass1);
 
           User user = new User(nickname,name,surname,town,district,email,hashedPsw);
           
@@ -201,6 +211,16 @@ public class Clienti {
         }
       }
     });
+  }
+
+  public void emptyField(Object field, String placeholder) {
+    if(field instanceof FTextField) {
+      ((FTextField)field).setText(placeholder);
+      ((FTextField)field).setForeground(Color.GRAY);
+    } else if(field instanceof FPasswordField) {
+      ((FPasswordField)field).setText(placeholder);
+      ((FPasswordField)field).setForeground(Color.GRAY);
+    }
   }
 
   public void emptyFields() {
