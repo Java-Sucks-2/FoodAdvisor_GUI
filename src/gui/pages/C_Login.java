@@ -15,8 +15,6 @@ public class C_Login {
    
     private FPage page;
 
-    public String pageTitle;
-
     private FLabel title_lbl;
     public FTextField email_tf;
     public FPasswordField password_pf;
@@ -41,7 +39,6 @@ public class C_Login {
     public C_Login(){
         
         page = new FPage();
-        pageTitle = "Login";
         gbc = new GridBagConstraints();
 
         title_lbl = new FLabel("Benvenuto!", new Font("Manrope ExtraBold", Font.PLAIN, 99));

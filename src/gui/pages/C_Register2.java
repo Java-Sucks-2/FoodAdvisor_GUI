@@ -15,8 +15,6 @@ public class C_Register2 {
 
     private FPage page;
 
-    public String pageTitle;
-
     private GridBagConstraints gbc;
     private FLabel title_lbl;
     private String text;
@@ -38,7 +36,6 @@ public class C_Register2 {
     public C_Register2() {
 
         page = new FPage();
-        pageTitle = "Register 2/3";
         gbc = new GridBagConstraints();
 
         title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));

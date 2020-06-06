@@ -16,8 +16,6 @@ public class C_Register3 {
 
     private FPage page;
 
-    public String pageTitle;
-
     private GridBagConstraints gbc;
     private FLabel title_lbl;
     private String text;
