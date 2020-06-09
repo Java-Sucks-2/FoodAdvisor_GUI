@@ -149,14 +149,15 @@ public class FileManager {
             // Divisione del contenuto in record
             String[] records = data.split("\n");
 
+            if(records[0].split("\\|").length <= 1) return new String[]{};
+
             // Ritorno dei record
             return records;
 
         } catch(Exception e) {
             /* Exception handling */
+            return new String[] {};
         }
-
-        return new String[] {"Error"};
     }
 
     /**

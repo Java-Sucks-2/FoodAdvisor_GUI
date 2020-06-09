@@ -20,8 +20,7 @@ import src.gui.pages.C_Register;
 import src.gui.pages.C_Register2;
 import src.gui.pages.C_Register3;
 import src.gui.pages.C_Search;
-import src.util.FileManager;
-import src.util.Security;
+import src.util.*;
 
 public class Clienti {
   private FWindow mainWindow;
@@ -76,7 +75,7 @@ public class Clienti {
     // Se la stringa in posizione 0 ritornata dal metodo per leggere
     // dal file è "Error" ritorno (false), l'autenticazione non è
     // andata a buon fine, altrimenti continuo
-    if(records[0].equals("Error")) return false;
+    if(records.length == 0) return false;
     // Per ognuno dei record (utenti) controllo se l'email e
     // la password inseriti dall'utente che desidera accedere corrispondono
     for(String record: records) {
@@ -107,7 +106,8 @@ public class Clienti {
           if(AuthenticateUser(email, password)) {
             changePage(searchPage.getPage());
           } else {
-            emptyFields();
+            emptyField(loginPage.email_tf, "Email");
+            emptyField(loginPage.password_pf, "Password");
             validateField(loginPage.email_tf, "Email");
             validateField(loginPage.password_pf, "Password");
           }
