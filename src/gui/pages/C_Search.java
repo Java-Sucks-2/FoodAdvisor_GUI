@@ -30,30 +30,39 @@ public class C_Search {
         gbc = new GridBagConstraints();
 
         menuIcon_lbl = new FLabel("assets/MenuIcon.png");
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.weightx = 0.0;
-        //gbc.weighty = 0.0;
-        //gbc.anchor = GridBagConstraints.LAST_LINE_END;
-        gbc.insets = new Insets(0,0,0,0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 0.06;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.insets = new Insets(-500,0,0,0);
         setGridCoordinatesXY(gbc, 0, 0);
         page.add(menuIcon_lbl, gbc);
 
-        userIcon_lbl = new FLabel("assets/UserIcon.png");
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.weightx = 0.0;
-        //gbc.weighty = 0.0;
-        //gbc.anchor = GridBagConstraints.LAST_LINE_END;
-        gbc.insets = new Insets(0,0,0,0);
+        FLabel gap_lbl = new FLabel();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(-500,0,0,0);
+        gbc.weightx = 0.8;
         setGridCoordinatesXY(gbc, 1, 0);
+        page.add(gap_lbl, gbc);
+
+        userIcon_lbl = new FLabel("assets/UserIcon.png");
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 0.06;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        gbc.insets = new Insets(-500,0,0,0);
+        setGridCoordinatesXY(gbc, 2, 0);
         page.add(userIcon_lbl, gbc);
 
-        title_lbl = new FLabel(username, new Font("Manrope Regular", Font.PLAIN, 20));
-        setGridCoordinatesXY(gbc, 2, 0);
-        gbc.insets = new Insets(0,0,0,0);
-        page.add(title_lbl, gbc);
+        userName_lbl = new FLabel(username, new Font("Manrope Regular", Font.PLAIN, 25));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        gbc.weightx = 0.03;
+        setGridCoordinatesXY(gbc, 3, 0);
+        gbc.insets = new Insets(-500,0,0,0);
+        page.add(userName_lbl, gbc);
 
         String title = "Trova il tuo ristorante preferito!";
         title_lbl = new FLabel(title, new Font("Manrope ExtraLight", Font.PLAIN, 45));
+        gbc.gridwidth = 4;
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(0,0,0,0);
         page.add(title_lbl, gbc);
@@ -83,8 +92,9 @@ public class C_Search {
         });
         
         searchBar_tb.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 0, 2);
+        gbc.gridwidth = 4;
         gbc.insets = new Insets(30, 0, 0, 0);
         searchBar_tb.setBackground(Color.WHITE);
         page.add(searchBar_tb, gbc);
