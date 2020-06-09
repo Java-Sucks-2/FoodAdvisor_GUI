@@ -31,6 +31,8 @@ public class Clienti {
   private C_Search searchPage;
   private boolean canChangePage;
 
+  private static User user;
+
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() { new Clienti(); }
@@ -39,6 +41,7 @@ public class Clienti {
 
   public Clienti() {
     registerFonts();
+    user = null;
 
     mainWindow = new FWindow("FoodAdvisor Clienti");
 
@@ -46,7 +49,6 @@ public class Clienti {
     registerPage  = new C_Register();
     registerPage2 = new C_Register2();
     registerPage3 = new C_Register3();
-    searchPage    = new C_Search();
 
     changePage(loginPage.getPage());
 
@@ -85,6 +87,8 @@ public class Clienti {
         String inputPasswordHash = Security.GetHash(password);
         if(fields[5].equals(email) && fields[6].equals(inputPasswordHash)) {
             // Accesso riuscito correttamente
+            //nickname, nome, cognome, comune, provincia, email, password(hash)
+            user = new User(fields[0],fields[1],fields[2],fields[3],fields[4],fields[5],fields[6]);
             return true;
         }
     }
@@ -104,6 +108,7 @@ public class Clienti {
           String password = String.valueOf(loginPage.password_pf.getPassword());
 
           if(AuthenticateUser(email, password)) {
+            searchPage = new C_Search(user.GetNickname());
             changePage(searchPage.getPage());
           } else {
             emptyField(loginPage.email_tf, "Email");
@@ -174,10 +179,6 @@ public class Clienti {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        canChangePage &= validateField(registerPage3.email_tf, "Email");
-        canChangePage &= validateField(registerPage3.password1_pf, "Password");
-        canChangePage &= validateField(registerPage3.password2_pf, "Password");
-        
         String pass1 = String.valueOf(registerPage3.password1_pf.getPassword());
         String pass2 = String.valueOf(registerPage3.password2_pf.getPassword());
 
@@ -185,6 +186,10 @@ public class Clienti {
           emptyField(registerPage3.password1_pf, "Password");
           emptyField(registerPage3.password2_pf, "Password");
         }
+
+        canChangePage &= validateField(registerPage3.email_tf, "Email");
+        canChangePage &= validateField(registerPage3.password1_pf, "Password");
+        canChangePage &= validateField(registerPage3.password2_pf, "Password");
 
         if(canChangePage) {
           // Registra l'utente
