@@ -19,7 +19,7 @@ public class C_Search {
     private FLabel userName_lbl;
     private FLabel title_lbl;
     private FTextField searchBar_tb;
-    private FLabel bottomImage;
+    private FComboBox restaurants_cb;
 
     public FPage getPage() {
         return page;
@@ -29,17 +29,19 @@ public class C_Search {
         page = new FPage();
         gbc = new GridBagConstraints();
 
+        int topMargin = -610;
+
         menuIcon_lbl = new FLabel("assets/MenuIcon.png");
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.insets = new Insets(-480,0,0,0);
+        gbc.insets = new Insets(topMargin,0,0,0);
         setGridCoordinatesXY(gbc, 0, 0);
         page.add(menuIcon_lbl, gbc);
 
         FLabel gap_lbl = new FLabel();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(-480,0,0,0);
+        gbc.insets = new Insets(topMargin,0,0,0);
         gbc.weightx = 0.8;
         setGridCoordinatesXY(gbc, 1, 0);
         page.add(gap_lbl, gbc);
@@ -48,7 +50,7 @@ public class C_Search {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.insets = new Insets(-480,0,0,0);
+        gbc.insets = new Insets(topMargin,0,0,0);
         setGridCoordinatesXY(gbc, 2, 0);
         page.add(userIcon_lbl, gbc);
 
@@ -57,14 +59,15 @@ public class C_Search {
         gbc.anchor = GridBagConstraints.LINE_END;
         gbc.weightx = 0.03;
         setGridCoordinatesXY(gbc, 3, 0);
-        gbc.insets = new Insets(-480,0,0,0);
+        gbc.insets = new Insets(topMargin,0,0,0);
         page.add(userName_lbl, gbc);
+        gbc = new GridBagConstraints();
 
         String title = "Trova il tuo ristorante preferito!";
         title_lbl = new FLabel(title, new Font("Manrope ExtraLight", Font.PLAIN, 45));
         gbc.gridwidth = 4;
         setGridCoordinatesXY(gbc, 0, 1);
-        gbc.insets = new Insets(0,0,0,0);
+        gbc.insets = new Insets(-280,0,0,0);
         page.add(title_lbl, gbc);
 
         searchBar_tb = new FTextField(38, new Font("Manrope", Font.PLAIN, 24));
@@ -95,18 +98,16 @@ public class C_Search {
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 0, 2);
         gbc.gridwidth = 4;
-        gbc.insets = new Insets(30, 0, 0, 0);
+        gbc.insets = new Insets(-130, 0, 0, 0);
         searchBar_tb.setBackground(Color.WHITE);
         page.add(searchBar_tb, gbc);
 
-        /*bottomImage = new FLabel("assets/BottomImageBanner.png");
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.weightx = 0.0;
-        //gbc.weighty = 0.0;
-        //gbc.anchor = GridBagConstraints.LAST_LINE_END;
-        gbc.insets = new Insets(374,0,0,0);
+        /*String[] values = new String[] {"Tipologia","Italiano","Etnico","Fusion"};
+        restaurants_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
+        restaurants_cb.setBorder(new LineBorder(Color.BLACK, 1));
+        gbc.insets = new Insets(0, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
-        page.add(bottomImage, gbc);*/
+        page.add(restaurants_cb, gbc);*/
     }
 
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
