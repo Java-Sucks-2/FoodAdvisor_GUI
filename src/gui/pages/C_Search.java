@@ -18,8 +18,8 @@ public class C_Search {
     private FLabel userIcon_lbl;
     private FLabel userName_lbl;
     private FLabel title_lbl;
-    private FTextField searchBar_tb;
-    private FComboBox restaurants_cb;
+    public FTextField searchBar_tb;
+    private FList restaurants_lst;
 
     public FPage getPage() {
         return page;
@@ -102,12 +102,11 @@ public class C_Search {
         searchBar_tb.setBackground(Color.WHITE);
         page.add(searchBar_tb, gbc);
 
-        /*String[] values = new String[] {"Tipologia","Italiano","Etnico","Fusion"};
-        restaurants_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
-        restaurants_cb.setBorder(new LineBorder(Color.BLACK, 1));
-        gbc.insets = new Insets(0, 0, 0, 0);
+        restaurants_lst = new FList();
+        restaurants_lst.setPreferredSize(new Dimension(762,40));
+        gbc.insets = new Insets(-52,0,0,0);
         setGridCoordinatesXY(gbc, 0, 3);
-        page.add(restaurants_cb, gbc);*/
+        page.add(restaurants_lst, gbc);
     }
 
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {

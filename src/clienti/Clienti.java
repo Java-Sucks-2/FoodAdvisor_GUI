@@ -8,6 +8,8 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -109,6 +111,7 @@ public class Clienti {
 
           if(AuthenticateUser(email, password)) {
             searchPage = new C_Search(user.GetNickname());
+            addSearchPageListeners();
             changePage(searchPage.getPage());
           } else {
             emptyField(loginPage.email_tf, "Email");
@@ -215,6 +218,21 @@ public class Clienti {
           changePage(loginPage.getPage());
         }
       }
+    });
+  }
+
+  public void addSearchPageListeners() {
+    searchPage.searchBar_tb.getDocument().addDocumentListener(new DocumentListener(){
+      public void removeUpdate(DocumentEvent e) {updateRestaurantsList();}
+    
+      public void insertUpdate(DocumentEvent e) {updateRestaurantsList();}
+    
+      public void changedUpdate(DocumentEvent e) {updateRestaurantsList();}
+
+      public void updateRestaurantsList() {
+        String value = searchPage.searchBar_tb.getText();
+      }
+
     });
   }
 
