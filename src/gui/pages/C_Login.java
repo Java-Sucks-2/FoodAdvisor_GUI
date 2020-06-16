@@ -23,7 +23,7 @@ public class C_Login {
     private FPage bts_pane;
     public FButton login_btn;
     final FLabel info_lbl;
-    FLabel guest_lb; 
+    public FLabel guest_lb; 
 
     final String text;
     boolean emailtxtAlreadyClicked;
@@ -171,17 +171,11 @@ public class C_Login {
 
         guest_lb = new FLabel("<html>Oppure procedi come <font color='blue'>ospite</font></html>", new Font("Manrope", Font.PLAIN, 15));
         guest_lb.addMouseListener(new MouseAdapter() {
-            @Override
             public void mouseEntered(final MouseEvent e) {
                 guest_lb.setText("<html>Oppure procedi come <font color='red'>ospite</font></html>");
             }
-            @Override
             public void mouseExited(final MouseEvent e) {
                 guest_lb.setText("<html>Oppure procedi come <font color='blue'>ospite</font></html>");
-            }
-            @Override
-            public void mouseClicked(final MouseEvent e) {
-                //mouse clicked
             }
         });
 

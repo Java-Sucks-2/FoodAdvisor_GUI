@@ -46,7 +46,8 @@ public class C_Search {
         setGridCoordinatesXY(gbc, 1, 0);
         page.add(gap_lbl, gbc);
 
-        userIcon_lbl = new FLabel("assets/UserIcon.png");
+        String iconPath = username.equals("Guest") ? "assets/GuestIcon.png" : "assets/UserIcon.png";
+        userIcon_lbl = new FLabel(iconPath);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_END;

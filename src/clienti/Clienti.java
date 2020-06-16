@@ -140,6 +140,14 @@ public class Clienti {
         changePage(registerPage.getPage());
       }
     });
+
+    loginPage.guest_lb.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(final MouseEvent e) {
+        searchPage = new C_Search("Guest");
+        addSearchPageListeners();
+        changePage(searchPage.getPage());
+      }
+    });
   }
 
   public void addRegisterPageListeners() {
