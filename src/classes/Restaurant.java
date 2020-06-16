@@ -4,7 +4,7 @@ import java.net.URL;
 
 public class Restaurant {
     public enum TypeRestaurant{
-        Italiano(0),Etnico(1), Fusion(2);
+        INSTANCE(4), Italiano(0),Etnico(1), Fusion(2);
         private final int value;
        // GETTER
         public int GetValue(){return value;}
@@ -13,6 +13,8 @@ public class Restaurant {
          * @param value */
         private TypeRestaurant(int value){this.value=value;}
     }
+
+
     private int id;
     private String name;
     private Address address;
