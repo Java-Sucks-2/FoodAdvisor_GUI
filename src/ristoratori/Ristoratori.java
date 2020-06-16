@@ -57,6 +57,16 @@ public class Ristoratori {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
+        if (registerPage.name_tf.getText().length() > 20 || 
+            registerPage.name_tf.getText().length() < 5) 
+            emptyField(registerPage.name_tf, "Nome");
+
+        /*
+        if(registerPage.number_tf.getText().length() != 10 ||
+           StringUtils.isNumeric(registerPage.number_tf.getText()))
+           emptyField(registerPage.number_tf, "Numero di Telefono");
+        */
+
         canChangePage &= validateField(registerPage.name_tf, "Nome");
         canChangePage &= validateField(registerPage.number_tf, "Numero di Telefono");
         canChangePage &= validateField(registerPage.website_tf, "Sito Web");
@@ -153,6 +163,16 @@ public class Ristoratori {
         }
       }
     });
+  }
+
+  public void emptyField(Object field, String placeholder) {
+    if(field instanceof FTextField) {
+      ((FTextField)field).setText(placeholder);
+      ((FTextField)field).setForeground(Color.GRAY);
+    } else if(field instanceof FPasswordField) {
+      ((FPasswordField)field).setText(placeholder);
+      ((FPasswordField)field).setForeground(Color.GRAY);
+    }
   }
 
   public void emptyFields() {
