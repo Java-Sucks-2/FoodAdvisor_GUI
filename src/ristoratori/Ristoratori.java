@@ -229,8 +229,6 @@ public class Ristoratori {
     mainWindow.revalidate();
   }
 
-  
-
   public static void registerFonts() {
     try {
       final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
