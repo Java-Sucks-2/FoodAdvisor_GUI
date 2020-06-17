@@ -1,17 +1,12 @@
 package src.clienti;
 
 import src.classes.User;
-import src.classes.Address.TypeAddress;
-import src.classes.Restaurant.TypeRestaurant;
-import src.classes.Address;
 import src.classes.Restaurant;
 import src.gui.components.*;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
