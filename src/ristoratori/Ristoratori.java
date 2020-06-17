@@ -42,14 +42,14 @@ public class Ristoratori {
     registerPage = new R_Register();
     registerPage2 = new R_Register2();
     registerPage3 = new R_Register3();
-
     changePage(registerPage.getPage());
 
     addRegisterPageListeners();
     addRegisterPage2Listeners();
     addRegisterPage3Listeners();
-
     mainWindow.setVisible(true);
+    registerPage.getPage().requestFocusInWindow();
+
   }
 
   public void addRegisterPageListeners() {
@@ -228,6 +228,8 @@ public class Ristoratori {
     mainWindow.repaint();
     mainWindow.revalidate();
   }
+
+  
 
   public static void registerFonts() {
     try {

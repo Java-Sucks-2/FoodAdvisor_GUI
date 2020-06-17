@@ -70,6 +70,7 @@ public class Clienti {
     addRegisterPage3Listeners();
 
     mainWindow.setVisible(true);
+    loginPage.getPage().requestFocusInWindow();
   }
 
   /** Registra un nuovo utente inserendolo nel file "Utenti.dati"
