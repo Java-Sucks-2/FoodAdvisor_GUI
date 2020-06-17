@@ -155,6 +155,10 @@ public class Clienti {
          /* TO DO: Controllo nickname */
          canChangePage = true;
 
+         if (registerPage.nick_tf.getText().length() > 20 || 
+         registerPage.nick_tf.getText().length() < 5) 
+          emptyField(registerPage.nick_tf, "Nickname");
+
          canChangePage &= validateField(registerPage.nick_tf, "Nickname");
          canChangePage &= validateField(registerPage.name_tf, "Nome");
          canChangePage &= validateField(registerPage.surname_tf, "Cognome");
