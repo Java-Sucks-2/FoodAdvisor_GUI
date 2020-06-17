@@ -57,17 +57,10 @@ public class Clienti {
 
     mainWindow = new FWindow("FoodAdvisor Clienti");
 
-    loginPage     = new C_Login();
-    registerPage  = new C_Register();
-    registerPage2 = new C_Register2();
-    registerPage3 = new C_Register3();
+    loginPage = new C_Login();
 
     changePage(loginPage.getPage());
-
     addLoginPageListeners();
-    addRegisterPageListeners();
-    addRegisterPage2Listeners();
-    addRegisterPage3Listeners();
 
     mainWindow.setVisible(true);
     loginPage.getPage().requestFocusInWindow();
@@ -137,6 +130,8 @@ public class Clienti {
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         emptyFields();
+        registerPage  = new C_Register();
+        addRegisterPageListeners();
         changePage(registerPage.getPage());
       }
     });
@@ -166,7 +161,11 @@ public class Clienti {
          canChangePage &= validateField(registerPage.name_tf, "Nome");
          canChangePage &= validateField(registerPage.surname_tf, "Cognome");
  
-         if(canChangePage) changePage(registerPage2.getPage());
+         if(canChangePage) { 
+            registerPage2 = new C_Register2();
+            addRegisterPage2Listeners();
+            changePage(registerPage2.getPage());
+         }
         }
     });
   }
@@ -185,7 +184,11 @@ public class Clienti {
         canChangePage &= validateField(registerPage2.town_tf, "Comune");
         canChangePage &= validateField(registerPage2.district_tf, "Provincia");
 
-        if(canChangePage) changePage(registerPage3.getPage());
+        if(canChangePage) {
+          registerPage3 = new C_Register3();
+          addRegisterPage3Listeners();
+          changePage(registerPage3.getPage());
+        }
       }
     });
   }
@@ -348,29 +351,37 @@ public class Clienti {
   }
 
   public void emptyFields() {
-    loginPage.email_tf.setText("Email");
-    loginPage.email_tf.setForeground(Color.GRAY);
-    loginPage.password_pf.setText("Password");
-    loginPage.password_pf.setForeground(Color.GRAY);
+    if(loginPage != null) {
+      loginPage.email_tf.setText("Email");
+      loginPage.email_tf.setForeground(Color.GRAY);
+      loginPage.password_pf.setText("Password");
+      loginPage.password_pf.setForeground(Color.GRAY);
+    }
 
-    registerPage.nick_tf.setText("Nickname");
-    registerPage.nick_tf.setForeground(Color.GRAY);
-    registerPage.name_tf.setText("Nome");
-    registerPage.name_tf.setForeground(Color.GRAY);
-    registerPage.surname_tf.setText("Cognome");
-    registerPage.surname_tf.setForeground(Color.GRAY);
+    if(registerPage != null) {
+      registerPage.nick_tf.setText("Nickname");
+      registerPage.nick_tf.setForeground(Color.GRAY);
+      registerPage.name_tf.setText("Nome");
+      registerPage.name_tf.setForeground(Color.GRAY);
+      registerPage.surname_tf.setText("Cognome");
+      registerPage.surname_tf.setForeground(Color.GRAY);
+    }
 
-    registerPage2.town_tf.setText("Comune");
-    registerPage2.town_tf.setForeground(Color.GRAY);
-    registerPage2.district_tf.setText("Provincia");
-    registerPage2.district_tf.setForeground(Color.GRAY);
-    
-    registerPage3.email_tf.setText("Email");
-    registerPage3.email_tf.setForeground(Color.GRAY);
-    registerPage3.password1_pf.setText("Password");
-    registerPage3.password1_pf.setForeground(Color.GRAY);
-    registerPage3.password2_pf.setText("Password");
-    registerPage3.password2_pf.setForeground(Color.GRAY);
+    if(registerPage2 != null) {
+      registerPage2.town_tf.setText("Comune");
+      registerPage2.town_tf.setForeground(Color.GRAY);
+      registerPage2.district_tf.setText("Provincia");
+      registerPage2.district_tf.setForeground(Color.GRAY);
+    }
+
+    if(registerPage3 != null) {
+      registerPage3.email_tf.setText("Email");
+      registerPage3.email_tf.setForeground(Color.GRAY);
+      registerPage3.password1_pf.setText("Password");
+      registerPage3.password1_pf.setForeground(Color.GRAY);
+      registerPage3.password2_pf.setText("Password");
+      registerPage3.password2_pf.setForeground(Color.GRAY);
+    }
   }
 
   public boolean validateField(Object field, String placeholder) {
