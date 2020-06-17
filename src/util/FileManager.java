@@ -1,6 +1,8 @@
 package src.util;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import src.classes.*;
+import src.classes.Address.TypeAddress;
+import src.classes.Restaurant.TypeRestaurant;
 
 /** Classe responsabile per l'accesso ai file dati */
 public class FileManager {
@@ -68,19 +72,37 @@ public class FileManager {
         }
     }
 
-    public static String[] GetRestaurants() {
-        String[] allRecords = GetFileRecords("EatAdvisor.dati");
-        List<String> restaurants = new ArrayList<String>();        
+    public static List<Restaurant> GetRestaurants() {
+        String[] records = GetFileRecords("EatAdvisor.dati");
+        List<Restaurant> restaurants = new ArrayList<Restaurant>();
+    
+        /* FORMATO RECORD RISTORANTE */
+        /* 2|Mesopotamia|Via|Isonzo|10|Azzate|VA|21022|3883085877|https://www.google.it/|Fusion */
+        for(String record: records) {
+            String[] fields = record.split("\\|");
 
-        for(String record: allRecords)
-            if(record.split("\\|").length > 4) restaurants.add(record);
+            if(fields.length > 4) {
+                TypeAddress typeAddress = Integer.parseInt(fields[4]) == 0 ? TypeAddress.Via : TypeAddress.Piazza;
+                Address address = new Address(typeAddress, fields[3], Integer.parseInt(fields[4]), fields[5], fields[6], Integer.parseInt(fields[7]));
 
-        String[] result = new String[restaurants.size()];
+                try {
+                    URL website = new URL(fields[9]);
 
-        for(int i = 0; i < restaurants.size(); i++)
-            result[i] = restaurants.get(i);
+                    TypeRestaurant typeRestaurant = TypeRestaurant.INSTANCE;
+                    if      (fields[10].equals("Etnico"))   typeRestaurant = TypeRestaurant.Etnico;
+                    else if (fields[10].equals("Italiano")) typeRestaurant = TypeRestaurant.Italiano;
+                    else if (fields[10].equals("Fusion"))   typeRestaurant = TypeRestaurant.Fusion;
 
-        return result;
+                    Restaurant restaurant = new Restaurant(Integer.parseInt(fields[0]), fields[1], address, Long.parseLong(fields[8]), website, typeRestaurant);
+                    restaurants.add(restaurant);
+
+                } catch(MalformedURLException e) {
+                    System.err.println(e);
+                }
+            }
+        }
+
+        return restaurants;
     }
 
     /**

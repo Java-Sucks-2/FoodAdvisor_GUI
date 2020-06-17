@@ -44,6 +44,7 @@ public class Clienti {
   private boolean canChangePage;
 
   private static User user;
+  private static List<Restaurant> restaurants;
 
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
@@ -54,6 +55,7 @@ public class Clienti {
   public Clienti() {
     registerFonts();
     user = null;
+    restaurants = FileManager.GetRestaurants();
 
     mainWindow = new FWindow("FoodAdvisor Clienti");
 
@@ -114,6 +116,7 @@ public class Clienti {
           String password = String.valueOf(loginPage.password_pf.getPassword());
 
           if(AuthenticateUser(email, password)) {
+            emptyFields();
             searchPage = new C_Search(user.GetNickname());
             addSearchPageListeners();
             changePage(searchPage.getPage());
@@ -254,37 +257,7 @@ public class Clienti {
       public void updateRestaurantsList() {
         String value = searchPage.searchBar_tb.getText().toLowerCase();
 
-        // Lista originale degli oggetti ristoranti
-        List<Restaurant> restaurants = new ArrayList<Restaurant>();
-        // Lista risultante dalle operazioni di filtraggio
-        List<Restaurant> filteredList = new ArrayList<Restaurant>();
-        // Record ristoranti sotto forma di stringhe
-        String[] records = FileManager.GetRestaurants();
-
-        /* FORMATO RECORD RISTORANTE */
-        /* 2|Mesopotamia|Via|Isonzo|10|Azzate|VA|21022|3883085877|https://www.google.it/|Fusion */
-        for(String record: records) {
-            String[] fields = record.split("\\|");
-            TypeAddress typeAddress = Integer.parseInt(fields[4]) == 0 ? TypeAddress.Via : TypeAddress.Piazza;
-            Address address = new Address(typeAddress, fields[3], Integer.parseInt(fields[4]), fields[5], fields[6], Integer.parseInt(fields[7]));
-
-            try {
-                URL website = new URL(fields[9]);
-
-                TypeRestaurant typeRestaurant = TypeRestaurant.INSTANCE;
-                if      (fields[10].equals("Etnico"))   typeRestaurant = TypeRestaurant.Etnico;
-                else if (fields[10].equals("Italiano")) typeRestaurant = TypeRestaurant.Italiano;
-                else if (fields[10].equals("Fusion"))   typeRestaurant = TypeRestaurant.Fusion;
-
-                Restaurant restaurant = new Restaurant(Integer.parseInt(fields[0]), fields[1], address, Long.parseLong(fields[8]), website, typeRestaurant);
-                restaurants.add(restaurant);
-
-            } catch(MalformedURLException e) {
-                System.err.println(e);
-            }
-        }
-
-        filteredList = FilterListBy(restaurants, "Name", new String[] {value});
+        List<Restaurant> filteredList = FilterListBy(restaurants, "Name", new String[] {value});
 
         System.out.println("\n\n");
         for(Restaurant r: filteredList) {
@@ -292,6 +265,12 @@ public class Clienti {
         }
       }
 
+    });
+
+    searchPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(loginPage.getPage());
+      }
     });
   }
 

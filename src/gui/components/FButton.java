@@ -39,7 +39,7 @@ public class FButton extends JButton {
             public void mouseReleased(final MouseEvent arg0) {
                 setBackground(new Color(237, 71, 53));
             }
-          });
+        });
     }
 
     public void autoSetBounds(int win_width, int width, int height, int ycoord) {

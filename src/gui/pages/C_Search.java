@@ -14,7 +14,7 @@ public class C_Search {
     private FPage page;
     private GridBagConstraints gbc;
 
-    private FLabel menuIcon_lbl;
+    public FLabel backIcon_lbl;
     private FLabel userIcon_lbl;
     private FLabel userName_lbl;
     private FLabel title_lbl;
@@ -31,13 +31,13 @@ public class C_Search {
 
         int topMargin = -610;
 
-        menuIcon_lbl = new FLabel("assets/BackIcon.png");
+        backIcon_lbl = new FLabel("assets/BackIcon.png");
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.insets = new Insets(topMargin,0,0,0);
         setGridCoordinatesXY(gbc, 0, 0);
-        page.add(menuIcon_lbl, gbc);
+        page.add(backIcon_lbl, gbc);
 
         FLabel gap_lbl = new FLabel();
         gbc.fill = GridBagConstraints.HORIZONTAL;
