@@ -31,7 +31,7 @@ public class C_Search {
 
         int topMargin = -610;
 
-        menuIcon_lbl = new FLabel("assets/MenuIcon.png");
+        menuIcon_lbl = new FLabel("assets/BackIcon.png");
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_START;
