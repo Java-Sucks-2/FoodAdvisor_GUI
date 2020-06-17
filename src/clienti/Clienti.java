@@ -249,7 +249,7 @@ public class Clienti {
       public void changedUpdate(DocumentEvent e) {updateRestaurantsList();}
 
       public void updateRestaurantsList() {
-        String value = searchPage.searchBar_tb.getText();
+        String value = searchPage.searchBar_tb.getText().toLowerCase();
 
         // Lista originale degli oggetti ristoranti
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -308,21 +308,21 @@ public class Clienti {
     Predicate<Restaurant> filter;
       switch(filterType) {
           case "Town": 
-              filter = restaurant -> restaurant.GetAddress().GetTownName().equals(values[0]);
+              filter = restaurant -> restaurant.GetAddress().GetTownName().toLowerCase().equals(values[0]);
               break;
 
           case "Typology":
-              filter = restaurant -> restaurant.GetType().toString().equals(values[0]);
+              filter = restaurant -> restaurant.GetType().toString().toLowerCase().equals(values[0]);
               break;
 
           case "Name":
-              filter = restaurant -> restaurant.GetName().contains(values[0]);
+              filter = restaurant -> restaurant.GetName().toLowerCase().contains(values[0]);
               break;
 
           case "Town&Typology":
               list = FilterListBy(list, "Town", new String[] {values[0]});
               if(list.isEmpty()) return new ArrayList<Restaurant>();
-              filter = restaurant -> restaurant.GetType().toString().equals(values[1]);
+              filter = restaurant -> restaurant.GetType().toString().toLowerCase().equals(values[1]);
               break;
 
           default:
