@@ -56,11 +56,12 @@ public class Ristoratori {
             registerPage.name_tf.getText().length() < 5) 
             emptyField(registerPage.name_tf, "Nome");
 
-        /*
         if(registerPage.number_tf.getText().length() != 10 ||
-           StringUtils.isNumeric(registerPage.number_tf.getText()))
+           !isNumeric(registerPage.number_tf.getText()))
            emptyField(registerPage.number_tf, "Numero di Telefono");
-        */
+
+        if(!isURLValid(registerPage.website_tf.getText()))
+          emptyField(registerPage.website_tf, "Sito Web");
 
         canChangePage &= validateField(registerPage.name_tf, "Nome");
         canChangePage &= validateField(registerPage.number_tf, "Numero di Telefono");
@@ -223,6 +224,24 @@ public class Ristoratori {
     }
 
     return false;
+  }
+
+  public boolean isNumeric(String number) {
+    try {
+      Long.parseLong(number);
+      return true;
+    } catch(NumberFormatException e) {
+      return false;
+    }
+  }
+
+  public boolean isURLValid(String url) {
+    try {
+      new URL(url);
+      return true;
+    } catch(MalformedURLException e) {
+      return false;
+    }
   }
 
   public void changePage(FPage newPage) {
