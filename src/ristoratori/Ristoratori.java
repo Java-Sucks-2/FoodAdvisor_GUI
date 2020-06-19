@@ -38,18 +38,13 @@ public class Ristoratori {
   public Ristoratori() {
     registerFonts();
     mainWindow = new FWindow("FoodAdvisor Ristoratori");
-
     registerPage = new R_Register();
-    registerPage2 = new R_Register2();
-    registerPage3 = new R_Register3();
-    changePage(registerPage.getPage());
-
+    
     addRegisterPageListeners();
-    addRegisterPage2Listeners();
-    addRegisterPage3Listeners();
+    changePage(registerPage.getPage());
+    
     mainWindow.setVisible(true);
     registerPage.getPage().requestFocusInWindow();
-
   }
 
   public void addRegisterPageListeners() {
@@ -72,7 +67,11 @@ public class Ristoratori {
         canChangePage &= validateField(registerPage.website_tf, "Sito Web");
         canChangePage &= validateField(registerPage.type_cb, "Tipologia");
 
-        if(canChangePage) changePage(registerPage2.getPage());
+        if(canChangePage) {
+          registerPage2 = new R_Register2();
+          addRegisterPage2Listeners();
+          changePage(registerPage2.getPage());
+        }
       }
     });
   }
@@ -92,7 +91,11 @@ public class Ristoratori {
         canChangePage &= validateField(registerPage2.addressname_tf, "Nome della Via");
         canChangePage &= validateField(registerPage2.number_tf, "Numero Civico");
 
-        if(canChangePage) changePage(registerPage3.getPage());
+        if(canChangePage) {
+          registerPage3 = new R_Register3();
+          addRegisterPage3Listeners();
+          changePage(registerPage3.getPage());
+        }
       }
     });
   }
