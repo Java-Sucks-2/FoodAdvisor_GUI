@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.SwingConstants;
 
@@ -21,10 +22,16 @@ public class FList extends JList<String> {
         addStyle();
     }
 
+    public FList(DefaultListModel<String> listModel) {
+        super(listModel);
+        addStyle();
+    }
+
     public void addStyle() {
+        this.setFixedCellHeight(50);
         this.setFont(new Font("Manrope", Font.PLAIN, 22));
         this.setOpaque(false);
-        this.setBackground(Color.WHITE);
+        this.setBackground(new Color(222,222,222));
         DefaultListCellRenderer renderer = (DefaultListCellRenderer) this.getCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
     }

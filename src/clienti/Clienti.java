@@ -257,13 +257,14 @@ public class Clienti {
         String value = searchPage.searchBar_tb.getText().toLowerCase();
 
         List<Restaurant> filteredList = FilterListBy(restaurants, "Name", new String[] {value});
+        searchPage.listModel.clear();
 
         System.out.println("\n\n");
         for(Restaurant r: filteredList) {
           System.out.println(r.GetName() + "\n");
-        }
+          searchPage.listModel.addElement(r.GetName());
+        }        
       }
-
     });
 
     searchPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
@@ -273,8 +274,7 @@ public class Clienti {
     });
   }
 
-  /**
-   * Filtra una lista data in input in base ad un parametro
+  /** Filtra una lista data in input in base ad un parametro
    * @param list Lista di oggetti Restaurant originale da filtrare
    * @param filterType Stringa rappresentante l'attributo da filtrare: (Town, Typology, Name, Town&Typology)
    * @param values Array di stringhe contenenti i valori per cui filtrare

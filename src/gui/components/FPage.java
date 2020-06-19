@@ -1,6 +1,7 @@
 package src.gui.components;
 
 import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +13,12 @@ public class FPage extends JPanel {
 
     public FPage() {
         super(new GridBagLayout());
+        this.setBorder(new EmptyBorder(0, 0, 0, 0));
+        this.setBackground(Color.WHITE);
+    }
+
+    public FPage(BorderLayout layout) {
+        super(layout);
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setBackground(Color.WHITE);
     }

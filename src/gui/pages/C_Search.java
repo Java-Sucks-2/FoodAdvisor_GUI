@@ -3,6 +3,9 @@ package src.gui.pages;
 import src.gui.components.*;
 import java.awt.*;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.event.FocusAdapter;
@@ -19,7 +22,8 @@ public class C_Search {
     private FLabel userName_lbl;
     private FLabel title_lbl;
     public FTextField searchBar_tb;
-    private FList restaurants_lst;
+    public FList restaurants_lst;
+    public DefaultListModel<String> listModel;
 
     public FPage getPage() {
         return page;
@@ -28,8 +32,9 @@ public class C_Search {
     public C_Search(String username) {
         page = new FPage();
         gbc = new GridBagConstraints();
+        listModel = new DefaultListModel<String>();
 
-        int topMargin = -610;
+        int topMargin = -100;
 
         backIcon_lbl = new FLabel("assets/BackIcon.png");
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -68,7 +73,7 @@ public class C_Search {
         title_lbl = new FLabel(title, new Font("Manrope ExtraLight", Font.PLAIN, 45));
         gbc.gridwidth = 4;
         setGridCoordinatesXY(gbc, 0, 1);
-        gbc.insets = new Insets(-280,0,0,0);
+        gbc.insets = new Insets(100,0,0,0);
         page.add(title_lbl, gbc);
 
         searchBar_tb = new FTextField(38, new Font("Manrope", Font.PLAIN, 24));
@@ -99,15 +104,33 @@ public class C_Search {
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 0, 2);
         gbc.gridwidth = 4;
-        gbc.insets = new Insets(-130, 0, 0, 0);
+        gbc.insets = new Insets(30, 0, 0, 0);
         searchBar_tb.setBackground(Color.WHITE);
         page.add(searchBar_tb, gbc);
 
-        restaurants_lst = new FList();
-        restaurants_lst.setPreferredSize(new Dimension(762,40));
-        gbc.insets = new Insets(-52,0,0,0);
+        FPage scrollingList = new FPage(new BorderLayout());
+        scrollingList.setPreferredSize(new Dimension(763,300));
+        scrollingList.setBackground(Color.WHITE);
+        scrollingList.setOpaque(true);
+        gbc.insets = new Insets(0,0,0,0);
         setGridCoordinatesXY(gbc, 0, 3);
-        page.add(restaurants_lst, gbc);
+
+        restaurants_lst = new FList(listModel);
+        //restaurants_lst.setPreferredSize(new Dimension(762,300));
+        //gbc.insets = new Insets(-2,0,0,0);
+        //setGridCoordinatesXY(gbc, 0, 3);
+        //page.add(restaurants_lst, gbc);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBackground(Color.WHITE);
+        scrollPane.setOpaque(true);
+        scrollPane.setBorder(new LineBorder(Color.WHITE, 1));
+        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setViewportView(restaurants_lst);
+        restaurants_lst.setLayoutOrientation(JList.VERTICAL);
+        scrollingList.add(scrollPane);
+
+        page.add(scrollingList, gbc);
     }
 
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
