@@ -135,7 +135,7 @@ public class Clienti {
     });
 
     loginPage.guest_lb.addMouseListener(new MouseAdapter() {
-      public void mouseClicked(final MouseEvent e) {
+      public void mouseReleased(final MouseEvent e) {
         searchPage = new C_Search("Guest");
         addSearchPageListeners();
         changePage(searchPage.getPage());

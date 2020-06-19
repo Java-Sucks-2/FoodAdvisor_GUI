@@ -109,7 +109,7 @@ public class C_Search {
         page.add(searchBar_tb, gbc);
 
         FPage scrollingList = new FPage(new BorderLayout());
-        scrollingList.setPreferredSize(new Dimension(763,300));
+        scrollingList.setPreferredSize(new Dimension(764,300));
         scrollingList.setBackground(Color.WHITE);
         scrollingList.setOpaque(true);
         gbc.insets = new Insets(0,0,0,0);

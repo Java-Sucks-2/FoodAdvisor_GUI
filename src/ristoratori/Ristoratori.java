@@ -88,7 +88,7 @@ public class Ristoratori {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if(!registerPage2.addressname_tf.getText().matches("[a-zA-Z]+"))
+        if(!registerPage2.addressname_tf.getText().matches("[a-zA-Z ]+"))
           emptyField(registerPage2.addressname_tf, "Nome della Via");
 
         if(!isNumeric(registerPage2.number_tf.getText())) 
@@ -118,7 +118,7 @@ public class Ristoratori {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if(!registerPage3.town_tf.getText().matches("[a-zA-Z]+"))
+        if(!registerPage3.town_tf.getText().matches("[a-zA-Z ]+"))
           emptyField(registerPage3.town_tf, "Comune");
 
         if(registerPage3.district_tf.getText().length() != 2 ||
