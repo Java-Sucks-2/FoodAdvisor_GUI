@@ -88,6 +88,12 @@ public class Ristoratori {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
+        if(!registerPage2.addressname_tf.getText().matches("[a-zA-Z]+"))
+          emptyField(registerPage2.addressname_tf, "Nome della Via");
+
+        if(!isNumeric(registerPage2.number_tf.getText())) 
+          emptyField(registerPage2.number_tf, "Numero Civico");
+
         canChangePage &= validateField(registerPage2.addresstype_cb, "Tipo Indirizzo");
         canChangePage &= validateField(registerPage2.addressname_tf, "Nome della Via");
         canChangePage &= validateField(registerPage2.number_tf, "Numero Civico");
@@ -111,6 +117,17 @@ public class Ristoratori {
     registerPage3.continue_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
+
+        if(!registerPage3.town_tf.getText().matches("[a-zA-Z]+"))
+          emptyField(registerPage3.town_tf, "Comune");
+
+        if(registerPage3.district_tf.getText().length() != 2 ||
+           !registerPage3.district_tf.getText().matches("[A-Z]+"))
+           emptyField(registerPage3.district_tf, "Provincia");
+
+        if(registerPage3.zipcode_tf.getText().length() != 5 ||
+           !isNumeric(registerPage3.zipcode_tf.getText()))
+           emptyField(registerPage3.zipcode_tf, "CAP");
 
         canChangePage &= validateField(registerPage3.town_tf, "Comune");
         canChangePage &= validateField(registerPage3.district_tf, "Provincia");
