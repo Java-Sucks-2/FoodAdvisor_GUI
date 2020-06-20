@@ -53,7 +53,6 @@ public class Clienti {
     restaurants = FileManager.GetRestaurants();
 
     mainWindow = new FWindow("FoodAdvisor Clienti");
-
     loginPage = new C_Login();
 
     changePage(loginPage.getPage());
@@ -63,7 +62,7 @@ public class Clienti {
     loginPage.getPage().requestFocusInWindow();
   }
 
-  
+
   /** Registra un nuovo utente inserendolo nel file "Utenti.dati"
   * @param user Oggetto User da registrare
   * @return Esito della registrazione (boolean) */
@@ -265,11 +264,8 @@ public class Clienti {
         List<Restaurant> filteredList = FilterListBy(restaurants, "Name", new String[] {value});
         searchPage.listModel.clear();
 
-        System.out.println("\n\n");
-        for(Restaurant r: filteredList) {
-          System.out.println(r.GetName() + "\n");
+        for(Restaurant r: filteredList) 
           searchPage.listModel.addElement(r.GetName());
-        }        
       }
     });
 
