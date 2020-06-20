@@ -63,6 +63,7 @@ public class Clienti {
     loginPage.getPage().requestFocusInWindow();
   }
 
+  
   /** Registra un nuovo utente inserendolo nel file "Utenti.dati"
   * @param user Oggetto User da registrare
   * @return Esito della registrazione (boolean) */
@@ -71,7 +72,7 @@ public class Clienti {
   }
 
   /** Autentica l'account di un cliente
-   * @param nickname Nickname da autenticare
+   * @param email Email da autenticare
    * @param password Password da autenticare
    * @return Esito dell'autenticazione (boolean) */
   public static boolean AuthenticateUser(String email, String password) {
@@ -98,6 +99,7 @@ public class Clienti {
     return false;
   }
 
+  /** Aggiunge i listeners della pagina di login */
   public void addLoginPageListeners() {
     loginPage.login_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -143,6 +145,7 @@ public class Clienti {
     });
   }
 
+  /** Aggiunge i listeners della prima pagina di registrazione */
   public void addRegisterPageListeners() {
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -172,6 +175,7 @@ public class Clienti {
     });
   }
 
+  /** Aggiunge i listeners della seconda pagina di registrazione */
   public void addRegisterPage2Listeners() {
     registerPage2.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -195,6 +199,7 @@ public class Clienti {
     });
   }
 
+  /** Aggiunge i listeners della terza pagina di registrazione */
   public void addRegisterPage3Listeners() {
     registerPage3.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -245,6 +250,7 @@ public class Clienti {
     });
   }
 
+  /** Aggiunge i listeners della pagina di ricerca di ristoranti */
   public void addSearchPageListeners() {
     searchPage.searchBar_tb.getDocument().addDocumentListener(new DocumentListener(){
       public void removeUpdate(DocumentEvent e) {updateRestaurantsList();}
@@ -318,6 +324,9 @@ public class Clienti {
       return filteredList;
   }
 
+  /** Svuota il contenuto del campo desiderato e lo reinizializza con il suo placeholder originale
+   * @param field Campo da svuotare
+   * @param placeholder Placeholder default del campo */
   public void emptyField(Object field, String placeholder) {
     if(field instanceof FTextField) {
       ((FTextField)field).setText(placeholder);
@@ -328,6 +337,7 @@ public class Clienti {
     }
   }
 
+  /** Svuota tutti i campi delle pagine di login e registrazione */
   public void emptyFields() {
     if(loginPage != null) {
       loginPage.email_tf.setText("Email");
@@ -362,6 +372,12 @@ public class Clienti {
     }
   }
 
+  /** Verifica il contenuto di un campo, se il contenuto è uguale
+   * al valore del placeholder, allora non è stato inserito nulla
+   * e quindi il contenuto di quel campo non è valido.
+   * @param field Campo da verificare
+   * @param placeholder Valore di default del campo (placeholder)
+   * @return Esito della verifica (boolean) */
   public boolean validateField(Object field, String placeholder) {
     if(field instanceof FTextField) {
       String value = ((FTextField)field).getText();
@@ -386,6 +402,8 @@ public class Clienti {
     return false;
   }
 
+  /** Svuota la mainWindow e inserisce la nuova pagina
+   * @param newPage Nuova pagina da inserire */
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);
@@ -393,6 +411,7 @@ public class Clienti {
     mainWindow.revalidate();
   }
 
+  /** Registra il font Manrope, utilizzato in tutte le pagine */
   public static void registerFonts() {
     try {
       final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
