@@ -260,8 +260,22 @@ public class Clienti {
 
       public void updateRestaurantsList() {
         String value = searchPage.searchBar_tb.getText().toLowerCase();
+        List<Restaurant> filteredList = new ArrayList<Restaurant>();
 
-        List<Restaurant> filteredList = FilterListBy(restaurants, "Name", new String[] {value});
+        if(value.contains(",")) {
+          String[] values = value.split(",");
+          if(values.length == 2 && !values[0].equals("") && !values[1].equals("")) {
+            if(values[1].charAt(0) == ' ' && values[1].length() > 1) 
+              values[1] = values[1].substring(1,values[1].length());
+
+            filteredList = FilterListBy(restaurants, "Town&Typology", values);
+          }
+        } else {
+          filteredList = FilterListBy(restaurants, "Name", new String[] {value});
+          filteredList.addAll(FilterListBy(restaurants, "Town", new String[] {value}));
+          filteredList.addAll(FilterListBy(restaurants, "Typology", new String[] {value}));
+        }
+
         searchPage.listModel.clear();
 
         for(Restaurant r: filteredList) 
