@@ -56,7 +56,7 @@ public class C_Login {
         page.add(info_lbl, gbc);
 
         emailtxtAlreadyClicked = false;
-        email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 20));
+        email_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         email_tf.setText("Email");
         email_tf.addMouseListener(new MouseAdapter() {
             @Override
@@ -87,7 +87,7 @@ public class C_Login {
         email_tf.setBackground(Color.WHITE);
         page.add(email_tf, gbc);
 
-        password_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 20));
+        password_pf = new FPasswordField(38, new Font("Manrope", Font.PLAIN, 22));
         password_pf.setForeground(Color.GRAY);
         password_pf.setText("Password");
         password_pf.addFocusListener(new FocusAdapter() {
