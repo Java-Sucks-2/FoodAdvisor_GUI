@@ -1,9 +1,8 @@
 package src.gui.pages;
 
+//Import
 import java.awt.*;
-
 import javax.swing.border.LineBorder;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -12,10 +11,9 @@ import java.awt.event.MouseEvent;
 import src.gui.components.*;
 
 public class R_Register {
+    //Oggetti
     private FPage page;
-
     public String pageTitle;
-
     private GridBagConstraints gbc;
     private FLabel title_lbl;
     private String text;
@@ -28,6 +26,7 @@ public class R_Register {
     public FButton continue_btn;
     private FLabel procedure_lb;
 
+    //Var
     boolean nametxtAlreadyClicked;
     boolean numbertxtAlreadyClicked;
     boolean websitetxtAlreadyClicked;
@@ -38,36 +37,42 @@ public class R_Register {
 
     public R_Register() {
 
+        //Setup base della pagina
         page = new FPage();
         gbc = new GridBagConstraints();
 
+        //Label di titolo
         title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));
         title_lbl.setForeground(Color.BLACK);
         gbc.fill = GridBagConstraints.CENTER;
         setGridCoordinatesXY(gbc, 0, 0);
-        // spacing Insets(int top, int left, int bottom, int right)
         gbc.insets = new Insets(-30, 0, 0, 0);
         page.add(title_lbl, gbc);
 
+        //Label di info
         text = "Registra un nuovo ristorante!";
         info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
+        //TextField per il nome
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         name_tf.setText("Nome");
+        //Azioni del focus
         name_tf.addFocusListener(new FocusAdapter() {
             public void focusLost(final FocusEvent arg0) {
-                //focus lost
+                //Perdita di focus
                 if(name_tf.getText().equals("")){
                     name_tf.setForeground(Color.GRAY);
                     name_tf.setText("Nome");
                 }
             }
         });
+        //Azioni del mouse
         name_tf.addMouseListener(new MouseAdapter() {
             public void mouseClicked(final MouseEvent arg0) {
+                //Click del mouse
                 if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
                     name_tf.setText("");
                     nametxtAlreadyClicked = true;
@@ -75,20 +80,19 @@ public class R_Register {
                 }
             } 
         });
-
-
         name_tf.setBorder(new LineBorder(Color.BLACK, 1));
-
-        //gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 2);
         page.add(name_tf, gbc);
 
+        //TextField del numero di telefono
         number_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         number_tf.setText("Numero di Telefono");
+        //Azioni di focus
         number_tf.addFocusListener(new FocusAdapter() {
             public void focusLost(final FocusEvent arg0) {
+                //Perdita di focus
                 if(number_tf.getText().equals("")){
                     number_tf.setForeground(Color.GRAY);
                     number_tf.setText("Numero di Telefono");
@@ -96,6 +100,7 @@ public class R_Register {
                 }
             }
             public void focusGained(final FocusEvent e) {
+                //Acquisizione di focus
                 if(!numbertxtAlreadyClicked || number_tf.getText().equals("Numero di Telefono")) {
                     number_tf.setText("");
                     numbertxtAlreadyClicked = true;
@@ -103,17 +108,18 @@ public class R_Register {
                 }
             }
         });
-
         number_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
-        // gbc.insets = new Insets(-60,0,50,0);
         page.add(number_tf, gbc);
 
+        //TextField sito web
         website_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         website_tf.setText("Sito Web");
+        //Azioni di focus
         website_tf.addFocusListener(new FocusAdapter() {
             public void focusLost(final FocusEvent arg0) {
+                //Perdita di focus
                 if(website_tf.getText().equals("")){
                     website_tf.setForeground(Color.GRAY);
                     website_tf.setText("Sito Web");
@@ -121,6 +127,7 @@ public class R_Register {
                 }
             }
             public void focusGained(final FocusEvent e) {
+                //Acquisizione di focus
                 if(!websitetxtAlreadyClicked || website_tf.getText().equals("Sito Web")) {
                     website_tf.setText("");
                     websitetxtAlreadyClicked = true;
@@ -128,13 +135,12 @@ public class R_Register {
                 }
             }
         });
-
         website_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 4);
-        // gbc.insets = new Insets(-60,0,50,0);
         page.add(website_tf, gbc);
 
+        //Combobox tipologia di ristorante
         String[] values = new String[] {"Tipologia","Italiano","Etnico","Fusion"};
         type_cb = new FComboBox(values, new Font("Manrope", Font.PLAIN, 22));
         type_cb.setBorder(new LineBorder(Color.BLACK, 1));
@@ -144,27 +150,27 @@ public class R_Register {
         setGridCoordinatesXY(gbc, 0, 5);
         page.add(type_cb, gbc);
        
+        //Pulsante continua
         continue_btn = new FButton("Continua");
-       // continue_btn.setPreferredSize(new Dimension(1,69) );
+        //Azioni del mouse
         continue_btn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(final MouseEvent arg0) {
-                //mouse clicked
+                //Click del mouse
             }
-        });
-        
+        });        
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 6);
-        // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        // gbc.insets = new Insets(0,269,0,0);
         page.add(continue_btn, gbc);
 
+        //Immagine che dimostra l'andamento della registrazione
         procedure_lb = new FLabel("assets/Step1.png");
         setGridCoordinatesXY(gbc, 0, 7);
         gbc.insets = new Insets(30, 0, 0, 0);
         page.add(procedure_lb, gbc);
     }
 
+    //Metodo per settare le coordinate più efficacemente
     public static void setGridCoordinatesXY(final GridBagConstraints gbc, final int x, final int y) {
         gbc.gridx = x;
         gbc.gridy = y;

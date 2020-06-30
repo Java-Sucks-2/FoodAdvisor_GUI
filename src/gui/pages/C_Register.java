@@ -1,5 +1,5 @@
 package src.gui.pages;
-
+//Import
 import java.awt.*;
 
 import javax.swing.border.LineBorder;
@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 import src.gui.components.*;
 
 public class C_Register { 
-
+    //Oggetti
     private FPage page;
 
     private GridBagConstraints gbc;
@@ -27,6 +27,7 @@ public class C_Register {
     public FButton continue_btn;
     private FLabel procedure_lb;
 
+    //Var
     boolean nicktxtAlreadyClicked;
     boolean nametxtAlreadyClicked;
     boolean surnametxtAlreadyClicked;
@@ -36,31 +37,34 @@ public class C_Register {
     }
 
     public C_Register() {
-
+        //Setup della pagina
         page = new FPage();
         gbc = new GridBagConstraints();
 
+        //Label di registrazione
         title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));
         title_lbl.setForeground(Color.BLACK);
         gbc.fill = GridBagConstraints.CENTER;
         setGridCoordinatesXY(gbc, 0, 0);
-        // spacing Insets(int top, int left, int bottom, int right)
         gbc.insets = new Insets(-30, 0, 0, 0);
         page.add(title_lbl, gbc);
 
+        //Label di info
         text = "Registrati per avere accesso a tutte le funzioni";
         info_lbl = new FLabel(text, new Font("Manrope Light", Font.PLAIN, 27));
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.insets = new Insets(10, 0, 15, 0);
         page.add(info_lbl, gbc);
 
+        //TextField per il nome
         nicktxtAlreadyClicked = false;
         nick_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         nick_tf.setText("Nickname");
+        //Azioni TextField del mouse
         nick_tf.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent arg0) {
-            //mouse pressed
+            //Click del mouse (pressed)
                 if(!nicktxtAlreadyClicked || nick_tf.getText().equals("Nickname")) {
                     nick_tf.setText("");
                     nicktxtAlreadyClicked = true;
@@ -68,11 +72,11 @@ public class C_Register {
                 }
             }
         });
-
+        //Azioni TextField del focus
         nick_tf.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent e) {
-                //focus lost
+                    //Perdita di focus
                     if(nick_tf.getText().equals("")){
                         nick_tf.setForeground(Color.GRAY);
                         nick_tf.setText("Nickname");
@@ -86,12 +90,14 @@ public class C_Register {
         nick_tf.setBackground(Color.WHITE);
         page.add(nick_tf, gbc);
 
+        //TextField per il nome
         name_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         name_tf.setText("Nome");
+        //Azioni TextField del focus
         name_tf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
-                //focus lost
+                //Perdita di focus
                 if(name_tf.getText().equals("")){
                     name_tf.setForeground(Color.GRAY);
                     name_tf.setText("Nome");
@@ -99,7 +105,7 @@ public class C_Register {
             }
             @Override
             public void focusGained(final FocusEvent e) {
-                //focus gained
+                //Acquisizione focus
                 if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
                     name_tf.setText("");
                     nametxtAlreadyClicked = true;
@@ -110,15 +116,16 @@ public class C_Register {
             name_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
-        // gbc.insets = new Insets(-60,0,50,0);
         page.add(name_tf, gbc);
 
+        //TextField cognome
         surname_tf = new FTextField(38, new Font("Manrope", Font.PLAIN, 22));
         surname_tf.setText("Cognome");
+        //Azioni TextField del focus
         surname_tf.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent arg0) {
-                //focus lost
+                //Perdita di focus
                 if(surname_tf.getText().equals("")){
                     surname_tf.setForeground(Color.GRAY);
                     surname_tf.setText("Cognome");
@@ -127,7 +134,7 @@ public class C_Register {
             }
             @Override
             public void focusGained(final FocusEvent e) {
-                //focus gained
+                //Acquisizione di focus
                 if(!surnametxtAlreadyClicked || surname_tf.getText().equals("Cognome")) {
                     surname_tf.setText("");
                     surnametxtAlreadyClicked = true;
@@ -138,33 +145,31 @@ public class C_Register {
         surname_tf.setBorder(new LineBorder(Color.BLACK, 1));
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 4);
-        // gbc.insets = new Insets(-60,0,50,0);
         page.add(surname_tf, gbc);
 
+        //Pannello
         bts_pane = new FPage();
         setGridCoordinatesXY(gbc, 0, 5);
         gbc.insets = new Insets(30, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         page.add(bts_pane, gbc);
 
+        //Pulsante per andare indietro
         back_btn = new FButton("Indietro");
         gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 0);
-        // gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        // gbc.insets = new Insets(0,0,0,294);
         bts_pane.add(back_btn, gbc);
 
+        //Label usata come gap
         FLabel gap_lbl = new FLabel();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.weightx = 0.1;
         setGridCoordinatesXY(gbc, 1, 0);
-        // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(gap_lbl, gbc);
 
+        //Pulsante continua
         continue_btn = new FButton("Continua");
         continue_btn.addMouseListener(new MouseAdapter() {
             @Override
@@ -177,10 +182,9 @@ public class C_Register {
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.weightx = 0.5;
         setGridCoordinatesXY(gbc, 2, 0);
-        // gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        // gbc.insets = new Insets(0,269,0,0);
         bts_pane.add(continue_btn, gbc);
 
+        //Immagine che dimostra l'andamento della registrazione
         procedure_lb = new FLabel("assets/Step1.png");
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
@@ -189,6 +193,7 @@ public class C_Register {
         bts_pane.add(procedure_lb, gbc);
     }
 
+    //Metodo per settare le coordinate più efficacemente
     public static void setGridCoordinatesXY(final GridBagConstraints gbc, final int x, final int y) {
         gbc.gridx = x;
         gbc.gridy = y;

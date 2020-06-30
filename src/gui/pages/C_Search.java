@@ -1,22 +1,21 @@
 package src.gui.pages;
 
+//Import
 import src.gui.components.*;
 import java.awt.*;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class C_Search {
+    //Oggetti
     private FPage page;
     private GridBagConstraints gbc;
-
     public FLabel backIcon_lbl;
     private FLabel userIcon_lbl;
     private FLabel userName_lbl;
@@ -30,12 +29,14 @@ public class C_Search {
     }
 
     public C_Search(String username) {
+        //Setup base della pagina
         page = new FPage();
         gbc = new GridBagConstraints();
         listModel = new DefaultListModel<String>();
 
         int topMargin = -100;
 
+        //Label con immagine freccia sx
         backIcon_lbl = new FLabel("assets/BackIcon.png");
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -44,6 +45,7 @@ public class C_Search {
         setGridCoordinatesXY(gbc, 0, 0);
         page.add(backIcon_lbl, gbc);
 
+        //Label di gap
         FLabel gap_lbl = new FLabel();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(topMargin,0,0,0);
@@ -51,6 +53,7 @@ public class C_Search {
         setGridCoordinatesXY(gbc, 1, 0);
         page.add(gap_lbl, gbc);
 
+        //Label con l'immagine guest o user
         String iconPath = username.equals("Guest") ? "assets/GuestIcon.png" : "assets/UserIcon.png";
         userIcon_lbl = new FLabel(iconPath);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -60,6 +63,7 @@ public class C_Search {
         setGridCoordinatesXY(gbc, 2, 0);
         page.add(userIcon_lbl, gbc);
 
+        //Label per display username
         userName_lbl = new FLabel(username, new Font("Manrope Regular", Font.PLAIN, 25));
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.LINE_END;
@@ -69,6 +73,7 @@ public class C_Search {
         page.add(userName_lbl, gbc);
         gbc = new GridBagConstraints();
 
+        //Label titolo
         String title = "Trova il tuo ristorante preferito!";
         title_lbl = new FLabel(title, new Font("Manrope ExtraLight", Font.PLAIN, 45));
         gbc.gridwidth = 4;
@@ -76,38 +81,39 @@ public class C_Search {
         gbc.insets = new Insets(100,0,0,0);
         page.add(title_lbl, gbc);
 
+        //TextField searchbar
         searchBar_tb = new FTextField(38, new Font("Manrope", Font.PLAIN, 24));
         searchBar_tb.setText("Comune, tipologia, nome del ristorante");
+        //Azioni del mouse
         searchBar_tb.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent arg0) {
-                //mouse pressed
+                //Click del mouse (pressed)
                 if(searchBar_tb.getText().equals("Comune, tipologia, nome del ristorante")) {
                     searchBar_tb.setText("");
                     searchBar_tb.setForeground(Color.BLACK);
                 }
             }
         });
-
+        //Azioni di focus
         searchBar_tb.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(final FocusEvent e) {
-                //focus lost
+                //Perdita di focus
                 if(searchBar_tb.getText().equals("")){
                     searchBar_tb.setForeground(Color.GRAY);
                     searchBar_tb.setText("Comune, tipologia, nome del ristorante");
                 }
             }
         });
-        
         searchBar_tb.setBorder(new LineBorder(Color.BLACK, 1));
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 0, 2);
         gbc.gridwidth = 4;
         gbc.insets = new Insets(30, 0, 0, 0);
         searchBar_tb.setBackground(Color.WHITE);
         page.add(searchBar_tb, gbc);
 
+        //Pannello nuovo
         FPage scrollingList = new FPage(new BorderLayout());
         scrollingList.setPreferredSize(new Dimension(764,300));
         scrollingList.setBackground(Color.WHITE);
@@ -116,11 +122,8 @@ public class C_Search {
         setGridCoordinatesXY(gbc, 0, 3);
 
         restaurants_lst = new FList(listModel);
-        //restaurants_lst.setPreferredSize(new Dimension(762,300));
-        //gbc.insets = new Insets(-2,0,0,0);
-        //setGridCoordinatesXY(gbc, 0, 3);
-        //page.add(restaurants_lst, gbc);
-
+        
+        //ScrollPane
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBackground(Color.WHITE);
         scrollPane.setOpaque(true);
@@ -133,6 +136,7 @@ public class C_Search {
         page.add(scrollingList, gbc);
     }
 
+    //Metodo per settare le coordinate più efficacemente
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
         gbc.gridx = x;
         gbc.gridy = y;

@@ -9,7 +9,9 @@ import javax.swing.JList;
 import javax.swing.SwingConstants;
 
 public class FList extends JList<String> {
-    /***/
+    /**
+     * Creazione di una JList con parametri custom
+    */
     private static final long serialVersionUID = 1L;
 
     public FList() {
@@ -27,6 +29,7 @@ public class FList extends JList<String> {
         addStyle();
     }
 
+    //Parte grafica
     public void addStyle() {
         this.setFixedCellHeight(50);
         this.setFont(new Font("Manrope", Font.PLAIN, 22));

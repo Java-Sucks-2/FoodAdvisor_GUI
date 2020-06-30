@@ -48,6 +48,7 @@ public class Clienti {
   }
 
   public Clienti() {
+    //setup della window
     registerFonts();
     user = null;
     restaurants = FileManager.GetRestaurants();
