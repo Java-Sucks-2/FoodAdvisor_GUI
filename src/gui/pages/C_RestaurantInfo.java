@@ -13,6 +13,10 @@ public class C_RestaurantInfo {
     public FLabel backIcon_lbl;
     private FLabel userIcon_lbl;
     private FLabel userName_lbl;
+    private FLabel restName_lbl;
+    private FLabel restImage_lbl;
+    private FLabel ratings_lbl;
+    private FPage body;
 
     public FPage getPage() {
         return page;
@@ -20,11 +24,12 @@ public class C_RestaurantInfo {
 
     public C_RestaurantInfo(User user, Restaurant restaurant) {
         //Setup base della pagina
-        page = new FPage();
+        page = new FPage(new BorderLayout());
+        
+        int topMargin = 0;
+
+        FPage header = new FPage();
         gbc = new GridBagConstraints();
-
-        int topMargin = -500;
-
         //Label con immagine freccia sx
         backIcon_lbl = new FLabel("assets/BackIcon.png");
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -32,15 +37,15 @@ public class C_RestaurantInfo {
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.insets = new Insets(topMargin,0,0,0);
         setGridCoordinatesXY(gbc, 0, 0);
-        page.add(backIcon_lbl, gbc);
+        header.add(backIcon_lbl, gbc);
 
         //Label di gap
         FLabel gap_lbl = new FLabel();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(topMargin,0,0,0);
         gbc.weightx = 0.8;
-        setGridCoordinatesXY(gbc, 1, 0);
-        page.add(gap_lbl, gbc);
+        setGridCoordinatesXY(gbc, 1, 0); 
+        header.add(gap_lbl, gbc);
 
         //Label con l'immagine guest o user
         String iconPath = user != null ? "assets/UserIcon.png" : "assets/GuestIcon.png";
@@ -50,7 +55,7 @@ public class C_RestaurantInfo {
         gbc.anchor = GridBagConstraints.LINE_END;
         gbc.insets = new Insets(topMargin,0,0,0);
         setGridCoordinatesXY(gbc, 2, 0);
-        page.add(userIcon_lbl, gbc);
+        header.add(userIcon_lbl, gbc);
 
         //Label per display username
         String username = user != null ? user.GetNickname() : "Guest";
@@ -60,8 +65,108 @@ public class C_RestaurantInfo {
         gbc.weightx = 0.03;
         setGridCoordinatesXY(gbc, 3, 0);
         gbc.insets = new Insets(topMargin,0,0,0);
-        page.add(userName_lbl, gbc);
+        header.add(userName_lbl, gbc);
+        
+        page.add(header, BorderLayout.PAGE_START);
+
+        body = new FPage();
         gbc = new GridBagConstraints();
+
+        //Label con l'immagine del ristorante
+        restImage_lbl = new FLabel("assets/Pizza.png");
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0,0,0,0);
+        setGridCoordinatesXY(gbc, 0, 0);
+        body.add(restImage_lbl, gbc);
+
+        FPage rightSide = new FPage();
+
+        //Label per display nome ristorante
+        restName_lbl = new FLabel(restaurant.GetName(), new Font("Manrope Medium", Font.PLAIN, 80));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        setGridCoordinatesXY(gbc, 0, 0);
+        gbc.insets = new Insets(0,100,0,0);
+        gbc.gridwidth = 2;
+        rightSide.add(restName_lbl, gbc);
+
+        gbc = new GridBagConstraints();
+
+        //Label con immagine stelle di rating
+        ratings_lbl = new FLabel("assets/3Stars.png");
+        gbc.insets = new Insets(0, 100, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 0, 1);
+        rightSide.add(ratings_lbl, gbc);
+        
+        FLabel ratingsText_lbl = new FLabel("23 recensioni", new Font("Manrope Regular", Font.PLAIN, 20));
+        gbc.insets = new Insets(0, 15, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 1, 1);
+        rightSide.add(ratingsText_lbl, gbc);
+
+        FPage infoBox = new FPage();
+        gbc = new GridBagConstraints();
+
+        //Label con immagine stelle di rating
+        FLabel location_lbl = new FLabel("assets/LocationIcon.png");
+        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 0, 0);
+        infoBox.add(location_lbl, gbc);
+
+        FLabel locationTxt_lbl = new FLabel("Via Fareshi 999, 21040 Oggiona VA", new Font("Manrope Regular", Font.PLAIN, 20));
+        gbc.insets = new Insets(0, 15, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 1, 0);
+        infoBox.add(locationTxt_lbl, gbc);
+
+        FLabel website_lbl = new FLabel("assets/WebsiteIcon.png");
+        gbc.insets = new Insets(15, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 0, 1);
+        infoBox.add(website_lbl, gbc);
+
+        FLabel websiteTxt_lbl = new FLabel("https://www.google.com/", new Font("Manrope Regular", Font.PLAIN, 20));
+        gbc.insets = new Insets(15, 15, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 1, 1);
+        infoBox.add(websiteTxt_lbl, gbc);
+
+        FLabel telephone_lbl = new FLabel("assets/TelephoneIcon.png");
+        gbc.insets = new Insets(15, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 0, 2);
+        infoBox.add(telephone_lbl, gbc);
+
+        FLabel telephoneTxt_lbl = new FLabel("3429034849", new Font("Manrope Regular", Font.PLAIN, 20));
+        gbc.insets = new Insets(15, 15, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 1, 2);
+        infoBox.add(telephoneTxt_lbl, gbc);
+        
+        FLabel restTypology_lbl = new FLabel("assets/RestTypologyIcon.png");
+        gbc.insets = new Insets(15, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 0, 3);
+        infoBox.add(restTypology_lbl, gbc);
+
+        FLabel restTypologyTxt_lbl = new FLabel("Italiano", new Font("Manrope Regular", Font.PLAIN, 20));
+        gbc.insets = new Insets(15, 15, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 1, 3);
+        infoBox.add(restTypologyTxt_lbl, gbc);
+        
+        gbc = new GridBagConstraints();
+        setGridCoordinatesXY(gbc, 0, 2);
+        gbc.insets = new Insets(25, 100, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridwidth = 2;
+        rightSide.add(infoBox, gbc);
+
+        setGridCoordinatesXY(gbc, 1, 0);
+        body.add(rightSide, gbc);
+
+        page.add(body, BorderLayout.CENTER);
     }
 
     //Metodo per settare le coordinate più efficacemente

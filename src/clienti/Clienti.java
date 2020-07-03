@@ -253,7 +253,7 @@ public class Clienti {
   }
 
   /** Aggiunge i listeners della pagina di ricerca di ristoranti */
-  public void addSearchPageListeners() {
+  public void addSearchPageListeners(){
     searchPage.searchBar_tb.getDocument().addDocumentListener(new DocumentListener(){
       public void removeUpdate(DocumentEvent e) {updateRestaurantsList();}
     
@@ -292,15 +292,27 @@ public class Clienti {
       }
     });
 
-    searchPage.restaurants_lst.addMouseListener(new MouseAdapter() {
+    searchPage.restaurants_lst.addMouseListener(new MouseAdapter(){
       public void mouseReleased(final MouseEvent arg0) {
         FList list = (FList) arg0.getSource();
-        String restName = list.getSelectedValue().toLowerCase();
+        if(list.getSelectedValue() != null) {
+          String restName = list.getSelectedValue().toLowerCase();
         
-        Restaurant selectedRestaurant = FilterListBy(restaurants, "Name", new String[]{restName}).get(0);
-        restaurantInfoPage = new C_RestaurantInfo(user, selectedRestaurant);
-        // Add restaurant info page's listeners
-        changePage(restaurantInfoPage.getPage());
+          Restaurant selectedRestaurant = FilterListBy(restaurants, "Name", new String[]{restName}).get(0);
+          restaurantInfoPage = new C_RestaurantInfo(user, selectedRestaurant);
+          addRestaurantInfoPageListeners();
+          changePage(restaurantInfoPage.getPage());
+        }
+      }
+    });
+  }
+
+  public void addRestaurantInfoPageListeners() {
+    restaurantInfoPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        searchPage = new C_Search(user);
+        addSearchPageListeners();
+        changePage(searchPage.getPage());
       }
     });
   }

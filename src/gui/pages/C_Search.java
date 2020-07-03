@@ -51,7 +51,7 @@ public class C_Search {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(topMargin,0,0,0);
         gbc.weightx = 0.8;
-        setGridCoordinatesXY(gbc, 1, 0);
+        setGridCoordinatesXY(gbc, 1, 0); 
         page.add(gap_lbl, gbc);
 
         //Label con l'immagine guest o user
