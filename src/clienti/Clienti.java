@@ -26,6 +26,7 @@ import src.gui.pages.C_Login;
 import src.gui.pages.C_Register;
 import src.gui.pages.C_Register2;
 import src.gui.pages.C_Register3;
+import src.gui.pages.C_RestaurantInfo;
 import src.gui.pages.C_Search;
 import src.util.*;
 
@@ -36,6 +37,7 @@ public class Clienti {
   private C_Register2 registerPage2;
   private C_Register3 registerPage3;
   private C_Search searchPage;
+  private C_RestaurantInfo restaurantInfoPage;
   private boolean canChangePage;
 
   private static User user;
@@ -114,7 +116,7 @@ public class Clienti {
 
           if(AuthenticateUser(email, password)) {
             emptyFields();
-            searchPage = new C_Search(user.GetNickname());
+            searchPage = new C_Search(user);
             addSearchPageListeners();
             changePage(searchPage.getPage());
           } else {
@@ -138,7 +140,7 @@ public class Clienti {
 
     loginPage.guest_lb.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent e) {
-        searchPage = new C_Search("Guest");
+        searchPage = new C_Search(user);
         addSearchPageListeners();
         changePage(searchPage.getPage());
       }
@@ -287,6 +289,18 @@ public class Clienti {
     searchPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         changePage(loginPage.getPage());
+      }
+    });
+
+    searchPage.restaurants_lst.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        FList list = (FList) arg0.getSource();
+        String restName = list.getSelectedValue().toLowerCase();
+        
+        Restaurant selectedRestaurant = FilterListBy(restaurants, "Name", new String[]{restName}).get(0);
+        restaurantInfoPage = new C_RestaurantInfo(user, selectedRestaurant);
+        // Add restaurant info page's listeners
+        changePage(restaurantInfoPage.getPage());
       }
     });
   }

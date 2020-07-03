@@ -1,6 +1,7 @@
 package src.gui.pages;
 
 //Import
+import src.classes.User;
 import src.gui.components.*;
 import java.awt.*;
 import javax.swing.DefaultListModel;
@@ -28,7 +29,7 @@ public class C_Search {
         return page;
     }
 
-    public C_Search(String username) {
+    public C_Search(User user) {
         //Setup base della pagina
         page = new FPage();
         gbc = new GridBagConstraints();
@@ -54,7 +55,7 @@ public class C_Search {
         page.add(gap_lbl, gbc);
 
         //Label con l'immagine guest o user
-        String iconPath = username.equals("Guest") ? "assets/GuestIcon.png" : "assets/UserIcon.png";
+        String iconPath = user != null ? "assets/UserIcon.png" : "assets/GuestIcon.png";
         userIcon_lbl = new FLabel(iconPath);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -64,6 +65,7 @@ public class C_Search {
         page.add(userIcon_lbl, gbc);
 
         //Label per display username
+        String username = user != null ? user.GetNickname() : "Guest";
         userName_lbl = new FLabel(username, new Font("Manrope Regular", Font.PLAIN, 25));
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.LINE_END;
