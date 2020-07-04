@@ -288,6 +288,8 @@ public class Clienti {
 
     searchPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
+        // Logout
+        user = null;
         changePage(loginPage.getPage());
       }
     });
