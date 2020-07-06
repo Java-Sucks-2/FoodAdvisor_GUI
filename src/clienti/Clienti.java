@@ -2,6 +2,7 @@ package src.clienti;
 
 import src.classes.User;
 import src.classes.Restaurant;
+import src.classes.Review;
 import src.gui.components.*;
 import java.awt.Font;
 import java.awt.Color;
@@ -28,6 +29,7 @@ import src.gui.pages.C_Register2;
 import src.gui.pages.C_Register3;
 import src.gui.pages.C_RestaurantInfo;
 import src.gui.pages.C_Search;
+import src.gui.pages.C_ReviewInsertion;
 import src.util.*;
 
 public class Clienti {
@@ -38,6 +40,7 @@ public class Clienti {
   private C_Register3 registerPage3;
   private C_Search searchPage;
   private C_RestaurantInfo restaurantInfoPage;
+  private C_ReviewInsertion reviewInsertionPage;
   private boolean canChangePage;
 
   private static User user;
@@ -64,7 +67,6 @@ public class Clienti {
     mainWindow.setVisible(true);
     loginPage.getPage().requestFocusInWindow();
   }
-
 
   /** Registra un nuovo utente inserendolo nel file "Utenti.dati"
   * @param user Oggetto User da registrare
@@ -309,12 +311,59 @@ public class Clienti {
     });
   }
 
+  /** Aggiunge i listeners della pagina di info del ristorante specificato */
   public void addRestaurantInfoPageListeners() {
     restaurantInfoPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         searchPage = new C_Search(user);
         addSearchPageListeners();
         changePage(searchPage.getPage());
+      }
+    });
+
+    restaurantInfoPage.ratingsText_lbl.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        if(user != null) {
+          reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+          addReviewInsertionPageListeners();
+          changePage(reviewInsertionPage.getPage());
+        } else {
+          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Help", JOptionPane.PLAIN_MESSAGE);
+        }
+      }
+    });
+  }
+
+  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un ristorante */
+  public void addReviewInsertionPageListeners() {
+    reviewInsertionPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(restaurantInfoPage.getPage());
+      }
+    });
+
+    reviewInsertionPage.submit_btn.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        canChangePage = true;
+
+        canChangePage &= validateField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
+        canChangePage &= validateField(reviewInsertionPage.stars, "*");
+        //canChangePage &= validateField(reviewInsertionPage.textField, "Descrizione");
+
+        if(canChangePage) {
+          // Inserisci nuovo giudizio
+          int stars = Integer.parseInt((String)reviewInsertionPage.stars.getSelectedItem());
+          String title = reviewInsertionPage.reviewTitle_tf.getText();
+          String description = reviewInsertionPage.textField.getText();
+          Review review = new Review(restaurantInfoPage.getRestaurant().GetId(), user.GetNickname(), (byte)stars, title, description);
+          
+          if(FileManager.SaveRestaurantReview(review))
+            System.out.println("Registrazione recensione effettuata con successo");
+          else
+            System.out.println("Registrazione fallita");
+        } else {
+          System.out.println("PORCODIO");
+        }
       }
     });
   }
@@ -437,7 +486,17 @@ public class Clienti {
         ((FPasswordField)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         return true;
       }
+    } else if (field instanceof FComboBox) {
+      String value = ((FComboBox)field).getSelectedItem().toString();
+      if(value.equals(placeholder)) {
+        ((FComboBox)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+        return false;
+      } else {
+        ((FComboBox)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        return true;
+      }
     }
+
     return false;
   }
 

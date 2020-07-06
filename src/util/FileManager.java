@@ -81,7 +81,7 @@ public class FileManager {
         for(String record: records) {
             String[] fields = record.split("\\|");
 
-            if(fields.length > 4) {
+            if(fields.length > 5) {
                 TypeAddress typeAddress = Integer.parseInt(fields[4]) == 0 ? TypeAddress.Via : TypeAddress.Piazza;
                 Address address = new Address(typeAddress, fields[3], Integer.parseInt(fields[4]), fields[5], fields[6], Integer.parseInt(fields[7]));
 
