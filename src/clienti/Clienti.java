@@ -19,6 +19,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -357,12 +358,14 @@ public class Clienti {
           String description = reviewInsertionPage.textField.getText();
           Review review = new Review(restaurantInfoPage.getRestaurant().GetId(), user.GetNickname(), (byte)stars, title, description);
           
-          if(FileManager.SaveRestaurantReview(review))
+          if(FileManager.SaveRestaurantReview(review)) {
             System.out.println("Registrazione recensione effettuata con successo");
+            emptyField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
+            emptyField(reviewInsertionPage.stars, "*");
+            emptyField(reviewInsertionPage.textField, "Descrizione");
+          }
           else
             System.out.println("Registrazione fallita");
-        } else {
-          System.out.println("PORCODIO");
         }
       }
     });
@@ -422,6 +425,11 @@ public class Clienti {
     } else if(field instanceof FPasswordField) {
       ((FPasswordField)field).setText(placeholder);
       ((FPasswordField)field).setForeground(Color.GRAY);
+    } else if(field instanceof FComboBox) {
+      ((FComboBox)field).setSelectedItem(placeholder);
+    } else if(field instanceof JTextArea) {
+      ((JTextArea)field).setText(placeholder);
+      ((JTextArea)field).setForeground(Color.GRAY);
     }
   }
 

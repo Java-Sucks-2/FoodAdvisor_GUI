@@ -7,6 +7,8 @@ import src.classes.Restaurant;
 import src.classes.User;
 import src.gui.components.FLabel;
 import src.gui.components.FPage;
+import src.util.FileManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent; 
 
@@ -112,14 +114,27 @@ public class C_RestaurantInfo {
 
         gbc = new GridBagConstraints();
 
+        String[] reviews = FileManager.GetRestaurantReviews(restaurant.GetId());
+        int numberOfReviews = reviews.length;
+        int numberOfStars = 0;
+        
+        if(numberOfReviews > 0) {
+            int sum = 0;
+            for(String review: reviews) {
+                String[] fields = review.split("\\|");
+                sum += Integer.parseInt(fields[2]);
+            }
+            numberOfStars = (int)Math.floor(sum/numberOfReviews);
+        }
+
         //Label con immagine stelle di rating
-        ratings_lbl = new FLabel("assets/3Stars.png");
+        ratings_lbl = new FLabel("assets/" + numberOfStars + "Stars.png");
         gbc.insets = new Insets(0, 50, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 1);
         rightSide.add(ratings_lbl, gbc);
         
-        ratingsText_lbl = new FLabel("<html>23 recensioni, <font color='blue'>inserisci</font></html>", new Font("Manrope Regular", Font.PLAIN, 20));
+        ratingsText_lbl = new FLabel("<html>" + numberOfReviews + " recensioni, <font color='blue'>inserisci</font></html>", new Font("Manrope Regular", Font.PLAIN, 20));
         gbc.insets = new Insets(0, 15, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 1, 1);
@@ -128,11 +143,11 @@ public class C_RestaurantInfo {
         ratingsText_lbl.addMouseListener(new MouseAdapter() {
             public void mouseEntered(final MouseEvent e) {
                 //"Ospite" scritto in rosso se ci si avvicina con il mouse 
-                ratingsText_lbl.setText("<html>23 recensioni, <font color='red'>inserisci</font></html>");
+                ratingsText_lbl.setText("<html>" + numberOfReviews + " recensioni, <font color='red'>inserisci</font></html>");
             }
             public void mouseExited(final MouseEvent e) {
                 //"Ospite" scritto in blu se ci si allontana con il mouse
-                ratingsText_lbl.setText("<html>23 recensioni, <font color='blue'>inserisci</font></html>");
+                ratingsText_lbl.setText("<html>" + numberOfReviews + " recensioni, <font color='blue'>inserisci</font></html>");
             }
         });
 
