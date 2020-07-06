@@ -35,7 +35,7 @@ public class C_Search {
         gbc = new GridBagConstraints();
         listModel = new DefaultListModel<String>();
 
-        int topMargin = -100;
+        int topMargin = -65;
 
         //Label con immagine freccia sx
         backIcon_lbl = new FLabel("assets/BackIcon.png");

@@ -30,7 +30,7 @@ public class C_RestaurantInfo {
         //Setup base della pagina
         page = new FPage(new BorderLayout());
         
-        int topMargin = 0;
+        int topMargin = 20;
 
         FPage header = new FPage();
         gbc = new GridBagConstraints();
