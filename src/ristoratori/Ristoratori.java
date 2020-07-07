@@ -38,18 +38,13 @@ public class Ristoratori {
   public Ristoratori() {
     registerFonts();
     mainWindow = new FWindow("FoodAdvisor Ristoratori");
-
     registerPage = new R_Register();
-    registerPage2 = new R_Register2();
-    registerPage3 = new R_Register3();
-
-    changePage(registerPage.getPage());
-
+    
     addRegisterPageListeners();
-    addRegisterPage2Listeners();
-    addRegisterPage3Listeners();
-
+    changePage(registerPage.getPage());
+    
     mainWindow.setVisible(true);
+    registerPage.getPage().requestFocusInWindow();
   }
 
   public void addRegisterPageListeners() {
@@ -57,12 +52,27 @@ public class Ristoratori {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
+        if (registerPage.name_tf.getText().length() > 20 || 
+            registerPage.name_tf.getText().length() < 5) 
+            emptyField(registerPage.name_tf, "Nome");
+
+        if(registerPage.number_tf.getText().length() != 10 ||
+           !isNumeric(registerPage.number_tf.getText()))
+           emptyField(registerPage.number_tf, "Numero di Telefono");
+
+        if(!isURLValid(registerPage.website_tf.getText()))
+          emptyField(registerPage.website_tf, "Sito Web");
+
         canChangePage &= validateField(registerPage.name_tf, "Nome");
         canChangePage &= validateField(registerPage.number_tf, "Numero di Telefono");
         canChangePage &= validateField(registerPage.website_tf, "Sito Web");
         canChangePage &= validateField(registerPage.type_cb, "Tipologia");
 
-        if(canChangePage) changePage(registerPage2.getPage());
+        if(canChangePage) {
+          registerPage2 = new R_Register2();
+          addRegisterPage2Listeners();
+          changePage(registerPage2.getPage());
+        }
       }
     });
   }
@@ -78,11 +88,21 @@ public class Ristoratori {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
+        if(!registerPage2.addressname_tf.getText().matches("[a-zA-Z ]+"))
+          emptyField(registerPage2.addressname_tf, "Nome della Via");
+
+        if(!isNumeric(registerPage2.number_tf.getText())) 
+          emptyField(registerPage2.number_tf, "Numero Civico");
+
         canChangePage &= validateField(registerPage2.addresstype_cb, "Tipo Indirizzo");
         canChangePage &= validateField(registerPage2.addressname_tf, "Nome della Via");
         canChangePage &= validateField(registerPage2.number_tf, "Numero Civico");
 
-        if(canChangePage) changePage(registerPage3.getPage());
+        if(canChangePage) {
+          registerPage3 = new R_Register3();
+          addRegisterPage3Listeners();
+          changePage(registerPage3.getPage());
+        }
       }
     });
   }
@@ -97,6 +117,17 @@ public class Ristoratori {
     registerPage3.continue_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
+
+        if(!registerPage3.town_tf.getText().matches("[a-zA-Z ]+"))
+          emptyField(registerPage3.town_tf, "Comune");
+
+        if(registerPage3.district_tf.getText().length() != 2 ||
+           !registerPage3.district_tf.getText().matches("[A-Z]+"))
+           emptyField(registerPage3.district_tf, "Provincia");
+
+        if(registerPage3.zipcode_tf.getText().length() != 5 ||
+           !isNumeric(registerPage3.zipcode_tf.getText()))
+           emptyField(registerPage3.zipcode_tf, "CAP");
 
         canChangePage &= validateField(registerPage3.town_tf, "Comune");
         canChangePage &= validateField(registerPage3.district_tf, "Provincia");
@@ -155,32 +186,37 @@ public class Ristoratori {
     });
   }
 
+  public void emptyField(Object field, String placeholder) {
+    if(field instanceof FTextField) {
+      ((FTextField)field).setText(placeholder);
+      ((FTextField)field).setForeground(Color.GRAY);
+    } else if(field instanceof FPasswordField) {
+      ((FPasswordField)field).setText(placeholder);
+      ((FPasswordField)field).setForeground(Color.GRAY);
+    }
+  }
+
   public void emptyFields() {
-    /*registerPage.name_tf.setText("Nome");
-    registerPage.number_tf.setText("Numero Telefono");
+    registerPage.name_tf.setText("Nome");
+    registerPage.name_tf.setForeground(Color.GRAY);
+    registerPage.number_tf.setText("Numero di Telefono");
+    registerPage.number_tf.setForeground(Color.GRAY);
     registerPage.website_tf.setText("Sito Web");
+    registerPage.website_tf.setForeground(Color.GRAY);
     registerPage.type_cb.setSelectedIndex(0);
 
     registerPage2.addresstype_cb.setSelectedIndex(0);
     registerPage2.addressname_tf.setText("Nome della Via");
+    registerPage2.addressname_tf.setForeground(Color.GRAY);
     registerPage2.number_tf.setText("Numero Civico");
+    registerPage2.number_tf.setForeground(Color.GRAY);
 
     registerPage3.town_tf.setText("Comune");
+    registerPage3.town_tf.setForeground(Color.GRAY);
     registerPage3.district_tf.setText("Provincia");
-    registerPage3.zipcode_tf.setText("CAP");*/
-
-    registerPage.name_tf.setText("");
-    registerPage.number_tf.setText("");
-    registerPage.website_tf.setText("");
-    registerPage.type_cb.setSelectedIndex(0);
-
-    registerPage2.addresstype_cb.setSelectedIndex(0);
-    registerPage2.addressname_tf.setText("");
-    registerPage2.number_tf.setText("");
-
-    registerPage3.town_tf.setText("");
-    registerPage3.district_tf.setText("");
-    registerPage3.zipcode_tf.setText("");
+    registerPage3.district_tf.setForeground(Color.GRAY);
+    registerPage3.zipcode_tf.setText("CAP");
+    registerPage3.zipcode_tf.setForeground(Color.GRAY);
   }
 
   public boolean validateField(Object field, String placeholder) {
@@ -205,6 +241,24 @@ public class Ristoratori {
     }
 
     return false;
+  }
+
+  public boolean isNumeric(String number) {
+    try {
+      Long.parseLong(number);
+      return true;
+    } catch(NumberFormatException e) {
+      return false;
+    }
+  }
+
+  public boolean isURLValid(String url) {
+    try {
+      new URL(url);
+      return true;
+    } catch(MalformedURLException e) {
+      return false;
+    }
   }
 
   public void changePage(FPage newPage) {
