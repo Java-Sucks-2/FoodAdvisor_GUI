@@ -41,7 +41,7 @@ public class C_Login {
         gbc = new GridBagConstraints();
 
         //Parte grafica
-        title_lbl = new FLabel("Benvenuto!", new Font("Manrope ExtraBold", Font.PLAIN, 99));
+        title_lbl = new FLabel("Benvenuto!", new Font("Manrope Regular", Font.PLAIN, 99));
         title_lbl.setForeground(Color.BLACK);
         gbc.fill = GridBagConstraints.CENTER;
         setGridCoordinatesXY(gbc, 0, 0);
