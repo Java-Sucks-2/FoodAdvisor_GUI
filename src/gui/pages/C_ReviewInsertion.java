@@ -157,15 +157,13 @@ public class C_ReviewInsertion {
         
         //JTextArea
         gbc = new GridBagConstraints();
-        textField = new JTextArea("Descrizione", 4, 34);
-        textField.setMargin(new Insets(10,20,10,20));
+        textField = new JTextArea("Descrizione", 5, 34);
         textField.setFont(new Font("Manrope", Font.PLAIN, 20));
         textField.setForeground(Color.GRAY);
+        textField.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
 
-        textField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Color.BLACK, 1),
-            BorderFactory.createEmptyBorder(10, 20, 10, 20)
-        ));
+        scrollPane = new JScrollPane(textField);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
         textField.setLineWrap(true);
         textField.setWrapStyleWord(true); 
@@ -195,13 +193,13 @@ public class C_ReviewInsertion {
                 }
             }
         });
-        rightSide.add(textField, gbc);
+
+        rightSide.add(scrollPane, gbc);
         
         submit_btn = new FButton("Invia");
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20,0,0,0);
         setGridCoordinatesXY(gbc, 0, 3);
-
         rightSide.add(submit_btn, gbc);
 
         gbc = new GridBagConstraints();

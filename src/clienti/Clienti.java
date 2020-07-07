@@ -257,7 +257,7 @@ public class Clienti {
   }
 
   /** Aggiunge i listeners della pagina di ricerca di ristoranti */
-  public void addSearchPageListeners(){
+  public void addSearchPageListeners() {
     searchPage.searchBar_tb.getDocument().addDocumentListener(new DocumentListener(){
       public void removeUpdate(DocumentEvent e) {updateRestaurantsList();}
     
@@ -348,9 +348,18 @@ public class Clienti {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
+        if(reviewInsertionPage.textField.getText().length() > 256) emptyField(reviewInsertionPage.textField, "Descrizione");
+
         canChangePage &= validateField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
         canChangePage &= validateField(reviewInsertionPage.stars, "*");
-        canChangePage &= validateField(reviewInsertionPage.textField, "Descrizione");
+
+        if(reviewInsertionPage.textField.getText().equals("Descrizione")) {
+          reviewInsertionPage.scrollPane.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+          canChangePage = false;
+        } else {
+          reviewInsertionPage.scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+          canChangePage = true;
+        }
 
         if(canChangePage) {
           // Inserisci nuovo giudizio
