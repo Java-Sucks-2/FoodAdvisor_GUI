@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
@@ -329,7 +330,7 @@ public class Clienti {
           addReviewInsertionPageListeners();
           changePage(reviewInsertionPage.getPage());
         } else {
-          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Help", JOptionPane.PLAIN_MESSAGE);
+          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore", JOptionPane.PLAIN_MESSAGE);
         }
       }
     });
@@ -349,7 +350,7 @@ public class Clienti {
 
         canChangePage &= validateField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
         canChangePage &= validateField(reviewInsertionPage.stars, "*");
-        //canChangePage &= validateField(reviewInsertionPage.textField, "Descrizione");
+        canChangePage &= validateField(reviewInsertionPage.textField, "Descrizione");
 
         if(canChangePage) {
           // Inserisci nuovo giudizio
@@ -359,13 +360,20 @@ public class Clienti {
           Review review = new Review(restaurantInfoPage.getRestaurant().GetId(), user.GetNickname(), (byte)stars, title, description);
           
           if(FileManager.SaveRestaurantReview(review)) {
-            System.out.println("Registrazione recensione effettuata con successo");
-            emptyField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
-            emptyField(reviewInsertionPage.stars, "*");
-            emptyField(reviewInsertionPage.textField, "Descrizione");
+            JOptionPane.showMessageDialog(null, "Recensione inserita con successo!", "Successo", JOptionPane.PLAIN_MESSAGE);
+            // Ristanzia pagina di info ristorante e cambia a quella pagina
+            Restaurant selectedRestaurant = restaurantInfoPage.getRestaurant();
+            restaurantInfoPage = new C_RestaurantInfo(user, selectedRestaurant);
+            addRestaurantInfoPageListeners();
+            changePage(restaurantInfoPage.getPage());
           }
-          else
-            System.out.println("Registrazione fallita");
+          else {
+            JOptionPane.showMessageDialog(null, "Non è stato possibile inserire la recensione", "Errore", JOptionPane.PLAIN_MESSAGE);
+          }
+            
+          emptyField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
+          emptyField(reviewInsertionPage.stars, "*");
+          emptyField(reviewInsertionPage.textField, "Descrizione");
         }
       }
     });
@@ -501,6 +509,20 @@ public class Clienti {
         return false;
       } else {
         ((FComboBox)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        return true;
+      }
+    } else if(field instanceof JTextArea) {
+      if(((JTextArea)field).getText().equals(placeholder)) {
+        ((JTextArea)field).setBorder(BorderFactory.createCompoundBorder(
+          BorderFactory.createLineBorder(Color.RED, 3),
+          BorderFactory.createEmptyBorder(10, 20, 10, 20)
+        ));
+        return false;
+      } else {
+        ((JTextArea)field).setBorder(BorderFactory.createCompoundBorder(
+          BorderFactory.createLineBorder(Color.BLACK, 1),
+          BorderFactory.createEmptyBorder(10, 20, 10, 20)
+        ));
         return true;
       }
     }

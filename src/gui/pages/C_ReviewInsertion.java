@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
@@ -160,8 +161,12 @@ public class C_ReviewInsertion {
         textField.setMargin(new Insets(10,20,10,20));
         textField.setFont(new Font("Manrope", Font.PLAIN, 20));
         textField.setForeground(Color.GRAY);
-        scrollPane = new JScrollPane(textField);
-        scrollPane.setBorder(new LineBorder(Color.BLACK, 1));
+
+        textField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.BLACK, 1),
+            BorderFactory.createEmptyBorder(10, 20, 10, 20)
+        ));
+
         textField.setLineWrap(true);
         textField.setWrapStyleWord(true); 
         setGridCoordinatesXY(gbc, 0, 2);
@@ -190,7 +195,7 @@ public class C_ReviewInsertion {
                 }
             }
         });
-        rightSide.add(scrollPane, gbc);
+        rightSide.add(textField, gbc);
         
         submit_btn = new FButton("Invia");
         gbc.fill = GridBagConstraints.HORIZONTAL;
