@@ -1,6 +1,8 @@
 package src.gui.components;
 
-import javax.swing.ImageIcon;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class FWindow extends JFrame {
@@ -15,7 +17,12 @@ public class FWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
         this.setBounds(0,0,1280,760);
-        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
-        
+        InputStream is = getClass().getResourceAsStream("/assets/icon.png");
+
+        try {
+            this.setIconImage(ImageIO.read(is));
+        } catch(Exception e) {
+            // Exit
+        }
     }
 } 
