@@ -43,7 +43,7 @@ public class R_Register {
         gbc = new GridBagConstraints();
 
         //Label di titolo
-        title_lbl = new FLabel("Registrazione", new Font("Manrope ExtraBold", Font.PLAIN, 99));
+        title_lbl = new FLabel("Registrazione", new Font("Manrope Regular", Font.PLAIN, 99));
         title_lbl.setForeground(Color.BLACK);
         gbc.fill = GridBagConstraints.CENTER;
         setGridCoordinatesXY(gbc, 0, 0);
