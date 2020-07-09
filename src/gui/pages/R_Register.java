@@ -72,7 +72,7 @@ public class R_Register {
         });
         //Azioni del mouse
         name_tf.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(final MouseEvent arg0) {
+            public void mousePressed(final MouseEvent arg0) {
                 //Click del mouse
                 if(!nametxtAlreadyClicked || name_tf.getText().equals("Nome")) {
                     name_tf.setText("");

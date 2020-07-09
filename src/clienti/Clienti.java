@@ -31,6 +31,7 @@ import src.gui.pages.C_Register3;
 import src.gui.pages.C_RestaurantInfo;
 import src.gui.pages.C_Search;
 import src.gui.pages.C_ReviewInsertion;
+import src.gui.pages.C_Reviews;
 import src.util.*;
 
 public class Clienti {
@@ -42,6 +43,7 @@ public class Clienti {
   private C_Search searchPage;
   private C_RestaurantInfo restaurantInfoPage;
   private C_ReviewInsertion reviewInsertionPage;
+  private C_Reviews reviewsPage;
   private boolean canChangePage;
 
   private static User user;
@@ -340,9 +342,15 @@ public class Clienti {
     restaurantInfoPage.ratingsText_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         if (user != null) {
-          reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
-          addReviewInsertionPageListeners();
-          changePage(reviewInsertionPage.getPage());
+          if(restaurantInfoPage.action.equals("inserisci")) {
+            reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+            addReviewInsertionPageListeners();
+            changePage(reviewInsertionPage.getPage());
+          } else if(restaurantInfoPage.action.equals("visualizza")) {
+            reviewsPage = new C_Reviews(user, restaurantInfoPage.getRestaurant());
+            addReviewsPageListeners();
+            changePage(reviewsPage.getPage());
+          }
         } else {
           JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore",
               JOptionPane.PLAIN_MESSAGE);
@@ -351,10 +359,8 @@ public class Clienti {
     });
   }
 
-  /**
-   * Aggiunge i listeners della pagina di inserimento delle recensioni per un
-   * ristorante
-   */
+  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un
+   * ristorante */
   public void addReviewInsertionPageListeners() {
     reviewInsertionPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -405,6 +411,15 @@ public class Clienti {
           emptyField(reviewInsertionPage.stars, "*");
           emptyField(reviewInsertionPage.textField, "Descrizione");
         }
+      }
+    });
+  }
+
+  /** Aggiunge i listeners della pagina di visualizzazione delle recensioni relative ad un ristorante */
+  public void addReviewsPageListeners() {
+    reviewsPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        changePage(restaurantInfoPage.getPage());
       }
     });
   }

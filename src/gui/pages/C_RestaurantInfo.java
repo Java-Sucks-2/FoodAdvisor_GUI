@@ -29,6 +29,7 @@ public class C_RestaurantInfo {
     private FLabel restTypology_lbl;
     private FPage body;
     public FLabel ratingsText_lbl;
+    public String action;
     private Restaurant restaurant;
 
     public FPage getPage() {
@@ -155,7 +156,9 @@ public class C_RestaurantInfo {
         setGridCoordinatesXY(gbc, 0, 1);
         rightSide.add(ratings_lbl, gbc);
         
-        ratingsText_lbl = new FLabel("<html>" + numberOfReviews + " recensioni, <font color='blue'>inserisci</font></html>", new Font("Manrope Regular", Font.PLAIN, 20));
+        action = FileManager.GetRestaurantReviews(restaurant.GetId()).length == 0 ? "inserisci" : "visualizza";
+
+        ratingsText_lbl = new FLabel("<html>" + numberOfReviews + " recensioni, <font color='blue'>"+action+"</font></html>", new Font("Manrope Regular", Font.PLAIN, 20));
         gbc.insets = new Insets(0, 15, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 1, 1);
@@ -164,11 +167,11 @@ public class C_RestaurantInfo {
         ratingsText_lbl.addMouseListener(new MouseAdapter() {
             public void mouseEntered(final MouseEvent e) {
                 //"Ospite" scritto in rosso se ci si avvicina con il mouse 
-                ratingsText_lbl.setText("<html>" + numberOfReviews + " recensioni, <font color='red'>inserisci</font></html>");
+                ratingsText_lbl.setText("<html>" + numberOfReviews + " recensioni, <font color='red'>"+action+"</font></html>");
             }
             public void mouseExited(final MouseEvent e) {
                 //"Ospite" scritto in blu se ci si allontana con il mouse
-                ratingsText_lbl.setText("<html>" + numberOfReviews + " recensioni, <font color='blue'>inserisci</font></html>");
+                ratingsText_lbl.setText("<html>" + numberOfReviews + " recensioni, <font color='blue'>"+action+"</font></html>");
             }
         });
 
