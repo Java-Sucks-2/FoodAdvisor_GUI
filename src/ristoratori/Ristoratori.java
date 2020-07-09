@@ -273,19 +273,19 @@ public class Ristoratori {
     try {
       final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-      InputStream is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-Bold.ttf");
+      InputStream is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Bold.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-ExtraBold.ttf");
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraBold.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-ExtraLight.ttf");
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraLight.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-Light.ttf");
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Light.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-Medium.ttf");
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Medium.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-Regular.ttf");
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Regular.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("assets/Manrope/static/Manrope-SemiBold.ttf");
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-SemiBold.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
