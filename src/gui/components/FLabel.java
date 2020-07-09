@@ -1,13 +1,13 @@
 package src.gui.components;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.io.IOException;
 
 public class FLabel extends JLabel {
-    /**
-     * Creazione di una JLabel con parametri custom
-    */
+    /** Creazione di una JLabel con parametri custom */
     private static final long serialVersionUID = 1L;
     
     public FLabel() {
@@ -21,8 +21,8 @@ public class FLabel extends JLabel {
     }
     
     //Per utilizzare una JLabel come immagine
-    public FLabel(String imgPath) {
-        super(new ImageIcon(imgPath));
+    public FLabel(String imgPath) throws IOException {
+        super(new ImageIcon(ImageIO.read(FLabel.class.getResourceAsStream("/"+imgPath))));
     }
 
 }

@@ -7,7 +7,7 @@ import src.gui.components.*;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
-import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -49,12 +49,14 @@ public class Clienti {
 
   public static void main(final String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
-      public void run() { new Clienti(); }
+      public void run() {
+        new Clienti();
+      }
     });
   }
 
   public Clienti() {
-    //setup della window
+    // setup della window
     registerFonts();
     user = null;
     restaurants = FileManager.GetRestaurants();
@@ -69,37 +71,44 @@ public class Clienti {
     loginPage.getPage().requestFocusInWindow();
   }
 
-  /** Registra un nuovo utente inserendolo nel file "Utenti.dati"
-  * @param user Oggetto User da registrare
-  * @return Esito della registrazione (boolean) */
+  /**
+   * Registra un nuovo utente inserendolo nel file "Utenti.dati"
+   * 
+   * @param user Oggetto User da registrare
+   * @return Esito della registrazione (boolean)
+   */
   public static boolean RegisterNewUser(User user) {
-      return FileManager.SaveUser(user);
+    return FileManager.SaveUser(user);
   }
 
-  /** Autentica l'account di un cliente
-   * @param email Email da autenticare
+  /**
+   * Autentica l'account di un cliente
+   * 
+   * @param email    Email da autenticare
    * @param password Password da autenticare
-   * @return Esito dell'autenticazione (boolean) */
+   * @return Esito dell'autenticazione (boolean)
+   */
   public static boolean AuthenticateUser(String email, String password) {
-    // Array di stringhe contenente l'intero contenuto del file Utenti.dati 
+    // Array di stringhe contenente l'intero contenuto del file Utenti.dati
     String[] records = FileManager.GetFileRecords("Utenti.dati");
     // Se la stringa in posizione 0 ritornata dal metodo per leggere
     // dal file è "Error" ritorno (false), l'autenticazione non è
     // andata a buon fine, altrimenti continuo
-    if(records.length == 0) return false;
+    if (records.length == 0)
+      return false;
     // Per ognuno dei record (utenti) controllo se l'email e
     // la password inseriti dall'utente che desidera accedere corrispondono
-    for(String record: records) {
-        // Splitto il record corrente per i suoi campi
-        String[] fields = record.split("\\|");
-        // Field 5 => Email, Field 6 => Hashed password
-        String inputPasswordHash = Security.GetHash(password);
-        if(fields[5].equals(email) && fields[6].equals(inputPasswordHash)) {
-            // Accesso riuscito correttamente
-            //nickname, nome, cognome, comune, provincia, email, password(hash)
-            user = new User(fields[0],fields[1],fields[2],fields[3],fields[4],fields[5],fields[6]);
-            return true;
-        }
+    for (String record : records) {
+      // Splitto il record corrente per i suoi campi
+      String[] fields = record.split("\\|");
+      // Field 5 => Email, Field 6 => Hashed password
+      String inputPasswordHash = Security.GetHash(password);
+      if (fields[5].equals(email) && fields[6].equals(inputPasswordHash)) {
+        // Accesso riuscito correttamente
+        // nickname, nome, cognome, comune, provincia, email, password(hash)
+        user = new User(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6]);
+        return true;
+      }
     }
     return false;
   }
@@ -113,11 +122,11 @@ public class Clienti {
         canChangePage &= validateField(loginPage.email_tf, "Email");
         canChangePage &= validateField(loginPage.password_pf, "Password");
 
-        if(canChangePage) {
+        if (canChangePage) {
           String email = loginPage.email_tf.getText();
           String password = String.valueOf(loginPage.password_pf.getPassword());
 
-          if(AuthenticateUser(email, password)) {
+          if (AuthenticateUser(email, password)) {
             emptyFields();
             searchPage = new C_Search(user);
             addSearchPageListeners();
@@ -135,7 +144,7 @@ public class Clienti {
     loginPage.register_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         emptyFields();
-        registerPage  = new C_Register();
+        registerPage = new C_Register();
         addRegisterPageListeners();
         changePage(registerPage.getPage());
       }
@@ -161,23 +170,22 @@ public class Clienti {
 
     registerPage.continue_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-         /* TO DO: Controllo nickname */
-         canChangePage = true;
+        /* TO DO: Controllo nickname */
+        canChangePage = true;
 
-         if (registerPage.nick_tf.getText().length() > 20 || 
-         registerPage.nick_tf.getText().length() < 5) 
+        if (registerPage.nick_tf.getText().length() > 20 || registerPage.nick_tf.getText().length() < 5)
           emptyField(registerPage.nick_tf, "Nickname");
 
-         canChangePage &= validateField(registerPage.nick_tf, "Nickname");
-         canChangePage &= validateField(registerPage.name_tf, "Nome");
-         canChangePage &= validateField(registerPage.surname_tf, "Cognome");
- 
-         if(canChangePage) { 
-            registerPage2 = new C_Register2();
-            addRegisterPage2Listeners();
-            changePage(registerPage2.getPage());
-         }
+        canChangePage &= validateField(registerPage.nick_tf, "Nickname");
+        canChangePage &= validateField(registerPage.name_tf, "Nome");
+        canChangePage &= validateField(registerPage.surname_tf, "Cognome");
+
+        if (canChangePage) {
+          registerPage2 = new C_Register2();
+          addRegisterPage2Listeners();
+          changePage(registerPage2.getPage());
         }
+      }
     });
   }
 
@@ -196,7 +204,7 @@ public class Clienti {
         canChangePage &= validateField(registerPage2.town_tf, "Comune");
         canChangePage &= validateField(registerPage2.district_tf, "Provincia");
 
-        if(canChangePage) {
+        if (canChangePage) {
           registerPage3 = new C_Register3();
           addRegisterPage3Listeners();
           changePage(registerPage3.getPage());
@@ -220,7 +228,7 @@ public class Clienti {
         String pass1 = String.valueOf(registerPage3.password1_pf.getPassword());
         String pass2 = String.valueOf(registerPage3.password2_pf.getPassword());
 
-        if(!pass1.equals(pass2)) {
+        if (!pass1.equals(pass2)) {
           emptyField(registerPage3.password1_pf, "Password");
           emptyField(registerPage3.password2_pf, "Password");
         }
@@ -229,12 +237,12 @@ public class Clienti {
         canChangePage &= validateField(registerPage3.password1_pf, "Password");
         canChangePage &= validateField(registerPage3.password2_pf, "Password");
 
-        if(canChangePage) {
+        if (canChangePage) {
           // Registra l'utente
           // nickname, nome, cognome, comune, provincia, email, password(hash)
           String nickname = registerPage.nick_tf.getText();
-          String name     = registerPage.name_tf.getText();
-          String surname  = registerPage.surname_tf.getText();
+          String name = registerPage.name_tf.getText();
+          String surname = registerPage.surname_tf.getText();
 
           String town = registerPage2.town_tf.getText();
           String district = registerPage2.district_tf.getText();
@@ -242,13 +250,13 @@ public class Clienti {
           String email = registerPage3.email_tf.getText();
           String hashedPsw = Security.GetHash(pass1);
 
-          User user = new User(nickname,name,surname,town,district,email,hashedPsw);
-          
-          String result = RegisterNewUser(user) ? "Registrazione effettuata con successo" 
-                                                : "Registrazione fallita, ritenta.";
+          User user = new User(nickname, name, surname, town, district, email, hashedPsw);
+
+          String result = RegisterNewUser(user) ? "Registrazione effettuata con successo"
+              : "Registrazione fallita, ritenta.";
 
           JOptionPane.showMessageDialog(null, result, "Registrazione", JOptionPane.PLAIN_MESSAGE);
-          
+
           emptyFields();
           changePage(loginPage.getPage());
         }
@@ -258,34 +266,40 @@ public class Clienti {
 
   /** Aggiunge i listeners della pagina di ricerca di ristoranti */
   public void addSearchPageListeners() {
-    searchPage.searchBar_tb.getDocument().addDocumentListener(new DocumentListener(){
-      public void removeUpdate(DocumentEvent e) {updateRestaurantsList();}
-    
-      public void insertUpdate(DocumentEvent e) {updateRestaurantsList();}
-    
-      public void changedUpdate(DocumentEvent e) {updateRestaurantsList();}
+    searchPage.searchBar_tb.getDocument().addDocumentListener(new DocumentListener() {
+      public void removeUpdate(DocumentEvent e) {
+        updateRestaurantsList();
+      }
+
+      public void insertUpdate(DocumentEvent e) {
+        updateRestaurantsList();
+      }
+
+      public void changedUpdate(DocumentEvent e) {
+        updateRestaurantsList();
+      }
 
       public void updateRestaurantsList() {
         String value = searchPage.searchBar_tb.getText().toLowerCase();
         List<Restaurant> filteredList = new ArrayList<Restaurant>();
 
-        if(value.contains(",")) {
+        if (value.contains(",")) {
           String[] values = value.split(",");
-          if(values.length == 2 && !values[0].equals("") && !values[1].equals("")) {
-            if(values[1].charAt(0) == ' ' && values[1].length() > 1) 
-              values[1] = values[1].substring(1,values[1].length());
+          if (values.length == 2 && !values[0].equals("") && !values[1].equals("")) {
+            if (values[1].charAt(0) == ' ' && values[1].length() > 1)
+              values[1] = values[1].substring(1, values[1].length());
 
             filteredList = FilterListBy(restaurants, "Town&Typology", values);
           }
         } else {
-          filteredList = FilterListBy(restaurants, "Name", new String[] {value});
-          filteredList.addAll(FilterListBy(restaurants, "Town", new String[] {value}));
-          filteredList.addAll(FilterListBy(restaurants, "Typology", new String[] {value}));
+          filteredList = FilterListBy(restaurants, "Name", new String[] { value });
+          filteredList.addAll(FilterListBy(restaurants, "Town", new String[] { value }));
+          filteredList.addAll(FilterListBy(restaurants, "Typology", new String[] { value }));
         }
 
         searchPage.listModel.clear();
 
-        for(Restaurant r: filteredList) 
+        for (Restaurant r : filteredList)
           searchPage.listModel.addElement(r.GetName());
       }
     });
@@ -298,13 +312,13 @@ public class Clienti {
       }
     });
 
-    searchPage.restaurants_lst.addMouseListener(new MouseAdapter(){
+    searchPage.restaurants_lst.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
         FList list = (FList) arg0.getSource();
-        if(list.getSelectedValue() != null) {
+        if (list.getSelectedValue() != null) {
           String restName = list.getSelectedValue().toLowerCase();
-        
-          Restaurant selectedRestaurant = FilterListBy(restaurants, "Name", new String[]{restName}).get(0);
+
+          Restaurant selectedRestaurant = FilterListBy(restaurants, "Name", new String[] { restName }).get(0);
           restaurantInfoPage = new C_RestaurantInfo(user, selectedRestaurant);
           addRestaurantInfoPageListeners();
           changePage(restaurantInfoPage.getPage());
@@ -325,18 +339,22 @@ public class Clienti {
 
     restaurantInfoPage.ratingsText_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-        if(user != null) {
+        if (user != null) {
           reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
           addReviewInsertionPageListeners();
           changePage(reviewInsertionPage.getPage());
         } else {
-          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore", JOptionPane.PLAIN_MESSAGE);
+          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore",
+              JOptionPane.PLAIN_MESSAGE);
         }
       }
     });
   }
 
-  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un ristorante */
+  /**
+   * Aggiunge i listeners della pagina di inserimento delle recensioni per un
+   * ristorante
+   */
   public void addReviewInsertionPageListeners() {
     reviewInsertionPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -348,12 +366,13 @@ public class Clienti {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if(reviewInsertionPage.textField.getText().length() > 256) emptyField(reviewInsertionPage.textField, "Descrizione");
+        if (reviewInsertionPage.textField.getText().length() > 256)
+          emptyField(reviewInsertionPage.textField, "Descrizione");
 
         canChangePage &= validateField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
         canChangePage &= validateField(reviewInsertionPage.stars, "*");
 
-        if(reviewInsertionPage.textField.getText().equals("Descrizione")) {
+        if (reviewInsertionPage.textField.getText().equals("Descrizione")) {
           reviewInsertionPage.scrollPane.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
           canChangePage = false;
         } else {
@@ -361,25 +380,27 @@ public class Clienti {
           canChangePage = true;
         }
 
-        if(canChangePage) {
+        if (canChangePage) {
           // Inserisci nuovo giudizio
-          int stars = Integer.parseInt((String)reviewInsertionPage.stars.getSelectedItem());
+          int stars = Integer.parseInt((String) reviewInsertionPage.stars.getSelectedItem());
           String title = reviewInsertionPage.reviewTitle_tf.getText();
           String description = reviewInsertionPage.textField.getText();
-          Review review = new Review(restaurantInfoPage.getRestaurant().GetId(), user.GetNickname(), (byte)stars, title, description);
-          
-          if(FileManager.SaveRestaurantReview(review)) {
-            JOptionPane.showMessageDialog(null, "Recensione inserita con successo!", "Successo", JOptionPane.PLAIN_MESSAGE);
+          Review review = new Review(restaurantInfoPage.getRestaurant().GetId(), user.GetNickname(), (byte) stars,
+              title, description);
+
+          if (FileManager.SaveRestaurantReview(review)) {
+            JOptionPane.showMessageDialog(null, "Recensione inserita con successo!", "Successo",
+                JOptionPane.PLAIN_MESSAGE);
             // Ristanzia pagina di info ristorante e cambia a quella pagina
             Restaurant selectedRestaurant = restaurantInfoPage.getRestaurant();
             restaurantInfoPage = new C_RestaurantInfo(user, selectedRestaurant);
             addRestaurantInfoPageListeners();
             changePage(restaurantInfoPage.getPage());
+          } else {
+            JOptionPane.showMessageDialog(null, "Non è stato possibile inserire la recensione", "Errore",
+                JOptionPane.PLAIN_MESSAGE);
           }
-          else {
-            JOptionPane.showMessageDialog(null, "Non è stato possibile inserire la recensione", "Errore", JOptionPane.PLAIN_MESSAGE);
-          }
-            
+
           emptyField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
           emptyField(reviewInsertionPage.stars, "*");
           emptyField(reviewInsertionPage.textField, "Descrizione");
@@ -388,78 +409,90 @@ public class Clienti {
     });
   }
 
-  /** Filtra una lista data in input in base ad un parametro
-   * @param list Lista di oggetti Restaurant originale da filtrare
-   * @param filterType Stringa rappresentante l'attributo da filtrare: (Town, Typology, Name, Town&Typology)
-   * @param values Array di stringhe contenenti i valori per cui filtrare
-   * @return Lista di ristoranti filtrata */
+  /**
+   * Filtra una lista data in input in base ad un parametro
+   * 
+   * @param list       Lista di oggetti Restaurant originale da filtrare
+   * @param filterType Stringa rappresentante l'attributo da filtrare: (Town,
+   *                   Typology, Name, Town&Typology)
+   * @param values     Array di stringhe contenenti i valori per cui filtrare
+   * @return Lista di ristoranti filtrata
+   */
   public static List<Restaurant> FilterListBy(List<Restaurant> list, String filterType, String[] values) {
     /* FORMATO RECORD RISTORANTE */
-    /* 2|Mesopotamia|Via|Isonzo|10|Azzate|VA|21022|3883085877|https://www.google.it/|Fusion */
-    
-    if(list.isEmpty()) return new ArrayList<Restaurant>();
-    if(values[0].equals("")) return new ArrayList<Restaurant>();
-    
+    /*
+     * 2|Mesopotamia|Via|Isonzo|10|Azzate|VA|21022|3883085877|https://www.google.it/
+     * |Fusion
+     */
+
+    if (list.isEmpty())
+      return new ArrayList<Restaurant>();
+    if (values[0].equals(""))
+      return new ArrayList<Restaurant>();
+
     Predicate<Restaurant> filter;
-      switch(filterType) {
-          case "Town": 
-              filter = restaurant -> restaurant.GetAddress().GetTownName().toLowerCase().equals(values[0]);
-              break;
+    switch (filterType) {
+      case "Town":
+        filter = restaurant -> restaurant.GetAddress().GetTownName().toLowerCase().equals(values[0]);
+        break;
 
-          case "Typology":
-              filter = restaurant -> restaurant.GetType().toString().toLowerCase().equals(values[0]);
-              break;
+      case "Typology":
+        filter = restaurant -> restaurant.GetType().toString().toLowerCase().equals(values[0]);
+        break;
 
-          case "Name":
-              filter = restaurant -> restaurant.GetName().toLowerCase().contains(values[0]);
-              break;
+      case "Name":
+        filter = restaurant -> restaurant.GetName().toLowerCase().contains(values[0]);
+        break;
 
-          case "Town&Typology":
-              list = FilterListBy(list, "Town", new String[] {values[0]});
-              if(list.isEmpty()) return new ArrayList<Restaurant>();
-              filter = restaurant -> restaurant.GetType().toString().toLowerCase().equals(values[1]);
-              break;
+      case "Town&Typology":
+        list = FilterListBy(list, "Town", new String[] { values[0] });
+        if (list.isEmpty())
+          return new ArrayList<Restaurant>();
+        filter = restaurant -> restaurant.GetType().toString().toLowerCase().equals(values[1]);
+        break;
 
-          default:
-              filter = restaurant -> restaurant.toString() != null;
-              break;
-      }
+      default:
+        filter = restaurant -> restaurant.toString() != null;
+        break;
+    }
 
-      List<Restaurant> filteredList = list.stream()
-          .filter(filter)
-          .collect(Collectors.toList());
+    List<Restaurant> filteredList = list.stream().filter(filter).collect(Collectors.toList());
 
-      return filteredList;
+    return filteredList;
   }
 
-  /** Svuota il contenuto del campo desiderato e lo reinizializza con il suo placeholder originale
-   * @param field Campo da svuotare
-   * @param placeholder Placeholder default del campo */
+  /**
+   * Svuota il contenuto del campo desiderato e lo reinizializza con il suo
+   * placeholder originale
+   * 
+   * @param field       Campo da svuotare
+   * @param placeholder Placeholder default del campo
+   */
   public void emptyField(Object field, String placeholder) {
-    if(field instanceof FTextField) {
-      ((FTextField)field).setText(placeholder);
-      ((FTextField)field).setForeground(Color.GRAY);
-    } else if(field instanceof FPasswordField) {
-      ((FPasswordField)field).setText(placeholder);
-      ((FPasswordField)field).setForeground(Color.GRAY);
-    } else if(field instanceof FComboBox) {
-      ((FComboBox)field).setSelectedItem(placeholder);
-    } else if(field instanceof JTextArea) {
-      ((JTextArea)field).setText(placeholder);
-      ((JTextArea)field).setForeground(Color.GRAY);
+    if (field instanceof FTextField) {
+      ((FTextField) field).setText(placeholder);
+      ((FTextField) field).setForeground(Color.GRAY);
+    } else if (field instanceof FPasswordField) {
+      ((FPasswordField) field).setText(placeholder);
+      ((FPasswordField) field).setForeground(Color.GRAY);
+    } else if (field instanceof FComboBox) {
+      ((FComboBox) field).setSelectedItem(placeholder);
+    } else if (field instanceof JTextArea) {
+      ((JTextArea) field).setText(placeholder);
+      ((JTextArea) field).setForeground(Color.GRAY);
     }
   }
 
   /** Svuota tutti i campi delle pagine di login e registrazione */
   public void emptyFields() {
-    if(loginPage != null) {
+    if (loginPage != null) {
       loginPage.email_tf.setText("Email");
       loginPage.email_tf.setForeground(Color.GRAY);
       loginPage.password_pf.setText("Password");
       loginPage.password_pf.setForeground(Color.GRAY);
     }
 
-    if(registerPage != null) {
+    if (registerPage != null) {
       registerPage.nick_tf.setText("Nickname");
       registerPage.nick_tf.setForeground(Color.GRAY);
       registerPage.name_tf.setText("Nome");
@@ -468,14 +501,14 @@ public class Clienti {
       registerPage.surname_tf.setForeground(Color.GRAY);
     }
 
-    if(registerPage2 != null) {
+    if (registerPage2 != null) {
       registerPage2.town_tf.setText("Comune");
       registerPage2.town_tf.setForeground(Color.GRAY);
       registerPage2.district_tf.setText("Provincia");
       registerPage2.district_tf.setForeground(Color.GRAY);
     }
 
-    if(registerPage3 != null) {
+    if (registerPage3 != null) {
       registerPage3.email_tf.setText("Email");
       registerPage3.email_tf.setForeground(Color.GRAY);
       registerPage3.password1_pf.setText("Password");
@@ -485,53 +518,52 @@ public class Clienti {
     }
   }
 
-  /** Verifica il contenuto di un campo, se il contenuto è uguale
-   * al valore del placeholder, allora non è stato inserito nulla
-   * e quindi il contenuto di quel campo non è valido.
-   * @param field Campo da verificare
+  /**
+   * Verifica il contenuto di un campo, se il contenuto è uguale al valore del
+   * placeholder, allora non è stato inserito nulla e quindi il contenuto di quel
+   * campo non è valido.
+   * 
+   * @param field       Campo da verificare
    * @param placeholder Valore di default del campo (placeholder)
-   * @return Esito della verifica (boolean) */
+   * @return Esito della verifica (boolean)
+   */
   public boolean validateField(Object field, String placeholder) {
-    if(field instanceof FTextField) {
-      String value = ((FTextField)field).getText();
-      if(value.equals(placeholder)) {
-        ((FTextField)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+    if (field instanceof FTextField) {
+      String value = ((FTextField) field).getText();
+      if (value.equals(placeholder)) {
+        ((FTextField) field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
-        ((FTextField)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        ((FTextField) field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         return true;
       }
 
-    } else if(field instanceof FPasswordField) {
-      String value = String.valueOf(((FPasswordField)field).getPassword());
-      if(value.equals(placeholder)) {
-        ((FPasswordField)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+    } else if (field instanceof FPasswordField) {
+      String value = String.valueOf(((FPasswordField) field).getPassword());
+      if (value.equals(placeholder)) {
+        ((FPasswordField) field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
-        ((FPasswordField)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        ((FPasswordField) field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         return true;
       }
     } else if (field instanceof FComboBox) {
-      String value = ((FComboBox)field).getSelectedItem().toString();
-      if(value.equals(placeholder)) {
-        ((FComboBox)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+      String value = ((FComboBox) field).getSelectedItem().toString();
+      if (value.equals(placeholder)) {
+        ((FComboBox) field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
-        ((FComboBox)field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        ((FComboBox) field).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         return true;
       }
-    } else if(field instanceof JTextArea) {
-      if(((JTextArea)field).getText().equals(placeholder)) {
-        ((JTextArea)field).setBorder(BorderFactory.createCompoundBorder(
-          BorderFactory.createLineBorder(Color.RED, 3),
-          BorderFactory.createEmptyBorder(10, 20, 10, 20)
-        ));
+    } else if (field instanceof JTextArea) {
+      if (((JTextArea) field).getText().equals(placeholder)) {
+        ((JTextArea) field).setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.RED, 3),
+            BorderFactory.createEmptyBorder(10, 20, 10, 20)));
         return false;
       } else {
-        ((JTextArea)field).setBorder(BorderFactory.createCompoundBorder(
-          BorderFactory.createLineBorder(Color.BLACK, 1),
-          BorderFactory.createEmptyBorder(10, 20, 10, 20)
-        ));
+        ((JTextArea) field).setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK, 1),
+            BorderFactory.createEmptyBorder(10, 20, 10, 20)));
         return true;
       }
     }
@@ -539,8 +571,11 @@ public class Clienti {
     return false;
   }
 
-  /** Svuota la mainWindow e inserisce la nuova pagina
-   * @param newPage Nuova pagina da inserire */
+  /**
+   * Svuota la mainWindow e inserisce la nuova pagina
+   * 
+   * @param newPage Nuova pagina da inserire
+   */
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);
@@ -549,16 +584,24 @@ public class Clienti {
   }
 
   /** Registra il font Manrope, utilizzato in tutte le pagine */
-  public static void registerFonts() {
+  public void registerFonts() {
     try {
       final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Bold.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-ExtraBold.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-ExtraLight.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Light.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Medium.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Regular.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-SemiBold.ttf")));
+
+      InputStream is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Bold.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraBold.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraLight.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Light.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Medium.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Regular.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-SemiBold.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
       e.printStackTrace();

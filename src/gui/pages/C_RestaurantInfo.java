@@ -10,7 +10,8 @@ import src.gui.components.FPage;
 import src.util.FileManager;
 
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent; 
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class C_RestaurantInfo {
     
@@ -22,6 +23,10 @@ public class C_RestaurantInfo {
     private FLabel restName_lbl;
     private FLabel restImage_lbl;
     private FLabel ratings_lbl;
+    private FLabel location_lbl;
+    private FLabel website_lbl;
+    private FLabel telephone_lbl;
+    private FLabel restTypology_lbl;
     private FPage body;
     public FLabel ratingsText_lbl;
     private Restaurant restaurant;
@@ -44,7 +49,11 @@ public class C_RestaurantInfo {
         FPage header = new FPage();
         gbc = new GridBagConstraints();
         //Label con immagine freccia sx
-        backIcon_lbl = new FLabel("assets/BackIcon.png");
+        try {
+            backIcon_lbl = new FLabel("assets/BackIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_START;
@@ -62,7 +71,11 @@ public class C_RestaurantInfo {
 
         //Label con l'immagine guest o user
         String iconPath = user != null ? "assets/UserIcon.png" : "assets/GuestIcon.png";
-        userIcon_lbl = new FLabel(iconPath);
+        try {
+            userIcon_lbl = new FLabel(iconPath);
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_END;
@@ -95,7 +108,11 @@ public class C_RestaurantInfo {
         else if(restaurant.GetType().toString().equals("Fusion")) 
             imagePath = "assets/Sushi.png";
 
-        restImage_lbl = new FLabel(imagePath);
+        try {
+            restImage_lbl = new FLabel(imagePath);
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(0,0,100,0);
@@ -128,7 +145,11 @@ public class C_RestaurantInfo {
         }
 
         //Label con immagine stelle di rating
-        ratings_lbl = new FLabel("assets/" + numberOfStars + "Stars.png");
+        try {
+            ratings_lbl = new FLabel("assets/" + numberOfStars + "Stars.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.insets = new Insets(0, 50, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 1);
@@ -155,7 +176,11 @@ public class C_RestaurantInfo {
         gbc = new GridBagConstraints();
 
         //Label con immagine stelle di rating
-        FLabel location_lbl = new FLabel("assets/LocationIcon.png");
+        try {
+            location_lbl = new FLabel("assets/LocationIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 0);
@@ -176,7 +201,11 @@ public class C_RestaurantInfo {
         setGridCoordinatesXY(gbc, 1, 0);
         infoBox.add(locationTxt_lbl, gbc);
 
-        FLabel website_lbl = new FLabel("assets/WebsiteIcon.png");
+        try {
+            website_lbl = new FLabel("assets/WebsiteIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.insets = new Insets(15, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 1);
@@ -189,7 +218,11 @@ public class C_RestaurantInfo {
         setGridCoordinatesXY(gbc, 1, 1);
         infoBox.add(websiteTxt_lbl, gbc);
 
-        FLabel telephone_lbl = new FLabel("assets/TelephoneIcon.png");
+        try {
+            telephone_lbl = new FLabel("assets/TelephoneIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.insets = new Insets(15, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 2);
@@ -202,7 +235,11 @@ public class C_RestaurantInfo {
         setGridCoordinatesXY(gbc, 1, 2);
         infoBox.add(telephoneTxt_lbl, gbc);
         
-        FLabel restTypology_lbl = new FLabel("assets/RestTypologyIcon.png");
+        try {
+            restTypology_lbl = new FLabel("assets/RestTypologyIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.insets = new Insets(15, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 3);

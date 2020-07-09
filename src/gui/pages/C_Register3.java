@@ -8,6 +8,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import src.gui.components.*;
 
 public class C_Register3 { 
@@ -118,7 +120,11 @@ public class C_Register3 {
         page.add(password1_pf, gbc);
 
         //Label immagine del punto di domanda
-        questionMark1_image = new FLabel("assets/QM_Red_32.png");
+        try {
+            questionMark1_image = new FLabel("assets/QM_Red_32.png");
+        } catch(IOException e) {
+            // Exit
+        }
         //Azione del mouse
         questionMark1_image.addMouseListener(new MouseAdapter() {
             public void mousePressed(final MouseEvent arg0) {
@@ -158,7 +164,11 @@ public class C_Register3 {
         page.add(password2_pf, gbc);
 
         //Label immagine del punto di domanda
-        questionMark2_image = new FLabel("assets/QM_Red_32.png");
+        try {
+            questionMark2_image = new FLabel("assets/QM_Red_32.png");
+        } catch(IOException e) {
+            // Exit
+        }
         //Azioni del mouse
         questionMark2_image.addMouseListener(new MouseAdapter() {
             //Se premuta dialog
@@ -208,7 +218,11 @@ public class C_Register3 {
         bts_pane.add(continue_btn, gbc);
 
         //Immagine che dimostra l'andamento della registrazione
-        procedure_lb = new FLabel("assets/Step3.png");
+        try {
+            procedure_lb = new FLabel("assets/Step3.png");
+        } catch(IOException e) {
+            // Exit
+        }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
         gbc.insets = new Insets(30, 0, 0, 0);

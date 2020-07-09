@@ -9,7 +9,7 @@ import src.gui.components.*;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
-import java.io.File;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -268,16 +268,25 @@ public class Ristoratori {
     mainWindow.revalidate();
   }
 
-  public static void registerFonts() {
+  /** Registra il font Manrope, utilizzato in tutte le pagine */
+  public void registerFonts() {
     try {
       final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Bold.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-ExtraBold.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-ExtraLight.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Light.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Medium.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-Regular.ttf")));
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("assets/Manrope/static/Manrope-SemiBold.ttf")));
+
+      InputStream is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Bold.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraBold.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraLight.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Light.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Medium.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Regular.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-SemiBold.ttf");
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
       e.printStackTrace();

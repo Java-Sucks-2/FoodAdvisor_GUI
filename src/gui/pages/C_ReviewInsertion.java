@@ -4,6 +4,7 @@ import java.awt.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -48,7 +49,11 @@ public class C_ReviewInsertion {
         FPage header = new FPage();
         gbc = new GridBagConstraints();
         //Label con immagine freccia sx
-        backIcon_lbl = new FLabel("assets/BackIcon.png");
+        try {
+            backIcon_lbl = new FLabel("assets/BackIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_START;
@@ -66,7 +71,11 @@ public class C_ReviewInsertion {
 
         //Label con l'immagine guest o user
         String iconPath = user != null ? "assets/UserIcon.png" : "assets/GuestIcon.png";
-        userIcon_lbl = new FLabel(iconPath);
+        try {
+            userIcon_lbl = new FLabel(iconPath);
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_END;
@@ -99,7 +108,11 @@ public class C_ReviewInsertion {
         else if(restaurant.GetType().toString().equals("Fusion")) 
             imagePath = "assets/Sushi.png";
 
-        restImage_lbl = new FLabel(imagePath);
+        try {
+            restImage_lbl = new FLabel(imagePath);
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(0,0,100,0);
