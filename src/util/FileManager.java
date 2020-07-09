@@ -15,14 +15,26 @@ import src.classes.Restaurant.TypeRestaurant;
 
 /** Classe responsabile per l'accesso ai file dati */
 public class FileManager {
+
+    public static String GetProjectPath() {
+        String projectDir = "";
+        try {
+            projectDir = (new File(FileManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile()).getPath();
+        } catch(Exception e) {
+            // Exit
+        }
+        return projectDir;
+    }
+
     /**
      * Memorizza un nuovo utente nel file Utenti.dati
      * @param user Istanza della classe User da salvare sul file
      * @return Un valore booleano che indica l'esito del salvataggio */
     public static boolean SaveUser(User user) {
         try {
-            String filePath = "data" + File.separator + "Utenti.dati";
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true));
+            String filePath = "/data" + File.separator + "Utenti.dati";
+            String fullPath = GetProjectPath()+filePath;
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fullPath, true));
             bw.write(user.toString());
             bw.close();
 
@@ -34,14 +46,15 @@ public class FileManager {
         }
     }
 
-        /**
+    /**
      * Memorizza un nuovo ristorante nel file EatAdvisor.dati
      * @param restaurant Istanza della classe Restaurant da salvare sul file
      * @return Un valore booleano che indica l'esito del salvataggio */
     public static boolean SaveRestaurant(Restaurant restaurant) {
         try {
-            String filePath = "data" + File.separator + "EatAdvisor.dati";
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true));
+            String filePath = "/data" + File.separator + "EatAdvisor.dati";
+            String fullPath = GetProjectPath()+filePath;
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fullPath, true));
             bw.write(restaurant.toString());
             bw.close();
 
@@ -59,8 +72,9 @@ public class FileManager {
      * @return Un valore booleano che indica l'esito del salvataggio */
     public static boolean SaveRestaurantReview(Review review) {
         try {
-            String filePath = "data" + File.separator + "EatAdvisor.dati";
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true));
+            String filePath = "/data" + File.separator + "EatAdvisor.dati";
+            String fullPath = GetProjectPath()+filePath;
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fullPath, true));
             bw.write(review.toString());
             bw.close();
 
@@ -138,10 +152,12 @@ public class FileManager {
 
             // Costruzione del path 
             String filePath = "/data" + File.separator + fileName;
-            
-            InputStream is = FileManager.class.getResourceAsStream(filePath);
+
+            String fullPath = GetProjectPath()+filePath;
+            System.out.println(fullPath);
+
             // Oggetto per la lettura ottimizzata da file di testo
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            BufferedReader br = new BufferedReader(new FileReader(new File(fullPath)));
 
             // Finché ci sono righe da leggere, leggile e mettile nella stringa "data"
             while(br.ready())
