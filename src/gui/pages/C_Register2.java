@@ -1,4 +1,5 @@
 package src.gui.pages;
+
 //Import
 import java.awt.*;
 
@@ -8,6 +9,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import src.gui.components.*;
 
@@ -154,7 +156,11 @@ public class C_Register2 {
         bts_pane.add(continue_btn, gbc);
 
         //Immagine che dimostra l'andamento della registrazione
-        procedure_lb = new FLabel("assets/Step2.png");
+        try {
+            procedure_lb = new FLabel("assets/Step2.png");
+        } catch(IOException e) {
+            // Exit
+        }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
         gbc.insets = new Insets(30, 0, 0, 0);

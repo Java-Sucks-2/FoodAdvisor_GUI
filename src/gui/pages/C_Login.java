@@ -1,4 +1,5 @@
 package src.gui.pages;
+
 //Import
 import src.gui.components.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class C_Login {
     //Oggetti
@@ -121,7 +123,11 @@ public class C_Login {
         page.add(password_pf, gbc);
 
         //Label Icona
-        questionMark_image = new FLabel("assets/QM_Red_32.png");
+        try {
+            questionMark_image = new FLabel("assets/QM_Red_32.png");
+        } catch(IOException e) {
+            // Exit
+        }
         //Azioni dell'icona
         questionMark_image.addMouseListener(new MouseAdapter() {
             //Se premuta dialog

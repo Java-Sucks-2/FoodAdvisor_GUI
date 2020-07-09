@@ -4,6 +4,7 @@ package src.gui.pages;
 import src.classes.User;
 import src.gui.components.*;
 import java.awt.*;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -12,6 +13,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class C_Search {
     //Oggetti
@@ -38,7 +40,11 @@ public class C_Search {
         int topMargin = -65;
 
         //Label con immagine freccia sx
-        backIcon_lbl = new FLabel("assets/BackIcon.png");
+        try {
+            backIcon_lbl = new FLabel("assets/BackIcon.png");
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_START;
@@ -56,7 +62,11 @@ public class C_Search {
 
         //Label con l'immagine guest o user
         String iconPath = user != null ? "assets/UserIcon.png" : "assets/GuestIcon.png";
-        userIcon_lbl = new FLabel(iconPath);
+        try {
+            userIcon_lbl = new FLabel(iconPath);
+        } catch(IOException e) {
+            // Exit
+        }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
         gbc.anchor = GridBagConstraints.LINE_END;

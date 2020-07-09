@@ -7,6 +7,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import src.gui.components.*;
 
@@ -164,7 +165,11 @@ public class R_Register {
         page.add(continue_btn, gbc);
 
         //Immagine che dimostra l'andamento della registrazione
-        procedure_lb = new FLabel("assets/Step1.png");
+        try {
+            procedure_lb = new FLabel("assets/Step1.png");
+        } catch(IOException e) {
+            // Exit
+        }
         setGridCoordinatesXY(gbc, 0, 7);
         gbc.insets = new Insets(30, 0, 0, 0);
         page.add(procedure_lb, gbc);

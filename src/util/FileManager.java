@@ -135,12 +135,13 @@ public class FileManager {
         try {
             // Stringa in cui verranno man mano inseriti i record
             String data = "";
+
             // Costruzione del path 
-            String filePath = "data" + File.separator + fileName;
-            // Istanza del file da leggere
-            File file = new File(filePath);
+            String filePath = "/data" + File.separator + fileName;
+            
+            InputStream is = FileManager.class.getResourceAsStream(filePath);
             // Oggetto per la lettura ottimizzata da file di testo
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             // Finché ci sono righe da leggere, leggile e mettile nella stringa "data"
             while(br.ready())
