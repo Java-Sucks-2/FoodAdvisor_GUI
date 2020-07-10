@@ -14,7 +14,7 @@ public class FButton extends JButton {
 
     public FButton(String text) {
         super(text);
-        AddStyle();
+        //AddStyle();
     }
     
     private void AddStyle() {
@@ -24,6 +24,7 @@ public class FButton extends JButton {
         this.setBackground(Color.RED);
         this.setFont(new Font("Manrope", Font.PLAIN, 22));
         this.setOpaque(true);
+        this.setBorderPainted(false);
         /*this.setFocusPainted(false);
         this.setContentAreaFilled(true);
         this.setBorderPainted(false);
