@@ -113,8 +113,9 @@ public class C_Register3 {
                     password1_pf.setForeground(Color.BLACK);
                 }
             }
-            });
-            password1_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        });
+        password1_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         page.add(password1_pf, gbc);
