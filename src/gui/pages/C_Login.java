@@ -120,6 +120,7 @@ public class C_Login {
 
         //Parte grafica
         password_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(30, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         page.add(password_pf, gbc);
