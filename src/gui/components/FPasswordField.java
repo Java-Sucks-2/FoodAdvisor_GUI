@@ -16,7 +16,7 @@ public class FPasswordField extends JPasswordField {
         super(i);
         //Parte grafica
         //this.setFont(font);
-        //this.setHorizontalAlignment(JPasswordField.CENTER);
-        //this.setPreferredSize(new Dimension(100, 40));
+        this.setHorizontalAlignment(JPasswordField.CENTER);
+        this.setPreferredSize(new Dimension(100, 40));
     }
 }
