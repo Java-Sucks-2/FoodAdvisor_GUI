@@ -1,2 +1,0 @@
-# FoodAdvisor_GUI
-Prove
