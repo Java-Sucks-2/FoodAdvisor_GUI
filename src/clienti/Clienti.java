@@ -63,7 +63,7 @@ public class Clienti {
     user = null;
     restaurants = FileManager.GetRestaurants();
 
-    mainWindow = new FWindow("FoodAdvisor Clienti");
+    mainWindow = new FWindow("FoodAdvisor Clienti"); //test
     loginPage = new C_Login();
 
     changePage(loginPage.getPage());
