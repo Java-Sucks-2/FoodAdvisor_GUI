@@ -4,6 +4,7 @@ package src.gui.pages;
 import src.gui.components.*;
 import java.awt.*;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
@@ -20,9 +21,15 @@ public class C_Login {
     public FTextField email_tf;
     public FPasswordField password_pf;
     private FLabel questionMark_image;
-    public FButton register_btn;
+    
+    //public FButton register_btn;
+    public JButton register_btn;
+
     private FPage bts_pane;
-    public FButton login_btn;
+    
+    //public FButton login_btn;
+    public JButton login_btn;
+
     final FLabel info_lbl;
     public FLabel guest_lb; 
 
@@ -151,7 +158,8 @@ public class C_Login {
         page.add(bts_pane, gbc);
 
         //Pulsante per il login
-        login_btn = new FButton("Accedi");
+        //login_btn = new FButton("Accedi");
+        login_btn = new JButton("Accedi");
         login_btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent arg0) {
@@ -174,7 +182,8 @@ public class C_Login {
         bts_pane.add(gap_lbl, gbc);
 
         //Pulsante per registrazione
-        register_btn = new FButton("Registrati");
+        //register_btn = new FButton("Registrati");
+        register_btn = new JButton("Registrati");
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.weightx = 0.5;
