@@ -28,10 +28,9 @@ public class FButton extends JButton {
         this.setContentAreaFilled(true);
         
         this.setPreferredSize(new Dimension(100, 45));
-        //this.putClientProperty("JComponent.sizeVariant", "large");
 
         //Parte funzionale
-        /*this.addMouseListener(new MouseAdapter() {
+        this.addMouseListener(new MouseAdapter() {
             public void mouseEntered(final MouseEvent e) {
                 setBackground(new Color(196, 48, 31));
             }
@@ -44,6 +43,6 @@ public class FButton extends JButton {
             public void mouseReleased(final MouseEvent arg0) {
                 setBackground(new Color(237, 71, 53));
             }
-        });*/
+        });
     }
 }
