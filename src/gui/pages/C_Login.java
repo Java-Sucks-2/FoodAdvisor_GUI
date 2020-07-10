@@ -4,7 +4,6 @@ package src.gui.pages;
 import src.gui.components.*;
 import java.awt.*;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
