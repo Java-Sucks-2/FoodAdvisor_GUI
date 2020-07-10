@@ -26,8 +26,8 @@ public class FButton extends JButton {
         this.setBorderPainted(false);
         this.setFocusPainted(false);
         this.setContentAreaFilled(true);
-        /*
-        this.setPreferredSize(new Dimension(100, 45));*/
+        
+        this.setPreferredSize(new Dimension(100, 45));
         //this.putClientProperty("JComponent.sizeVariant", "large");
 
         //Parte funzionale
