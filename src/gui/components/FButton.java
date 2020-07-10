@@ -20,7 +20,8 @@ public class FButton extends JButton {
     private void AddStyle() {
         //Parte grafica
         this.setForeground(Color.WHITE);
-        this.setBackground(new Color(237, 71, 53));
+        //this.setBackground(new Color(237, 71, 53));
+        this.setBackground(Color.RED);
         this.setFont(new Font("Manrope", Font.PLAIN, 22));
         this.setOpaque(true);
         /*this.setFocusPainted(false);
