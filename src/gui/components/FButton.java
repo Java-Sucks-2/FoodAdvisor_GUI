@@ -9,9 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class FButton extends JButton {
-    /**
-     * Creazione di un JButton con parametri custom
-    */
+    /** Creazione di un JButton con parametri custom */
 	private static final long serialVersionUID = 1L;
 
     public FButton(String text) {
@@ -27,7 +25,8 @@ public class FButton extends JButton {
         this.setFocusPainted(false);
         this.setContentAreaFilled(true);
         this.setBorderPainted(false);
-        this.setPreferredSize(new Dimension(100, 45));
+        //this.setPreferredSize(new Dimension(100, 45));
+        this.putClientProperty("JComponent.sizeVariant", "large");
 
         //Parte funzionale
         this.addMouseListener(new MouseAdapter() {
