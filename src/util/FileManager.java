@@ -154,7 +154,6 @@ public class FileManager {
             String filePath = "/data" + File.separator + fileName;
 
             String fullPath = GetProjectPath()+filePath;
-            System.out.println(fullPath);
 
             // Oggetto per la lettura ottimizzata da file di testo
             BufferedReader br = new BufferedReader(new FileReader(new File(fullPath)));
