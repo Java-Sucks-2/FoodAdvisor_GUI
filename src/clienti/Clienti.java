@@ -378,7 +378,7 @@ public class Clienti {
         canChangePage &= validateField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
         canChangePage &= validateField(reviewInsertionPage.stars, "*");
 
-        if (reviewInsertionPage.textField.getText().equals("Descrizione")) {
+        if (reviewInsertionPage.textField.getText().equals("Descrizione") || reviewInsertionPage.textField.getText().contains("|")) {
           reviewInsertionPage.scrollPane.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
           canChangePage = false;
         } else {
@@ -545,7 +545,7 @@ public class Clienti {
   public boolean validateField(Object field, String placeholder) {
     if (field instanceof FTextField) {
       String value = ((FTextField) field).getText();
-      if (value.equals(placeholder)) {
+      if (value.equals(placeholder) || value.contains("|")) {
         ((FTextField) field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
