@@ -21,8 +21,9 @@ public class FButton extends JButton {
         //Parte grafica
         this.setForeground(Color.WHITE);
         this.setBackground(new Color(237, 71, 53));
-        /*this.setFont(new Font("Manrope", Font.PLAIN, 22));
-        this.setFocusPainted(false);
+        this.setFont(new Font("Manrope", Font.PLAIN, 22));
+        this.setOpaque(true);
+        /*this.setFocusPainted(false);
         this.setContentAreaFilled(true);
         this.setBorderPainted(false);
         this.setPreferredSize(new Dimension(100, 45));*/
