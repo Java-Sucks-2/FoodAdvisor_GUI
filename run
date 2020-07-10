@@ -3,7 +3,7 @@
 #javac src/classes/*.java -d bin -cp bin
 #javac src/util/*.java -d bin -cp bin
 javac src/gui/components/*.java -d bin -cp bin
-#javac src/gui/pages/*.java -d bin -cp bin
+javac src/gui/pages/*.java -d bin -cp bin
 #javac src/clienti/*.java -d bin -cp bin
 #javac src/ristoratori/*.java -d bin -cp bin
 cd bin
