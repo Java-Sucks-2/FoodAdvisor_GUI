@@ -118,12 +118,10 @@ public class C_Reviews {
 
       String[] reviews = FileManager.GetRestaurantReviews(restaurant.GetId());
       int[] starsDistribution = new int[5];
-      //float[] starsPercentage = new float[5];
 
       for(String review: reviews) {
           String[] fields = review.split("\\|");
           starsDistribution[Integer.parseInt(fields[2])-1]++;
-          
       }
 
       FLabel fiveStars_lbl = new FLabel("Eccellente", new Font("Manrope Regular", Font.PLAIN, 20));
@@ -157,12 +155,65 @@ public class C_Reviews {
       rightSide.add(oneStar_lbl, gbc);
 
       gbc = new GridBagConstraints();
-      JProgressBar fiveStars_pb = new JProgressBar();
-      gbc.insets = new Insets(0, 15, 0, 0);
-      //gbc.anchor = GridBagConstraints.WEST;
-      gbc.fill = GridBagConstraints.HORIZONTAL;
+      JProgressBar fiveStars_pb = new JProgressBar(0,reviews.length);
+      fiveStars_pb.setString(String.valueOf(starsDistribution[4]));
+      fiveStars_pb.setPreferredSize(new Dimension(300, 20));
+      fiveStars_pb.setValue(starsDistribution[4]);
+      fiveStars_pb.setStringPainted(true);
+      fiveStars_pb.setForeground(new Color(237, 71, 53));
+      fiveStars_pb.setBackground(new Color(237, 206, 213));
+      gbc.insets = new Insets(10, 150, 0, 0);
+      gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 1, 1);
       rightSide.add(fiveStars_pb, gbc);
+
+      JProgressBar fourStars_pb = new JProgressBar(0,reviews.length);
+      fourStars_pb.setString(String.valueOf(starsDistribution[3]));
+      fourStars_pb.setPreferredSize(new Dimension(300, 20));
+      fourStars_pb.setValue(starsDistribution[3]);
+      fourStars_pb.setStringPainted(true);
+      fourStars_pb.setForeground(new Color(237, 71, 53));
+      fourStars_pb.setBackground(new Color(237, 206, 213));
+      gbc.insets = new Insets(10, 150, 0, 0);
+      gbc.anchor = GridBagConstraints.WEST;
+      setGridCoordinatesXY(gbc, 1, 2);
+      rightSide.add(fourStars_pb, gbc);
+
+      JProgressBar threeStars_pb = new JProgressBar(0,reviews.length);
+      threeStars_pb.setString(String.valueOf(starsDistribution[2]));
+      threeStars_pb.setPreferredSize(new Dimension(300, 20));
+      threeStars_pb.setValue(starsDistribution[2]);
+      threeStars_pb.setStringPainted(true);
+      threeStars_pb.setForeground(new Color(237, 71, 53));
+      threeStars_pb.setBackground(new Color(237, 206, 213));
+      gbc.insets = new Insets(10, 150, 0, 0);
+      gbc.anchor = GridBagConstraints.WEST;
+      setGridCoordinatesXY(gbc, 1, 3);
+      rightSide.add(threeStars_pb, gbc);
+
+      JProgressBar twoStars_pb = new JProgressBar(0,reviews.length);
+      twoStars_pb.setString(String.valueOf(starsDistribution[1]));
+      twoStars_pb.setPreferredSize(new Dimension(300, 20));
+      twoStars_pb.setValue(starsDistribution[1]);
+      twoStars_pb.setStringPainted(true);
+      twoStars_pb.setForeground(new Color(237, 71, 53));
+      twoStars_pb.setBackground(new Color(237, 206, 213));
+      gbc.insets = new Insets(10, 150, 0, 0);
+      gbc.anchor = GridBagConstraints.WEST;
+      setGridCoordinatesXY(gbc, 1, 4);
+      rightSide.add(twoStars_pb, gbc);
+
+      JProgressBar oneStar_pb = new JProgressBar(0,reviews.length);
+      oneStar_pb.setString(String.valueOf(starsDistribution[0]));
+      oneStar_pb.setPreferredSize(new Dimension(300, 20));
+      oneStar_pb.setValue(starsDistribution[0]);
+      oneStar_pb.setStringPainted(true);
+      oneStar_pb.setForeground(new Color(237, 71, 53));
+      oneStar_pb.setBackground(new Color(237, 206, 213));
+      gbc.insets = new Insets(10, 150, 0, 0);
+      gbc.anchor = GridBagConstraints.WEST;
+      setGridCoordinatesXY(gbc, 1, 5);
+      rightSide.add(oneStar_pb, gbc);
 
       gbc = new GridBagConstraints();
       gbc.insets = new Insets(0,50,150,0);
