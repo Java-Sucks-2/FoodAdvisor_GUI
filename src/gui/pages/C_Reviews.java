@@ -3,6 +3,8 @@ package src.gui.pages;
 import java.awt.*;
 
 import java.io.IOException;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
 
 import src.classes.Restaurant;
 import src.classes.User;
@@ -116,41 +118,51 @@ public class C_Reviews {
 
       String[] reviews = FileManager.GetRestaurantReviews(restaurant.GetId());
       int[] starsDistribution = new int[5];
+      //float[] starsPercentage = new float[5];
 
       for(String review: reviews) {
           String[] fields = review.split("\\|");
           starsDistribution[Integer.parseInt(fields[2])-1]++;
+          
       }
 
-      FLabel fiveStars_lbl = new FLabel("Eccellente: "+starsDistribution[4], new Font("Manrope Regular", Font.PLAIN, 20));
+      FLabel fiveStars_lbl = new FLabel("Eccellente", new Font("Manrope Regular", Font.PLAIN, 20));
       gbc.insets = new Insets(10, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 0, 1);
       rightSide.add(fiveStars_lbl, gbc);
 
-      FLabel fourStars_lbl = new FLabel("Molto buono: "+starsDistribution[3], new Font("Manrope Regular", Font.PLAIN, 20));
+      FLabel fourStars_lbl = new FLabel("Molto buono", new Font("Manrope Regular", Font.PLAIN, 20));
       gbc.insets = new Insets(10, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 0, 2);
       rightSide.add(fourStars_lbl, gbc);
 
-      FLabel threeStars_lbl = new FLabel("Nella media: "+starsDistribution[2], new Font("Manrope Regular", Font.PLAIN, 20));
+      FLabel threeStars_lbl = new FLabel("Nella media", new Font("Manrope Regular", Font.PLAIN, 20));
       gbc.insets = new Insets(10, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 0, 3);
       rightSide.add(threeStars_lbl, gbc);
 
-      FLabel twoStars_lbl = new FLabel("Scarso: "+starsDistribution[1], new Font("Manrope Regular", Font.PLAIN, 20));
+      FLabel twoStars_lbl = new FLabel("Scarso", new Font("Manrope Regular", Font.PLAIN, 20));
       gbc.insets = new Insets(10, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 0, 4);
       rightSide.add(twoStars_lbl, gbc);
 
-      FLabel oneStar_lbl = new FLabel("Pessimo: "+starsDistribution[0], new Font("Manrope Regular", Font.PLAIN, 20));
+      FLabel oneStar_lbl = new FLabel("Pessimo", new Font("Manrope Regular", Font.PLAIN, 20));
       gbc.insets = new Insets(10, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 0, 5);
       rightSide.add(oneStar_lbl, gbc);
+
+      gbc = new GridBagConstraints();
+      JProgressBar fiveStars_pb = new JProgressBar();
+      gbc.insets = new Insets(0, 15, 0, 0);
+      //gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
+      setGridCoordinatesXY(gbc, 1, 1);
+      rightSide.add(fiveStars_pb, gbc);
 
       gbc = new GridBagConstraints();
       gbc.insets = new Insets(0,50,150,0);
