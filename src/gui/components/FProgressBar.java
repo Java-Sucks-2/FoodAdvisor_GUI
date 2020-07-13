@@ -14,7 +14,7 @@ public class FProgressBar extends JProgressBar {
     public FProgressBar(int min, int max, int value, String strvalue) {
         super(min,max);
         this.setValue(value);
-        this.setString(strvalue);
+        this.setString(value > 0 ? strvalue : "");
         addStyle();
     }
 

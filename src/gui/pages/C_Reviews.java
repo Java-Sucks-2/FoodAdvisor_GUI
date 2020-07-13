@@ -4,9 +4,15 @@ import java.awt.*;
 
 import java.io.IOException;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 import src.classes.Restaurant;
 import src.classes.User;
+import src.gui.components.FButton;
 import src.gui.components.FLabel;
+import src.gui.components.FList;
 import src.gui.components.FPage;
 import src.gui.components.FProgressBar;
 import src.util.FileManager;
@@ -20,6 +26,7 @@ public class C_Reviews {
     private FLabel restName_lbl;
     private FLabel restImage_lbl;
     private FPage body;
+    public FButton insert_btn;
     
     public FPage getPage() {
         return page;
@@ -77,43 +84,60 @@ public class C_Reviews {
       setGridCoordinatesXY(gbc, 3, 0);
       gbc.insets = new Insets(topMargin,0,0,0);
       header.add(userName_lbl, gbc);
-      
+
+      FPage subHeader = new FPage();
+      gbc = new GridBagConstraints();
+
+      String imagePath;
+
+      if(restaurant.GetType().toString().equals("Italiano")) 
+        imagePath = "assets/SmallPizza.png";
+      else if(restaurant.GetType().toString().equals("Etnico"))
+        imagePath = "assets/SmallHamburger.png";
+      else
+        imagePath = "assets/SmallSushi.png";
+
+      try {
+        restImage_lbl = new FLabel(imagePath);
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
+
+      gbc.anchor = GridBagConstraints.WEST;
+      gbc.insets = new Insets(0, 100, 0, 0);
+      gbc.gridheight = 2;
+      setGridCoordinatesXY(gbc, 0, 0);
+      subHeader.add(restImage_lbl, gbc);
+
+      gbc = new GridBagConstraints();
+      //Label per display nome ristorante
+      restName_lbl = new FLabel(restaurant.GetName(), new Font("Manrope Medium", Font.PLAIN, 40));
+      gbc.anchor = GridBagConstraints.WEST;
+      setGridCoordinatesXY(gbc, 1, 0);
+      gbc.insets = new Insets(0,20,0,0);
+      subHeader.add(restName_lbl, gbc);
+
+      //Label "Recensioni"
+      FLabel reviews_lbl = new FLabel("Recensioni", new Font("Manrope Regular", Font.PLAIN, 30));
+      gbc.anchor = GridBagConstraints.WEST;
+      setGridCoordinatesXY(gbc, 1, 1);
+      gbc.insets = new Insets(0,20,0,0);
+      gbc.gridwidth = 4;
+      subHeader.add(reviews_lbl, gbc);
+
+      gbc = new GridBagConstraints();
+      setGridCoordinatesXY(gbc, 0, 1);
+      gbc.anchor = GridBagConstraints.WEST;
+      gbc.insets = new Insets(50,0,0,0);
+      gbc.gridwidth = 4;
+      header.add(subHeader, gbc);
+
       page.add(header, BorderLayout.PAGE_START);
 
       body = new FPage();
       gbc = new GridBagConstraints();
 
-      //Label con l'immagine del ristorante
-      String imagePath = null;
-
-      if(restaurant.GetType().toString().equals("Italiano")) 
-          imagePath = "assets/Pizza.png";
-      else if(restaurant.GetType().toString().equals("Etnico")) 
-          imagePath = "assets/Hamburger.png";
-      else if(restaurant.GetType().toString().equals("Fusion")) 
-          imagePath = "assets/Sushi.png";
-
-      try {
-          restImage_lbl = new FLabel(imagePath);
-      } catch(IOException e) {
-          // Exit
-      }
-      gbc.fill = GridBagConstraints.HORIZONTAL;
-      gbc.anchor = GridBagConstraints.CENTER;
-      gbc.insets = new Insets(0,0,100,0);
-      setGridCoordinatesXY(gbc, 0, 0);
-      body.add(restImage_lbl, gbc);
-
-      FPage rightSide = new FPage();
-
-      //Label per display nome ristorante
-      restName_lbl = new FLabel(restaurant.GetName(), new Font("Manrope Medium", Font.PLAIN, 80));
-      gbc.fill = GridBagConstraints.HORIZONTAL;
-      gbc.anchor = GridBagConstraints.CENTER;
-      setGridCoordinatesXY(gbc, 0, 0);
-      gbc.insets = new Insets(0,0,0,0);
-      gbc.gridwidth = 2;
-      rightSide.add(restName_lbl, gbc);
+      FPage leftSide = new FPage();
 
       String[] reviews = FileManager.GetRestaurantReviews(restaurant.GetId());
       int[] starsDistribution = new int[5];
@@ -124,72 +148,119 @@ public class C_Reviews {
       }
 
       FLabel fiveStars_lbl = new FLabel("Eccellente", new Font("Manrope Regular", Font.PLAIN, 20));
-      gbc.insets = new Insets(10, 0, 0, 0);
+      gbc.insets = new Insets(10, 20, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 0, 1);
-      rightSide.add(fiveStars_lbl, gbc);
+      setGridCoordinatesXY(gbc, 1, 1);
+      leftSide.add(fiveStars_lbl, gbc);
 
       FLabel fourStars_lbl = new FLabel("Molto buono", new Font("Manrope Regular", Font.PLAIN, 20));
-      gbc.insets = new Insets(10, 0, 0, 0);
+      gbc.insets = new Insets(10, 20, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 0, 2);
-      rightSide.add(fourStars_lbl, gbc);
+      setGridCoordinatesXY(gbc, 1, 2);
+      leftSide.add(fourStars_lbl, gbc);
 
       FLabel threeStars_lbl = new FLabel("Nella media", new Font("Manrope Regular", Font.PLAIN, 20));
-      gbc.insets = new Insets(10, 0, 0, 0);
+      gbc.insets = new Insets(10, 20, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 0, 3);
-      rightSide.add(threeStars_lbl, gbc);
+      setGridCoordinatesXY(gbc, 1, 3);
+      leftSide.add(threeStars_lbl, gbc);
 
       FLabel twoStars_lbl = new FLabel("Scarso", new Font("Manrope Regular", Font.PLAIN, 20));
-      gbc.insets = new Insets(10, 0, 0, 0);
+      gbc.insets = new Insets(10, 20, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 0, 4);
-      rightSide.add(twoStars_lbl, gbc);
+      setGridCoordinatesXY(gbc, 1, 4);
+      leftSide.add(twoStars_lbl, gbc);
 
       FLabel oneStar_lbl = new FLabel("Pessimo", new Font("Manrope Regular", Font.PLAIN, 20));
-      gbc.insets = new Insets(10, 0, 0, 0);
+      gbc.insets = new Insets(10, 20, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 0, 5);
-      rightSide.add(oneStar_lbl, gbc);
+      setGridCoordinatesXY(gbc, 1, 5);
+      leftSide.add(oneStar_lbl, gbc);
 
       gbc = new GridBagConstraints();
       FProgressBar fiveStars_pb = new FProgressBar(0,reviews.length, starsDistribution[4], String.valueOf(starsDistribution[4]));
-      gbc.insets = new Insets(15, 150, 0, 0);
+      gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 1, 1);
-      rightSide.add(fiveStars_pb, gbc);
+      setGridCoordinatesXY(gbc, 0, 1);
+      leftSide.add(fiveStars_pb, gbc);
 
       FProgressBar fourStars_pb = new FProgressBar(0,reviews.length, starsDistribution[3], String.valueOf(starsDistribution[3]));
-      gbc.insets = new Insets(15, 150, 0, 0);
+      gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 1, 2);
-      rightSide.add(fourStars_pb, gbc);
+      setGridCoordinatesXY(gbc, 0, 2);
+      leftSide.add(fourStars_pb, gbc);
 
       FProgressBar threeStars_pb = new FProgressBar(0,reviews.length, starsDistribution[2], String.valueOf(starsDistribution[2]));
-      gbc.insets = new Insets(15, 150, 0, 0);
+      gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 1, 3);
-      rightSide.add(threeStars_pb, gbc);
+      setGridCoordinatesXY(gbc, 0, 3);
+      leftSide.add(threeStars_pb, gbc);
 
       FProgressBar twoStars_pb = new FProgressBar(0,reviews.length, starsDistribution[1], String.valueOf(starsDistribution[1]));
-      gbc.insets = new Insets(15, 150, 0, 0);
+      gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 1, 4);
-      rightSide.add(twoStars_pb, gbc);
+      setGridCoordinatesXY(gbc, 0, 4);
+      leftSide.add(twoStars_pb, gbc);
 
       FProgressBar oneStar_pb = new FProgressBar(0,reviews.length, starsDistribution[0], String.valueOf(starsDistribution[0]));
-      gbc.insets = new Insets(15, 150, 0, 0);
+      gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
-      setGridCoordinatesXY(gbc, 1, 5);
-      rightSide.add(oneStar_pb, gbc);
+      setGridCoordinatesXY(gbc, 0, 5);
+      leftSide.add(oneStar_pb, gbc);
 
       gbc = new GridBagConstraints();
-      gbc.insets = new Insets(0,50,150,0);
+      insert_btn = new FButton("Inserisci");
+      setGridCoordinatesXY(gbc, 0, 6);
+      gbc.insets = new Insets(40, 0, 0, 0);
+      gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
+      gbc.gridwidth = 2;
+      leftSide.add(insert_btn, gbc);
+      
+      gbc = new GridBagConstraints();
+      gbc.insets = new Insets(0, 100, 80, 0);
       setGridCoordinatesXY(gbc, 1, 0);
-      body.add(rightSide, gbc);
+      body.add(leftSide, gbc);
 
-      page.add(body, BorderLayout.CENTER);
+      String[] reviewsRecords = FileManager.GetRestaurantReviews(restaurant.GetId());
+      
+      FPage reviewsList = new FPage(new GridLayout(reviewsRecords.length, 1));
+      reviewsList.setBackground(new Color(222,222,222));
+      reviewsList.setPreferredSize(new Dimension(550, 348));
+
+      for(int i = 0; i < reviewsRecords.length; i++) {
+        String[] fields = reviewsRecords[i].split("\\|");
+
+        FPage reviewElement = new FPage();
+        gbc = new GridBagConstraints();
+
+        FLabel userName = new FLabel(fields[1]+":", new Font("Manrope Medium", Font.PLAIN, 18));
+        gbc.insets = new Insets(5, 10, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 0, 0);
+        reviewElement.add(userName, gbc);
+
+        FLabel reviewTitle = new FLabel(fields[3], new Font("Manrope Regular", Font.PLAIN, 18));
+        gbc.insets = new Insets(5, 10, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        setGridCoordinatesXY(gbc, 1, 0);
+        reviewElement.add(reviewTitle, gbc);
+        
+        FLabel reviewDescription = new FLabel(fields[4], new Font("Manrope Regular", Font.PLAIN, 16));
+        gbc.insets = new Insets(5, 20, 0, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridwidth = 2;
+        setGridCoordinatesXY(gbc, 0, 1);
+        reviewElement.add(reviewDescription, gbc);
+        
+        reviewsList.add(reviewElement);
+      }
+
+      JScrollPane scrollPane = new JScrollPane(reviewsList);
+      scrollPane.setPreferredSize(new Dimension(550, 348));
+
+      page.add(scrollPane, BorderLayout.CENTER);
+      page.add(body, BorderLayout.WEST);
   }
 
   //Metodo per settare le coordinate più efficacemente

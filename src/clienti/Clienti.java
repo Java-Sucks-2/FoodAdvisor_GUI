@@ -422,6 +422,14 @@ public class Clienti {
         changePage(restaurantInfoPage.getPage());
       }
     });
+
+    reviewsPage.insert_btn.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+        addReviewInsertionPageListeners();
+        changePage(reviewInsertionPage.getPage());
+      }
+    });
   }
 
   /**
