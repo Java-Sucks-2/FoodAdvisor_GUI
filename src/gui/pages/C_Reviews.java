@@ -7,8 +7,11 @@ import java.io.IOException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+
 import src.classes.Restaurant;
 import src.classes.User;
 import src.gui.components.FButton;
@@ -135,7 +138,8 @@ public class C_Reviews {
 
       page.add(header, BorderLayout.PAGE_START);
 
-      body = new FPage();
+      body = new FPage(new GridLayout(1,2));
+      body.setBackground(Color.LIGHT_GRAY);
       gbc = new GridBagConstraints();
 
       FPage leftSide = new FPage();
@@ -182,30 +186,35 @@ public class C_Reviews {
       FProgressBar fiveStars_pb = new FProgressBar(0,reviews.length, starsDistribution[4], String.valueOf(starsDistribution[4]));
       gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
       setGridCoordinatesXY(gbc, 0, 1);
       leftSide.add(fiveStars_pb, gbc);
 
       FProgressBar fourStars_pb = new FProgressBar(0,reviews.length, starsDistribution[3], String.valueOf(starsDistribution[3]));
       gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
       setGridCoordinatesXY(gbc, 0, 2);
       leftSide.add(fourStars_pb, gbc);
 
       FProgressBar threeStars_pb = new FProgressBar(0,reviews.length, starsDistribution[2], String.valueOf(starsDistribution[2]));
       gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
       setGridCoordinatesXY(gbc, 0, 3);
       leftSide.add(threeStars_pb, gbc);
 
       FProgressBar twoStars_pb = new FProgressBar(0,reviews.length, starsDistribution[1], String.valueOf(starsDistribution[1]));
       gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
       setGridCoordinatesXY(gbc, 0, 4);
       leftSide.add(twoStars_pb, gbc);
 
       FProgressBar oneStar_pb = new FProgressBar(0,reviews.length, starsDistribution[0], String.valueOf(starsDistribution[0]));
       gbc.insets = new Insets(15, 0, 0, 0);
       gbc.anchor = GridBagConstraints.WEST;
+      gbc.fill = GridBagConstraints.HORIZONTAL;
       setGridCoordinatesXY(gbc, 0, 5);
       leftSide.add(oneStar_pb, gbc);
 
@@ -218,60 +227,58 @@ public class C_Reviews {
       gbc.gridwidth = 2;
       leftSide.add(insert_btn, gbc);
       
-      gbc = new GridBagConstraints();
-      gbc.insets = new Insets(0, 100, 80, 0);
-      setGridCoordinatesXY(gbc, 1, 0);
-      body.add(leftSide, gbc);
+      body.add(leftSide);
 
       String[] reviewsRecords = FileManager.GetRestaurantReviews(restaurant.GetId());
-      
+
       FPage reviewsList = new FPage();
-      reviewsList.setBorder(BorderFactory.createEmptyBorder());
-      //reviewsList.setPreferredSize(new Dimension(550, 348));
+      reviewsList.setLayout(new BoxLayout(reviewsList, BoxLayout.Y_AXIS));
+      reviewsList.setBackground(Color.PINK);
 
       for(int i = 0; i < reviewsRecords.length; i++) {
         gbc = new GridBagConstraints();
         String[] fields = reviewsRecords[i].split("\\|");
 
         FPage reviewElement = new FPage();
-        reviewElement.setPreferredSize(new Dimension(500, 60));
+        reviewElement.setPreferredSize(new Dimension(150, 20));
         reviewElement.setBackground(new Color(222,222,222));
         reviewElement.setBorder(BorderFactory.createEmptyBorder());
         gbc = new GridBagConstraints();
 
         FLabel userName = new FLabel(fields[1]+":", new Font("Manrope Bold", Font.PLAIN, 18));
         gbc.insets = new Insets(20, 10, 0, 0);
-        gbc.anchor = GridBagConstraints.WEST;
+        //gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 0);
         reviewElement.add(userName, gbc);
 
         FLabel reviewTitle = new FLabel(fields[3], new Font("Manrope Medium", Font.PLAIN, 18));
         gbc.insets = new Insets(20, 10, 0, 0);
-        gbc.anchor = GridBagConstraints.WEST;
+        //gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 1, 0);
         reviewElement.add(reviewTitle, gbc);
         
         FLabel reviewDescription = new FLabel(fields[4], new Font("Manrope Regular", Font.PLAIN, 16));
         gbc.insets = new Insets(5, 10, 0, 0);
-        gbc.anchor = GridBagConstraints.WEST;
+        //gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 2;
         setGridCoordinatesXY(gbc, 0, 1);
         reviewElement.add(reviewDescription, gbc);
-        
-        gbc = new GridBagConstraints();
-        setGridCoordinatesXY(gbc, 0, i);
-        gbc.insets = new Insets(0,0,0,0);
-        gbc.anchor = GridBagConstraints.WEST;
-        
 
+        reviewElement.setAlignmentX(Component.LEFT_ALIGNMENT);
+        reviewsList.add(reviewElement);
       }
 
-      //JScrollPane scrollPane = new JScrollPane(reviewsList, VERTICAL_SCROLLBAR_AS_NEEDED);
-      //scrollPane.setPreferredSize(new Dimension(550, 348));
-      //scrollPane.setBorder(BorderFactory.createEmptyBorder());
-      //scrollPane.isWheelScrollingEnabled(true);
-      page.add(reviewsList, BorderLayout.CENTER);
-      page.add(body, BorderLayout.LINE_START);
+      JScrollPane scrollPane = new JScrollPane(reviewsList);
+      /*scrollPane.setBackground(Color.WHITE);
+      scrollPane.setOpaque(true);
+      scrollPane.setBorder(new LineBorder(Color.WHITE, 1));
+      scrollPane.getViewport().setBackground(Color.WHITE);
+      scrollPane.setViewportView(reviewsList);
+      reviewsList.setLayoutOrientation(JList.VERTICAL);*/
+
+      body.add(scrollPane);
+
+      page.add(body, BorderLayout.CENTER);
   }
 
   //Metodo per settare le coordinate più efficacemente
