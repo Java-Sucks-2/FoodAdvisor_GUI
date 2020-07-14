@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+import javax.swing.BorderFactory;
 import src.classes.Restaurant;
 import src.classes.User;
 import src.gui.components.FButton;
@@ -224,43 +225,53 @@ public class C_Reviews {
 
       String[] reviewsRecords = FileManager.GetRestaurantReviews(restaurant.GetId());
       
-      FPage reviewsList = new FPage(new GridLayout(reviewsRecords.length, 1));
-      reviewsList.setBackground(new Color(222,222,222));
-      reviewsList.setPreferredSize(new Dimension(550, 348));
+      FPage reviewsList = new FPage();
+      reviewsList.setBorder(BorderFactory.createEmptyBorder());
+      //reviewsList.setPreferredSize(new Dimension(550, 348));
 
       for(int i = 0; i < reviewsRecords.length; i++) {
+        gbc = new GridBagConstraints();
         String[] fields = reviewsRecords[i].split("\\|");
 
         FPage reviewElement = new FPage();
+        reviewElement.setPreferredSize(new Dimension(500, 60));
+        reviewElement.setBackground(new Color(222,222,222));
+        reviewElement.setBorder(BorderFactory.createEmptyBorder());
         gbc = new GridBagConstraints();
 
-        FLabel userName = new FLabel(fields[1]+":", new Font("Manrope Medium", Font.PLAIN, 18));
-        gbc.insets = new Insets(5, 10, 0, 0);
+        FLabel userName = new FLabel(fields[1]+":", new Font("Manrope Bold", Font.PLAIN, 18));
+        gbc.insets = new Insets(20, 10, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 0, 0);
         reviewElement.add(userName, gbc);
 
-        FLabel reviewTitle = new FLabel(fields[3], new Font("Manrope Regular", Font.PLAIN, 18));
-        gbc.insets = new Insets(5, 10, 0, 0);
+        FLabel reviewTitle = new FLabel(fields[3], new Font("Manrope Medium", Font.PLAIN, 18));
+        gbc.insets = new Insets(20, 10, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         setGridCoordinatesXY(gbc, 1, 0);
         reviewElement.add(reviewTitle, gbc);
         
         FLabel reviewDescription = new FLabel(fields[4], new Font("Manrope Regular", Font.PLAIN, 16));
-        gbc.insets = new Insets(5, 20, 0, 0);
+        gbc.insets = new Insets(5, 10, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 2;
         setGridCoordinatesXY(gbc, 0, 1);
         reviewElement.add(reviewDescription, gbc);
         
-        reviewsList.add(reviewElement);
+        gbc = new GridBagConstraints();
+        setGridCoordinatesXY(gbc, 0, i);
+        gbc.insets = new Insets(0,0,0,0);
+        gbc.anchor = GridBagConstraints.WEST;
+        
+
       }
 
-      JScrollPane scrollPane = new JScrollPane(reviewsList);
-      scrollPane.setPreferredSize(new Dimension(550, 348));
-
-      page.add(scrollPane, BorderLayout.CENTER);
-      page.add(body, BorderLayout.WEST);
+      //JScrollPane scrollPane = new JScrollPane(reviewsList, VERTICAL_SCROLLBAR_AS_NEEDED);
+      //scrollPane.setPreferredSize(new Dimension(550, 348));
+      //scrollPane.setBorder(BorderFactory.createEmptyBorder());
+      //scrollPane.isWheelScrollingEnabled(true);
+      page.add(reviewsList, BorderLayout.CENTER);
+      page.add(body, BorderLayout.LINE_START);
   }
 
   //Metodo per settare le coordinate più efficacemente

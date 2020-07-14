@@ -8,10 +8,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.SwingConstants;
 
-public class FList extends JList<String> {
-    /**
-     * Creazione di una JList con parametri custom
-    */
+public class FList<E> extends JList<E> {
+    /** Creazione di una JList con parametri custom */
     private static final long serialVersionUID = 1L;
 
     public FList() {
@@ -19,12 +17,12 @@ public class FList extends JList<String> {
         addStyle();
     }
 
-    public FList(String[] items) {
+    public FList(E[] items) {
         super(items);
         addStyle();
     }
 
-    public FList(DefaultListModel<String> listModel) {
+    public FList(DefaultListModel<E> listModel) {
         super(listModel);
         addStyle();
     }
