@@ -7,7 +7,10 @@ import java.io.IOException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -233,14 +236,13 @@ public class C_Reviews {
 
       FPage reviewsList = new FPage();
       reviewsList.setLayout(new BoxLayout(reviewsList, BoxLayout.Y_AXIS));
-      reviewsList.setBackground(Color.PINK);
 
       for(int i = 0; i < reviewsRecords.length; i++) {
         gbc = new GridBagConstraints();
         String[] fields = reviewsRecords[i].split("\\|");
 
         FPage reviewElement = new FPage();
-        reviewElement.setPreferredSize(new Dimension(150, 20));
+        //reviewElement.setPreferredSize(new Dimension(150, 150));
         reviewElement.setBackground(new Color(222,222,222));
         reviewElement.setBorder(BorderFactory.createEmptyBorder());
         gbc = new GridBagConstraints();
@@ -257,8 +259,17 @@ public class C_Reviews {
         setGridCoordinatesXY(gbc, 1, 0);
         reviewElement.add(reviewTitle, gbc);
         
-        FLabel reviewDescription = new FLabel(fields[4], new Font("Manrope Regular", Font.PLAIN, 16));
-        gbc.insets = new Insets(5, 10, 0, 0);
+        JTextArea reviewDescription = new JTextArea();
+        reviewDescription.setText(fields[4]);
+        reviewDescription.setFont(new Font("Manrope Regular", Font.PLAIN, 16));
+        reviewDescription.setLineWrap(true);
+        reviewDescription.setWrapStyleWord(true);
+        reviewDescription.setEditable(false);
+        reviewDescription.setFocusable(false);
+        reviewDescription.setBackground(UIManager.getColor("reviewElement.background"));
+        reviewDescription.setBorder(UIManager.getBorder("reviewElement.border"));
+        gbc.insets = new Insets(5, 10, 20, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         //gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 2;
         setGridCoordinatesXY(gbc, 0, 1);
@@ -268,13 +279,12 @@ public class C_Reviews {
         reviewsList.add(reviewElement);
       }
 
-      JScrollPane scrollPane = new JScrollPane(reviewsList);
-      /*scrollPane.setBackground(Color.WHITE);
+      JScrollPane scrollPane = new JScrollPane();
+      scrollPane.setBorder(new EmptyBorder(new Insets(30,0,77,80)));
       scrollPane.setOpaque(true);
-      scrollPane.setBorder(new LineBorder(Color.WHITE, 1));
+      scrollPane.setBackground(Color.WHITE);
       scrollPane.getViewport().setBackground(Color.WHITE);
       scrollPane.setViewportView(reviewsList);
-      reviewsList.setLayoutOrientation(JList.VERTICAL);*/
 
       body.add(scrollPane);
 
