@@ -1,7 +1,19 @@
 package src.clienti;
 
-/*
- *   
+/** 
+ *  Università degli studi dell'Insubria
+ *  
+ *  Anno accademico 2019/2020 
+ *  Sede Varese
+ *  
+ *  Progetto di Laboratorio Interdisciplinare A 
+ * 
+ *  Loschiavo Christian 739894 Varese
+ *  Giubilei  Ivan      739892 Varese
+ *  Rossi     Nicolò    742626 Varese
+ *  Ferrario  Andrea    740485 Varese
+ * 
+ *  FoodAdvisor, applicazione Clienti
  */
 
 import src.classes.User;
@@ -81,8 +93,7 @@ public class Clienti {
    * Registra un nuovo utente inserendolo nel file "Utenti.dati"
    * 
    * @param user Oggetto User da registrare
-   * @return Esito della registrazione (boolean)
-   */
+   * @return Esito della registrazione (boolean) */
   public static boolean RegisterNewUser(User user) {
     return FileManager.SaveUser(user);
   }
@@ -92,8 +103,7 @@ public class Clienti {
    * 
    * @param email    Email da autenticare
    * @param password Password da autenticare
-   * @return Esito dell'autenticazione (boolean)
-   */
+   * @return Esito dell'autenticazione (boolean) */
   public static boolean AuthenticateUser(String email, String password) {
     // Array di stringhe contenente l'intero contenuto del file Utenti.dati
     String[] records = FileManager.GetFileRecords("Utenti.dati");
@@ -166,7 +176,7 @@ public class Clienti {
     });
   }
 
-  /** Aggiunge i listeners della prima pagina di registrazione */
+  /** Aggiunge i listeners della prima pagina di registrazione*/
   public void addRegisterPageListeners() {
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -363,8 +373,7 @@ public class Clienti {
     });
   }
 
-  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un
-   * ristorante */
+  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un ristorante*/
   public void addReviewInsertionPageListeners() {
     reviewInsertionPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -440,18 +449,10 @@ public class Clienti {
    * Filtra una lista data in input in base ad un parametro
    * 
    * @param list       Lista di oggetti Restaurant originale da filtrare
-   * @param filterType Stringa rappresentante l'attributo da filtrare: (Town,
-   *                   Typology, Name, Town&Typology)
+   * @param filterType Stringa rappresentante l'attributo da filtrare: (Town, Typology, Name, Town&Typology)
    * @param values     Array di stringhe contenenti i valori per cui filtrare
-   * @return Lista di ristoranti filtrata
-   */
+   * @return Lista di ristoranti filtrata */
   public static List<Restaurant> FilterListBy(List<Restaurant> list, String filterType, String[] values) {
-    /* FORMATO RECORD RISTORANTE */
-    /*
-     * 2|Mesopotamia|Via|Isonzo|10|Azzate|VA|21022|3883085877|https://www.google.it/
-     * |Fusion
-     */
-
     if (list.isEmpty())
       return new ArrayList<Restaurant>();
     if (values[0].equals(""))
@@ -493,8 +494,7 @@ public class Clienti {
    * placeholder originale
    * 
    * @param field       Campo da svuotare
-   * @param placeholder Placeholder default del campo
-   */
+   * @param placeholder Placeholder default del campo */
   public void emptyField(Object field, String placeholder) {
     if (field instanceof FTextField) {
       ((FTextField) field).setText(placeholder);
@@ -552,8 +552,7 @@ public class Clienti {
    * 
    * @param field       Campo da verificare
    * @param placeholder Valore di default del campo (placeholder)
-   * @return Esito della verifica (boolean)
-   */
+   * @return Esito della verifica (boolean) */
   public boolean validateField(Object field, String placeholder) {
     if (field instanceof FTextField) {
       String value = ((FTextField) field).getText();
@@ -601,8 +600,7 @@ public class Clienti {
   /**
    * Svuota la mainWindow e inserisce la nuova pagina
    * 
-   * @param newPage Nuova pagina da inserire
-   */
+   * @param newPage Nuova pagina da inserire */
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);

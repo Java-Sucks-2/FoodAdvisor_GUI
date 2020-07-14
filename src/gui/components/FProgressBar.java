@@ -23,8 +23,8 @@ public class FProgressBar extends JProgressBar {
         this.setStringPainted(true);
         this.setForeground(new Color(237, 71, 53));
         this.setBackground(new Color(237, 206, 213));
-        UIManager.put("ProgressBar.selectionBackground", Color.GRAY);
-        UIManager.put("ProgressBar.selectionForeground", Color.WHITE);
+        UIManager.put("this.selectionBackground", Color.GRAY);
+        UIManager.put("this.selectionForeground", Color.WHITE);
         this.setBorderPainted(false);
         this.setFont(new Font("Manrope Medium", Font.PLAIN, 15));
     }
