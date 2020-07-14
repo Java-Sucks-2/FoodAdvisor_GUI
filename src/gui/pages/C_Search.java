@@ -24,7 +24,7 @@ public class C_Search {
     private FLabel userName_lbl;
     private FLabel title_lbl;
     public FTextField searchBar_tb;
-    public FList restaurants_lst;
+    public FList<String> restaurants_lst;
     public DefaultListModel<String> listModel;
 
     public FPage getPage() {
@@ -133,7 +133,7 @@ public class C_Search {
         gbc.insets = new Insets(0,0,0,0);
         setGridCoordinatesXY(gbc, 0, 3);
 
-        restaurants_lst = new FList(listModel);
+        restaurants_lst = new FList<String>(listModel);
         
         //ScrollPane
         JScrollPane scrollPane = new JScrollPane();

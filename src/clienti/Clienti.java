@@ -316,7 +316,7 @@ public class Clienti {
 
     searchPage.restaurants_lst.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-        FList list = (FList) arg0.getSource();
+        FList<String> list = (FList<String>)arg0.getSource();
         if (list.getSelectedValue() != null) {
           String restName = list.getSelectedValue().toLowerCase();
 
