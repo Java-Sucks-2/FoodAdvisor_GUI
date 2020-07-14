@@ -242,20 +242,22 @@ public class C_Reviews {
         String[] fields = reviewsRecords[i].split("\\|");
 
         FPage reviewElement = new FPage();
-        //reviewElement.setPreferredSize(new Dimension(150, 150));
-        reviewElement.setBackground(new Color(222,222,222));
+        int color = i%2 == 0 ? 222 : 200;
+        reviewElement.setBackground(new Color(color,color,color));
         reviewElement.setBorder(BorderFactory.createEmptyBorder());
         gbc = new GridBagConstraints();
 
         FLabel userName = new FLabel(fields[1]+":", new Font("Manrope Bold", Font.PLAIN, 18));
         gbc.insets = new Insets(20, 10, 0, 0);
-        //gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.WEST;
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 0, 0);
         reviewElement.add(userName, gbc);
 
         FLabel reviewTitle = new FLabel(fields[3], new Font("Manrope Medium", Font.PLAIN, 18));
         gbc.insets = new Insets(20, 10, 0, 0);
-        //gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.WEST;
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 1, 0);
         reviewElement.add(reviewTitle, gbc);
         
@@ -268,23 +270,27 @@ public class C_Reviews {
         reviewDescription.setFocusable(false);
         reviewDescription.setBackground(UIManager.getColor("reviewElement.background"));
         reviewDescription.setBorder(UIManager.getBorder("reviewElement.border"));
+
         gbc.insets = new Insets(5, 10, 20, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 2;
         setGridCoordinatesXY(gbc, 0, 1);
         reviewElement.add(reviewDescription, gbc);
 
         reviewElement.setAlignmentX(Component.LEFT_ALIGNMENT);
+        reviewElement.setAlignmentX(SwingConstants.LEFT);
         reviewsList.add(reviewElement);
       }
-
+      
       JScrollPane scrollPane = new JScrollPane();
-      scrollPane.setBorder(new EmptyBorder(new Insets(30,0,77,80)));
+      scrollPane.setBorder(new EmptyBorder(new Insets(30,50,77,130)));
       scrollPane.setOpaque(true);
       scrollPane.setBackground(Color.WHITE);
       scrollPane.getViewport().setBackground(Color.WHITE);
       scrollPane.setViewportView(reviewsList);
+      scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+      scrollPane.setAlignmentX(SwingConstants.LEFT);
 
       body.add(scrollPane);
 
