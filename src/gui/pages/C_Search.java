@@ -148,7 +148,11 @@ public class C_Search {
         page.add(scrollingList, gbc);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+    * Metodo per settare le coordinate più efficacemente
+    * @param gbc Istanza di GridBagConstraints
+    * @param x Colonna
+    * @param y Riga */
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
         gbc.gridx = x;
         gbc.gridy = y;

@@ -4,14 +4,11 @@ import java.awt.*;
 
 import java.io.IOException;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 
@@ -19,7 +16,6 @@ import src.classes.Restaurant;
 import src.classes.User;
 import src.gui.components.FButton;
 import src.gui.components.FLabel;
-import src.gui.components.FList;
 import src.gui.components.FPage;
 import src.gui.components.FProgressBar;
 import src.util.FileManager;
@@ -297,7 +293,11 @@ public class C_Reviews {
       page.add(body, BorderLayout.CENTER);
   }
 
-  //Metodo per settare le coordinate più efficacemente
+  /**
+   * Metodo per settare le coordinate più efficacemente
+   * @param gbc Istanza di GridBagConstraints
+   * @param x Colonna
+   * @param y Riga */
   public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
       gbc.gridx = x;
       gbc.gridy = y;

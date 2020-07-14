@@ -51,6 +51,7 @@ public class Ristoratori {
     });
   }
 
+  /** Costruttore della classe ristoratori */
   public Ristoratori() {
     registerFonts();
     mainWindow = new FWindow("FoodAdvisor Ristoratori");

@@ -73,6 +73,7 @@ public class Clienti {
     });
   }
 
+  /** Costruttore della classe clienti */
   public Clienti() {
     // setup della window
     registerFonts();

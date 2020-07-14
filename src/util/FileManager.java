@@ -16,6 +16,9 @@ import src.classes.Restaurant.TypeRestaurant;
 /** Classe responsabile per l'accesso ai file dati */
 public class FileManager {
 
+    /**
+     * Ottiene il path del progetto
+     * @return Path del progetto */
     public static String GetProjectPath() {
         String projectDir = "";
         try {
@@ -86,6 +89,9 @@ public class FileManager {
         }
     }
 
+    /**
+     * Ottiene una lista di istanze della classe Restaurant, contenute nel file EatAdvisor.dati
+     * @return Lista di Restaurant */
     public static List<Restaurant> GetRestaurants() {
         String[] records = GetFileRecords("EatAdvisor.dati");
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
