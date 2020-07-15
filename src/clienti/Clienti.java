@@ -356,17 +356,19 @@ public class Clienti {
 
     restaurantInfoPage.ratingsText_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-        if (user != null) {
-          if(restaurantInfoPage.action.equals("inserisci")) {
-            reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
-            addReviewInsertionPageListeners();
-            changePage(reviewInsertionPage.getPage());
-          } else if(restaurantInfoPage.action.equals("visualizza")) {
+        if (user != null && restaurantInfoPage.action.equals("inserisci")) {
+          reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+          addReviewInsertionPageListeners();
+          changePage(reviewInsertionPage.getPage());
+        }
+
+        if(restaurantInfoPage.action.equals("visualizza")) {
             reviewsPage = new C_Reviews(user, restaurantInfoPage.getRestaurant());
             addReviewsPageListeners();
             changePage(reviewsPage.getPage());
-          }
-        } else {
+        }
+        
+        if(user == null && restaurantInfoPage.action.equals("inserisci")) {
           JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore",
               JOptionPane.PLAIN_MESSAGE);
         }
@@ -439,9 +441,14 @@ public class Clienti {
 
     reviewsPage.insert_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-        reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
-        addReviewInsertionPageListeners();
-        changePage(reviewInsertionPage.getPage());
+        if(user != null) {
+          reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+          addReviewInsertionPageListeners();
+          changePage(reviewInsertionPage.getPage());
+        } else {
+          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore",
+              JOptionPane.PLAIN_MESSAGE);
+        }
       }
     });
   }

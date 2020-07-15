@@ -186,18 +186,16 @@ public class C_ReviewInsertion {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 2;
 
-        //Azioni del mouse
-        textField.addMouseListener(new MouseAdapter() {
-            public void mousePressed(final MouseEvent arg0) {
+        //Azioni di focus
+        textField.addFocusListener(new FocusAdapter() {
+            public void focusGained(final FocusEvent e) {
                 //Click del mouse (pressed)
                 if(textField.getText().equals("Descrizione")) {
                     textField.setText("");
                     textField.setForeground(Color.BLACK);
                 }
             }
-        });
-        //Azioni di focus
-        textField.addFocusListener(new FocusAdapter() {
+
             public void focusLost(final FocusEvent e) {
                 //Perdita di focus
                 if(textField.getText().equals("")){
