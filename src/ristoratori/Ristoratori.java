@@ -1,5 +1,21 @@
 package src.ristoratori;
 
+/** 
+ *  Università degli studi dell'Insubria
+ *  
+ *  Anno accademico 2019/2020 
+ *  Sede Varese
+ *  
+ *  Progetto di Laboratorio Interdisciplinare A 
+ * 
+ *  Loschiavo Christian 739894 Varese
+ *  Giubilei  Ivan      739892 Varese
+ *  Rossi     Nicolò    742626 Varese
+ *  Ferrario  Andrea    740485 Varese
+ * 
+ *  FoodAdvisor, applicazione Ristoratori
+ */
+
 import src.classes.Address;
 import src.classes.Address.TypeAddress;
 import src.classes.Restaurant;
@@ -35,6 +51,7 @@ public class Ristoratori {
     });
   }
 
+  /** Costruttore della classe ristoratori */
   public Ristoratori() {
     registerFonts();
     mainWindow = new FWindow("FoodAdvisor Ristoratori");
@@ -47,6 +64,7 @@ public class Ristoratori {
     registerPage.getPage().requestFocusInWindow();
   }
 
+  /** Aggiunge i listener della prima pagina di registrazione */
   public void addRegisterPageListeners() {
     registerPage.continue_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -77,6 +95,7 @@ public class Ristoratori {
     });
   }
 
+  /** Aggiunge i listener della seconda pagina di registrazione */
   public void addRegisterPage2Listeners() {
     registerPage2.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -107,6 +126,7 @@ public class Ristoratori {
     });
   }
 
+  /** Aggiunge i listener della terza pagina di registrazione */
   public void addRegisterPage3Listeners() {
     registerPage3.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -162,7 +182,10 @@ public class Ristoratori {
             URL website = null;
 
             try { website = new URL(registerPage.website_tf.getText()); }
-            catch(MalformedURLException e) { System.err.println(e); }
+            catch(MalformedURLException e) {
+              System.out.println("Errore Ristoratori :303");
+              System.err.println(e);
+            }
 
             TypeRestaurant restType = TypeRestaurant.valueOf(registerPage.type_cb.getSelectedItem().toString());
 
@@ -186,6 +209,12 @@ public class Ristoratori {
     });
   }
 
+  /**
+   * Svuota il contenuto del campo desiderato e lo reinizializza con il suo
+   * placeholder originale
+   * 
+   * @param field       Campo da svuotare
+   * @param placeholder Placeholder default del campo */
   public void emptyField(Object field, String placeholder) {
     if(field instanceof FTextField) {
       ((FTextField)field).setText(placeholder);
@@ -196,6 +225,7 @@ public class Ristoratori {
     }
   }
 
+  /** Svuota tutti i campi delle pagine di registrazione */
   public void emptyFields() {
     registerPage.name_tf.setText("Nome");
     registerPage.name_tf.setForeground(Color.GRAY);
@@ -219,10 +249,18 @@ public class Ristoratori {
     registerPage3.zipcode_tf.setForeground(Color.GRAY);
   }
 
+  /**
+   * Verifica il contenuto di un campo, se il contenuto è uguale al valore del
+   * placeholder, allora non è stato inserito nulla e quindi il contenuto di quel
+   * campo non è valido.
+   * 
+   * @param field       Campo da verificare
+   * @param placeholder Valore di default del campo (placeholder)
+   * @return Esito della verifica (boolean) */
   public boolean validateField(Object field, String placeholder) {
     if(field instanceof FTextField) {
       String value = ((FTextField)field).getText();
-      if(value.equals(placeholder) || value.contains("|")) {
+      if(value.equals(placeholder) || value.contains("|") || value.contains("\n")) {
         ((FTextField)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
@@ -243,24 +281,38 @@ public class Ristoratori {
     return false;
   }
 
+  /**
+   * Verifica che una stringa contenga solamente cifre numeriche
+   * @param number Stringa da controllare
+   * @return Esito del controllo (boolean) */
   public boolean isNumeric(String number) {
     try {
       Long.parseLong(number);
       return true;
     } catch(NumberFormatException e) {
+      System.out.println("Errore Ristoratori :290");
       return false;
     }
   }
 
+  /**
+   * Verifica che una stringa contenga un URL valido
+   * @param url Stringa da controllare
+   * @return Esito del controllo (boolean) */
   public boolean isURLValid(String url) {
     try {
       new URL(url);
       return true;
     } catch(MalformedURLException e) {
+      System.out.println("Errore Ristoratori :303");
       return false;
     }
   }
 
+  /**
+   * Svuota la mainWindow e inserisce la nuova pagina
+   * 
+   * @param newPage Nuova pagina da inserire */
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);
@@ -275,10 +327,6 @@ public class Ristoratori {
 
       InputStream is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Bold.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraBold.ttf");
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraLight.ttf");
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
       is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Light.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
       is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Medium.ttf");
@@ -289,6 +337,7 @@ public class Ristoratori {
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
+      System.out.println("Errore caricamento :335");
       e.printStackTrace();
     }
   }

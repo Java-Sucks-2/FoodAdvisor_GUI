@@ -16,12 +16,15 @@ import src.classes.Restaurant.TypeRestaurant;
 /** Classe responsabile per l'accesso ai file dati */
 public class FileManager {
 
+    /**
+     * Ottiene il path del progetto
+     * @return Path del progetto */
     public static String GetProjectPath() {
         String projectDir = "";
         try {
             projectDir = (new File(FileManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile()).getPath();
         } catch(Exception e) {
-            // Exit
+            System.out.println("Errore caricamento :27");
         }
         return projectDir;
     }
@@ -41,7 +44,7 @@ public class FileManager {
             return true;
 
         } catch(IOException e) {
-            /* Exception handling */
+            System.out.println("Errore file manager :47");
             return false;
         }
     }
@@ -61,7 +64,7 @@ public class FileManager {
             return true;
 
         } catch(IOException e) {
-            /* Exception handling */
+            System.out.println("Errore file manager :67");
             return false;
         }
     }
@@ -81,11 +84,14 @@ public class FileManager {
             return true;
 
         } catch(IOException e) {
-            /* Exception handling */
+            System.out.println("Errore file manager :87");
             return false;
         }
     }
 
+    /**
+     * Ottiene una lista di istanze della classe Restaurant, contenute nel file EatAdvisor.dati
+     * @return Lista di Restaurant */
     public static List<Restaurant> GetRestaurants() {
         String[] records = GetFileRecords("EatAdvisor.dati");
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
@@ -111,6 +117,7 @@ public class FileManager {
                     restaurants.add(restaurant);
 
                 } catch(MalformedURLException e) {
+                    System.out.println("Errore file manager :120");
                     System.err.println(e);
                 }
             }
@@ -168,9 +175,9 @@ public class FileManager {
             return data;
 
         } catch(FileNotFoundException e) {
-            /* Exception handling */
+            System.out.println("Errore file manager :178");
         } catch(IOException e) {
-            /* Exception handling */
+            System.out.println("Errore file manager :180");
         }
 
         return "Error";
@@ -193,7 +200,7 @@ public class FileManager {
             return records;
 
         } catch(Exception e) {
-            /* Exception handling */
+            System.out.println("Errore file manager :203");
             return new String[] {};
         }
     }

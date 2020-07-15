@@ -53,7 +53,7 @@ public class C_RestaurantInfo {
         try {
             backIcon_lbl = new FLabel("assets/BackIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :56");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -75,7 +75,7 @@ public class C_RestaurantInfo {
         try {
             userIcon_lbl = new FLabel(iconPath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :78");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -112,7 +112,7 @@ public class C_RestaurantInfo {
         try {
             restImage_lbl = new FLabel(imagePath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :115");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -149,7 +149,7 @@ public class C_RestaurantInfo {
         try {
             ratings_lbl = new FLabel("assets/" + numberOfStars + "Stars.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :152");
         }
         gbc.insets = new Insets(0, 50, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
@@ -182,7 +182,7 @@ public class C_RestaurantInfo {
         try {
             location_lbl = new FLabel("assets/LocationIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :185");
         }
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
@@ -207,7 +207,7 @@ public class C_RestaurantInfo {
         try {
             website_lbl = new FLabel("assets/WebsiteIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :210");
         }
         gbc.insets = new Insets(15, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
@@ -224,7 +224,7 @@ public class C_RestaurantInfo {
         try {
             telephone_lbl = new FLabel("assets/TelephoneIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :227");
         }
         gbc.insets = new Insets(15, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
@@ -241,7 +241,7 @@ public class C_RestaurantInfo {
         try {
             restTypology_lbl = new FLabel("assets/RestTypologyIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :244");
         }
         gbc.insets = new Insets(15, 0, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
@@ -270,7 +270,11 @@ public class C_RestaurantInfo {
         page.add(body, BorderLayout.CENTER);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+     * Metodo per settare le coordinate più efficacemente
+     * @param gbc Istanza di GridBagConstraints
+     * @param x Colonna
+     * @param y Riga */
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
         gbc.gridx = x;
         gbc.gridy = y;

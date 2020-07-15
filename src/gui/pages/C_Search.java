@@ -24,7 +24,7 @@ public class C_Search {
     private FLabel userName_lbl;
     private FLabel title_lbl;
     public FTextField searchBar_tb;
-    public FList restaurants_lst;
+    public FList<String> restaurants_lst;
     public DefaultListModel<String> listModel;
 
     public FPage getPage() {
@@ -43,7 +43,7 @@ public class C_Search {
         try {
             backIcon_lbl = new FLabel("assets/BackIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :46");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -65,7 +65,7 @@ public class C_Search {
         try {
             userIcon_lbl = new FLabel(iconPath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :68");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -133,7 +133,7 @@ public class C_Search {
         gbc.insets = new Insets(0,0,0,0);
         setGridCoordinatesXY(gbc, 0, 3);
 
-        restaurants_lst = new FList(listModel);
+        restaurants_lst = new FList<String>(listModel);
         
         //ScrollPane
         JScrollPane scrollPane = new JScrollPane();
@@ -148,7 +148,11 @@ public class C_Search {
         page.add(scrollingList, gbc);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+    * Metodo per settare le coordinate più efficacemente
+    * @param gbc Istanza di GridBagConstraints
+    * @param x Colonna
+    * @param y Riga */
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
         gbc.gridx = x;
         gbc.gridy = y;

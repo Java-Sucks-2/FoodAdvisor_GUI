@@ -1,5 +1,21 @@
 package src.clienti;
 
+/** 
+ *  Università degli studi dell'Insubria
+ *  
+ *  Anno accademico 2019/2020 
+ *  Sede Varese
+ *  
+ *  Progetto di Laboratorio Interdisciplinare A 
+ * 
+ *  Loschiavo Christian 739894 Varese
+ *  Giubilei  Ivan      739892 Varese
+ *  Rossi     Nicolò    742626 Varese
+ *  Ferrario  Andrea    740485 Varese
+ * 
+ *  FoodAdvisor, applicazione Clienti
+ */
+
 import src.classes.User;
 import src.classes.Restaurant;
 import src.classes.Review;
@@ -17,6 +33,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
+
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -50,13 +67,10 @@ public class Clienti {
   private static List<Restaurant> restaurants;
 
   public static void main(final String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        new Clienti();
-      }
-    });
+    SwingUtilities.invokeLater(() -> new Clienti());
   }
 
+  /** Costruttore della classe clienti */
   public Clienti() {
     // setup della window
     registerFonts();
@@ -77,8 +91,7 @@ public class Clienti {
    * Registra un nuovo utente inserendolo nel file "Utenti.dati"
    * 
    * @param user Oggetto User da registrare
-   * @return Esito della registrazione (boolean)
-   */
+   * @return Esito della registrazione (boolean) */
   public static boolean RegisterNewUser(User user) {
     return FileManager.SaveUser(user);
   }
@@ -88,8 +101,7 @@ public class Clienti {
    * 
    * @param email    Email da autenticare
    * @param password Password da autenticare
-   * @return Esito dell'autenticazione (boolean)
-   */
+   * @return Esito dell'autenticazione (boolean) */
   public static boolean AuthenticateUser(String email, String password) {
     // Array di stringhe contenente l'intero contenuto del file Utenti.dati
     String[] records = FileManager.GetFileRecords("Utenti.dati");
@@ -162,7 +174,7 @@ public class Clienti {
     });
   }
 
-  /** Aggiunge i listeners della prima pagina di registrazione */
+  /** Aggiunge i listeners della prima pagina di registrazione*/
   public void addRegisterPageListeners() {
     registerPage.back_btn.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -316,7 +328,7 @@ public class Clienti {
 
     searchPage.restaurants_lst.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-        FList list = (FList) arg0.getSource();
+        FList<String> list = (FList<String>)arg0.getSource();
         if (list.getSelectedValue() != null) {
           String restName = list.getSelectedValue().toLowerCase();
 
@@ -341,17 +353,19 @@ public class Clienti {
 
     restaurantInfoPage.ratingsText_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
-        if (user != null) {
-          if(restaurantInfoPage.action.equals("inserisci")) {
-            reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
-            addReviewInsertionPageListeners();
-            changePage(reviewInsertionPage.getPage());
-          } else if(restaurantInfoPage.action.equals("visualizza")) {
+        if (user != null && restaurantInfoPage.action.equals("inserisci")) {
+          reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+          addReviewInsertionPageListeners();
+          changePage(reviewInsertionPage.getPage());
+        }
+
+        if(restaurantInfoPage.action.equals("visualizza")) {
             reviewsPage = new C_Reviews(user, restaurantInfoPage.getRestaurant());
             addReviewsPageListeners();
             changePage(reviewsPage.getPage());
-          }
-        } else {
+        }
+        
+        if(user == null && restaurantInfoPage.action.equals("inserisci")) {
           JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore",
               JOptionPane.PLAIN_MESSAGE);
         }
@@ -359,8 +373,7 @@ public class Clienti {
     });
   }
 
-  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un
-   * ristorante */
+  /** Aggiunge i listeners della pagina di inserimento delle recensioni per un ristorante*/
   public void addReviewInsertionPageListeners() {
     reviewInsertionPage.backIcon_lbl.addMouseListener(new MouseAdapter() {
       public void mouseReleased(final MouseEvent arg0) {
@@ -372,7 +385,8 @@ public class Clienti {
       public void mouseReleased(final MouseEvent arg0) {
         canChangePage = true;
 
-        if (reviewInsertionPage.textField.getText().length() > 256)
+        String textFieldContent = reviewInsertionPage.textField.getText();
+        if (textFieldContent.length() > 256 || textFieldContent.contains("|") || textFieldContent.contains("\n"))
           emptyField(reviewInsertionPage.textField, "Descrizione");
 
         canChangePage &= validateField(reviewInsertionPage.reviewTitle_tf, "Titolo recensione");
@@ -422,24 +436,29 @@ public class Clienti {
         changePage(restaurantInfoPage.getPage());
       }
     });
+
+    reviewsPage.insert_btn.addMouseListener(new MouseAdapter() {
+      public void mouseReleased(final MouseEvent arg0) {
+        if(user != null) {
+          reviewInsertionPage = new C_ReviewInsertion(user, restaurantInfoPage.getRestaurant());
+          addReviewInsertionPageListeners();
+          changePage(reviewInsertionPage.getPage());
+        } else {
+          JOptionPane.showMessageDialog(null, "Devi essere loggato per lasciare una recensione", "Errore",
+              JOptionPane.PLAIN_MESSAGE);
+        }
+      }
+    });
   }
 
   /**
    * Filtra una lista data in input in base ad un parametro
    * 
    * @param list       Lista di oggetti Restaurant originale da filtrare
-   * @param filterType Stringa rappresentante l'attributo da filtrare: (Town,
-   *                   Typology, Name, Town&Typology)
+   * @param filterType Stringa rappresentante l'attributo da filtrare: (Town, Typology, Name, Town&Typology)
    * @param values     Array di stringhe contenenti i valori per cui filtrare
-   * @return Lista di ristoranti filtrata
-   */
+   * @return Lista di ristoranti filtrata */
   public static List<Restaurant> FilterListBy(List<Restaurant> list, String filterType, String[] values) {
-    /* FORMATO RECORD RISTORANTE */
-    /*
-     * 2|Mesopotamia|Via|Isonzo|10|Azzate|VA|21022|3883085877|https://www.google.it/
-     * |Fusion
-     */
-
     if (list.isEmpty())
       return new ArrayList<Restaurant>();
     if (values[0].equals(""))
@@ -481,8 +500,7 @@ public class Clienti {
    * placeholder originale
    * 
    * @param field       Campo da svuotare
-   * @param placeholder Placeholder default del campo
-   */
+   * @param placeholder Placeholder default del campo */
   public void emptyField(Object field, String placeholder) {
     if (field instanceof FTextField) {
       ((FTextField) field).setText(placeholder);
@@ -540,12 +558,11 @@ public class Clienti {
    * 
    * @param field       Campo da verificare
    * @param placeholder Valore di default del campo (placeholder)
-   * @return Esito della verifica (boolean)
-   */
+   * @return Esito della verifica (boolean) */
   public boolean validateField(Object field, String placeholder) {
     if (field instanceof FTextField) {
       String value = ((FTextField) field).getText();
-      if (value.equals(placeholder) || value.contains("|")) {
+      if (value.equals(placeholder) || value.contains("|") || value.contains("\n")) {
         ((FTextField) field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
@@ -589,8 +606,7 @@ public class Clienti {
   /**
    * Svuota la mainWindow e inserisce la nuova pagina
    * 
-   * @param newPage Nuova pagina da inserire
-   */
+   * @param newPage Nuova pagina da inserire */
   public void changePage(FPage newPage) {
     mainWindow.getContentPane().removeAll();
     mainWindow.getContentPane().add(newPage);
@@ -605,10 +621,6 @@ public class Clienti {
 
       InputStream is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Bold.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraBold.ttf");
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraLight.ttf");
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
       is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Light.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
       is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Medium.ttf");
@@ -619,6 +631,7 @@ public class Clienti {
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
+      System.out.println("Errore Clienti :638");
       e.printStackTrace();
     }
   }

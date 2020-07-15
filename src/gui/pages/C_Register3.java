@@ -113,8 +113,9 @@ public class C_Register3 {
                     password1_pf.setForeground(Color.BLACK);
                 }
             }
-            });
-            password1_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        });
+        password1_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         page.add(password1_pf, gbc);
@@ -123,7 +124,7 @@ public class C_Register3 {
         try {
             questionMark1_image = new FLabel("assets/QM_Red_32.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :127");
         }
         //Azione del mouse
         questionMark1_image.addMouseListener(new MouseAdapter() {
@@ -167,7 +168,7 @@ public class C_Register3 {
         try {
             questionMark2_image = new FLabel("assets/QM_Red_32.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :171");
         }
         //Azioni del mouse
         questionMark2_image.addMouseListener(new MouseAdapter() {
@@ -221,7 +222,7 @@ public class C_Register3 {
         try {
             procedure_lb = new FLabel("assets/Step3.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :225");
         }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
@@ -230,7 +231,11 @@ public class C_Register3 {
         bts_pane.add(procedure_lb, gbc);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+     * Metodo per settare le coordinate più efficacemente
+     * @param gbc Istanza di GridBagConstraints
+     * @param x Colonna
+     * @param y Riga */
     public static void setGridCoordinatesXY(final GridBagConstraints gbc, final int x, final int y) {
         gbc.gridx = x;
         gbc.gridy = y;

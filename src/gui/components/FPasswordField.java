@@ -13,10 +13,11 @@ public class FPasswordField extends JPasswordField {
     private static final long serialVersionUID = 1L;
     
     public FPasswordField(int i, Font font) {
-        super(i);
+        super(36);
         //Parte grafica
-        this.setFont(font);
+        //this.setFont(font);
         this.setHorizontalAlignment(JPasswordField.CENTER);
+        this.setFont(new Font("Arial", Font.PLAIN, 21));
         this.setPreferredSize(new Dimension(100, 40));
     }
 }

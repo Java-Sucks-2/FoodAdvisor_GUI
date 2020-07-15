@@ -168,14 +168,18 @@ public class R_Register {
         try {
             procedure_lb = new FLabel("assets/Step1.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :171");
         }
         setGridCoordinatesXY(gbc, 0, 7);
         gbc.insets = new Insets(30, 0, 0, 0);
         page.add(procedure_lb, gbc);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+     * Metodo per settare le coordinate più efficacemente
+     * @param gbc Istanza di GridBagConstraints
+     * @param x Colonna
+     * @param y Riga */
     public static void setGridCoordinatesXY(final GridBagConstraints gbc, final int x, final int y) {
         gbc.gridx = x;
         gbc.gridy = y;

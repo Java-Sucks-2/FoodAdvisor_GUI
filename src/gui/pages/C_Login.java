@@ -20,9 +20,11 @@ public class C_Login {
     public FTextField email_tf;
     public FPasswordField password_pf;
     private FLabel questionMark_image;
+    
     public FButton register_btn;
     private FPage bts_pane;
     public FButton login_btn;
+
     final FLabel info_lbl;
     public FLabel guest_lb; 
 
@@ -118,6 +120,7 @@ public class C_Login {
 
         //Parte grafica
         password_pf.setBorder(new LineBorder(Color.BLACK, 1));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(30, 0, 0, 0);
         setGridCoordinatesXY(gbc, 0, 3);
         page.add(password_pf, gbc);
@@ -126,7 +129,7 @@ public class C_Login {
         try {
             questionMark_image = new FLabel("assets/QM_Red_32.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :132");
         }
         //Azioni dell'icona
         questionMark_image.addMouseListener(new MouseAdapter() {
@@ -202,7 +205,11 @@ public class C_Login {
         bts_pane.add(guest_lb, gbc);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+     * Metodo per settare le coordinate più efficacemente
+     * @param gbc Istanza di GridBagConstraints
+     * @param x Colonna
+     * @param y Riga */
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
         gbc.gridx = x;
         gbc.gridy = y;

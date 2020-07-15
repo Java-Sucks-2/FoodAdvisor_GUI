@@ -200,7 +200,7 @@ public class R_Register3 {
         try {
             procedure_lb = new FLabel("assets/Step3.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :203");
         }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;
@@ -209,7 +209,11 @@ public class R_Register3 {
         bts_pane.add(procedure_lb, gbc);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+     * Metodo per settare le coordinate più efficacemente
+     * @param gbc Istanza di GridBagConstraints
+     * @param x Colonna
+     * @param y Riga */
     public static void setGridCoordinatesXY(final GridBagConstraints gbc, final int x, final int y) {
         gbc.gridx = x;
         gbc.gridy = y;

@@ -11,6 +11,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.border.LineBorder;
 
 import src.classes.Restaurant;
@@ -52,7 +53,7 @@ public class C_ReviewInsertion {
         try {
             backIcon_lbl = new FLabel("assets/BackIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :56");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -74,7 +75,7 @@ public class C_ReviewInsertion {
         try {
             userIcon_lbl = new FLabel(iconPath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :78");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -111,7 +112,7 @@ public class C_ReviewInsertion {
         try {
             restImage_lbl = new FLabel(imagePath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :115");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -175,6 +176,11 @@ public class C_ReviewInsertion {
         textField.setForeground(Color.GRAY);
         textField.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
 
+        textField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "none");
+        textField.getInputMap().put(KeyStroke.getKeyStroke("RETURN"), "none");
+        textField.getInputMap().put(KeyStroke.getKeyStroke("Enter"), "none");
+        textField.getInputMap().put(KeyStroke.getKeyStroke("Return"), "none");
+
         scrollPane = new JScrollPane(textField);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
@@ -186,18 +192,16 @@ public class C_ReviewInsertion {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 2;
 
-        //Azioni del mouse
-        textField.addMouseListener(new MouseAdapter() {
-            public void mousePressed(final MouseEvent arg0) {
+        //Azioni di focus
+        textField.addFocusListener(new FocusAdapter() {
+            public void focusGained(final FocusEvent e) {
                 //Click del mouse (pressed)
                 if(textField.getText().equals("Descrizione")) {
                     textField.setText("");
                     textField.setForeground(Color.BLACK);
                 }
             }
-        });
-        //Azioni di focus
-        textField.addFocusListener(new FocusAdapter() {
+
             public void focusLost(final FocusEvent e) {
                 //Perdita di focus
                 if(textField.getText().equals("")){
@@ -223,7 +227,11 @@ public class C_ReviewInsertion {
         page.add(body, BorderLayout.CENTER);
     }
 
-    //Metodo per settare le coordinate più efficacemente
+    /**
+     * Metodo per settare le coordinate più efficacemente
+     * @param gbc Istanza di GridBagConstraints
+     * @param x Colonna
+     * @param y Riga */
     public static void setGridCoordinatesXY(GridBagConstraints gbc, int x, int y) {
         gbc.gridx = x;
         gbc.gridy = y;
