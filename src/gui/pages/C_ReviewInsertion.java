@@ -11,6 +11,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.border.LineBorder;
 
 import src.classes.Restaurant;
@@ -174,6 +175,11 @@ public class C_ReviewInsertion {
         textField.setFont(new Font("Manrope", Font.PLAIN, 20));
         textField.setForeground(Color.GRAY);
         textField.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
+
+        textField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "none");
+        textField.getInputMap().put(KeyStroke.getKeyStroke("RETURN"), "none");
+        textField.getInputMap().put(KeyStroke.getKeyStroke("Enter"), "none");
+        textField.getInputMap().put(KeyStroke.getKeyStroke("Return"), "none");
 
         scrollPane = new JScrollPane(textField);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));

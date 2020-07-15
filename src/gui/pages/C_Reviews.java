@@ -289,7 +289,7 @@ public class C_Reviews {
         gbc.insets = new Insets(5, 10, 20, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         setGridCoordinatesXY(gbc, 0, 1);
         reviewElement.add(reviewDescription, gbc);
 
@@ -299,7 +299,7 @@ public class C_Reviews {
       }
       
       JScrollPane scrollPane = new JScrollPane();
-      scrollPane.setBorder(new EmptyBorder(new Insets(30,50,77,130)));
+      scrollPane.setBorder(new EmptyBorder(new Insets(30,20,77,100)));
       scrollPane.setOpaque(true);
       scrollPane.setBackground(Color.WHITE);
       scrollPane.getViewport().setBackground(Color.WHITE);

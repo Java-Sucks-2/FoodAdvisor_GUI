@@ -257,7 +257,7 @@ public class Ristoratori {
   public boolean validateField(Object field, String placeholder) {
     if(field instanceof FTextField) {
       String value = ((FTextField)field).getText();
-      if(value.equals(placeholder) || value.contains("|")) {
+      if(value.equals(placeholder) || value.contains("|") || value.contains("\n")) {
         ((FTextField)field).setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         return false;
       } else {
