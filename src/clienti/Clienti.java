@@ -624,10 +624,6 @@ public class Clienti {
 
       InputStream is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Bold.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraBold.ttf");
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
-      is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-ExtraLight.ttf");
-      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
       is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Light.ttf");
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
       is = getClass().getResourceAsStream("/assets/Manrope/static/Manrope-Medium.ttf");
