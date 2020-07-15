@@ -120,8 +120,23 @@ public class C_Reviews {
       gbc.insets = new Insets(0,20,0,0);
       subHeader.add(restName_lbl, gbc);
 
+      String[] reviews = FileManager.GetRestaurantReviews(restaurant.GetId());
+      int[] starsDistribution = new int[5];
+      double averageScore = 0;
+
+      for(String review: reviews) {
+        String[] fields = review.split("\\|");
+        starsDistribution[Integer.parseInt(fields[2])-1]++;
+      }
+
+      for(int i = 0; i < 5; i++)
+        averageScore += starsDistribution[i] * (i+1);
+
+      averageScore /= reviews.length;
+      averageScore = Math.round(averageScore * 10) / 10.0;
+
       //Label "Recensioni"
-      FLabel reviews_lbl = new FLabel("Recensioni", new Font("Manrope Regular", Font.PLAIN, 30));
+      FLabel reviews_lbl = new FLabel("Recensioni (" + averageScore + ")", new Font("Manrope Regular", Font.PLAIN, 30));
       gbc.anchor = GridBagConstraints.WEST;
       setGridCoordinatesXY(gbc, 1, 1);
       gbc.insets = new Insets(0,20,0,0);
@@ -142,14 +157,6 @@ public class C_Reviews {
       gbc = new GridBagConstraints();
 
       FPage leftSide = new FPage();
-
-      String[] reviews = FileManager.GetRestaurantReviews(restaurant.GetId());
-      int[] starsDistribution = new int[5];
-
-      for(String review: reviews) {
-          String[] fields = review.split("\\|");
-          starsDistribution[Integer.parseInt(fields[2])-1]++;
-      }
 
       FLabel fiveStars_lbl = new FLabel("Eccellente", new Font("Manrope Regular", Font.PLAIN, 20));
       gbc.insets = new Insets(10, 20, 0, 0);
@@ -256,6 +263,18 @@ public class C_Reviews {
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 1, 0);
         reviewElement.add(reviewTitle, gbc);
+
+        FLabel starsImage;
+
+        try {
+          starsImage = new FLabel("assets/"+fields[2]+"StarsSmall.png");
+          gbc.insets = new Insets(20,10,0,0);
+          gbc.anchor = GridBagConstraints.WEST;
+          setGridCoordinatesXY(gbc, 2, 0);
+          reviewElement.add(starsImage, gbc);
+        } catch(IOException e) {
+          // Exit
+        }
         
         JTextArea reviewDescription = new JTextArea();
         reviewDescription.setText(fields[4]);
