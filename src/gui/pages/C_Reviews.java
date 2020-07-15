@@ -47,7 +47,7 @@ public class C_Reviews {
       try {
           backIcon_lbl = new FLabel("assets/BackIcon.png");
       } catch(IOException e) {
-          // Exit
+        System.out.println("Errore caricamento :50");
       }
       gbc.fill = GridBagConstraints.HORIZONTAL;
       gbc.weightx = 0.06;
@@ -69,7 +69,7 @@ public class C_Reviews {
       try {
           userIcon_lbl = new FLabel(iconPath);
       } catch(IOException e) {
-          // Exit
+        System.out.println("Errore caricamento :72");
       }
       gbc.fill = GridBagConstraints.HORIZONTAL;
       gbc.weightx = 0.06;
@@ -103,6 +103,7 @@ public class C_Reviews {
       try {
         restImage_lbl = new FLabel(imagePath);
       } catch(IOException e) {
+        System.out.println("Errore caricamento :106");
         e.printStackTrace();
       }
 
@@ -253,14 +254,12 @@ public class C_Reviews {
         FLabel userName = new FLabel(fields[1]+":", new Font("Manrope Bold", Font.PLAIN, 18));
         gbc.insets = new Insets(20, 10, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 0, 0);
         reviewElement.add(userName, gbc);
 
         FLabel reviewTitle = new FLabel(fields[3], new Font("Manrope Medium", Font.PLAIN, 18));
         gbc.insets = new Insets(20, 10, 0, 0);
         gbc.anchor = GridBagConstraints.WEST;
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         setGridCoordinatesXY(gbc, 1, 0);
         reviewElement.add(reviewTitle, gbc);
 
@@ -273,7 +272,7 @@ public class C_Reviews {
           setGridCoordinatesXY(gbc, 2, 0);
           reviewElement.add(starsImage, gbc);
         } catch(IOException e) {
-          // Exit
+          System.out.println("Errore caricamento :275");
         }
         
         JTextArea reviewDescription = new JTextArea();

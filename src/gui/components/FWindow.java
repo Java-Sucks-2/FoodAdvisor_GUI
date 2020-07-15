@@ -22,7 +22,7 @@ public class FWindow extends JFrame {
         try {
             this.setIconImage(ImageIO.read(is));
         } catch(Exception e) {
-            // Exit
+            System.out.println("Errore FWindow :25");
         }
     }
 } 

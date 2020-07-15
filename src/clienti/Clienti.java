@@ -635,6 +635,7 @@ public class Clienti {
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
+      System.out.println("Errore Clienti :638");
       e.printStackTrace();
     }
   }

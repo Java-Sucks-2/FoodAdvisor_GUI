@@ -53,7 +53,7 @@ public class C_ReviewInsertion {
         try {
             backIcon_lbl = new FLabel("assets/BackIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :56");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -75,7 +75,7 @@ public class C_ReviewInsertion {
         try {
             userIcon_lbl = new FLabel(iconPath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :78");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -112,7 +112,7 @@ public class C_ReviewInsertion {
         try {
             restImage_lbl = new FLabel(imagePath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :115");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;

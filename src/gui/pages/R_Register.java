@@ -168,7 +168,7 @@ public class R_Register {
         try {
             procedure_lb = new FLabel("assets/Step1.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :171");
         }
         setGridCoordinatesXY(gbc, 0, 7);
         gbc.insets = new Insets(30, 0, 0, 0);

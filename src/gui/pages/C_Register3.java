@@ -124,7 +124,7 @@ public class C_Register3 {
         try {
             questionMark1_image = new FLabel("assets/QM_Red_32.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :127");
         }
         //Azione del mouse
         questionMark1_image.addMouseListener(new MouseAdapter() {
@@ -168,7 +168,7 @@ public class C_Register3 {
         try {
             questionMark2_image = new FLabel("assets/QM_Red_32.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :171");
         }
         //Azioni del mouse
         questionMark2_image.addMouseListener(new MouseAdapter() {
@@ -222,7 +222,7 @@ public class C_Register3 {
         try {
             procedure_lb = new FLabel("assets/Step3.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :225");
         }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;

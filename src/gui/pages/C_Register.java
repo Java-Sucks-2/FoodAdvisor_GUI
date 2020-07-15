@@ -189,7 +189,7 @@ public class C_Register {
         try {
             procedure_lb = new FLabel("assets/Step1.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :192");
         }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;

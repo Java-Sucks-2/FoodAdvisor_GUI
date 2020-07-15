@@ -173,7 +173,7 @@ public class R_Register2 {
         try {
             procedure_lb = new FLabel("assets/Step2.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :176");
         }
         setGridCoordinatesXY(gbc, 0, 1);
         gbc.gridwidth = 3;

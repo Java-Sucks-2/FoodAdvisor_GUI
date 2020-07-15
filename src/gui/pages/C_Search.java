@@ -43,7 +43,7 @@ public class C_Search {
         try {
             backIcon_lbl = new FLabel("assets/BackIcon.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :46");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;
@@ -65,7 +65,7 @@ public class C_Search {
         try {
             userIcon_lbl = new FLabel(iconPath);
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :68");
         }
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.06;

@@ -129,7 +129,7 @@ public class C_Login {
         try {
             questionMark_image = new FLabel("assets/QM_Red_32.png");
         } catch(IOException e) {
-            // Exit
+            System.out.println("Errore caricamento :132");
         }
         //Azioni dell'icona
         questionMark_image.addMouseListener(new MouseAdapter() {

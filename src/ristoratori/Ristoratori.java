@@ -182,7 +182,10 @@ public class Ristoratori {
             URL website = null;
 
             try { website = new URL(registerPage.website_tf.getText()); }
-            catch(MalformedURLException e) { System.err.println(e); }
+            catch(MalformedURLException e) {
+              System.out.println("Errore Ristoratori :303");
+              System.err.println(e);
+            }
 
             TypeRestaurant restType = TypeRestaurant.valueOf(registerPage.type_cb.getSelectedItem().toString());
 
@@ -287,6 +290,7 @@ public class Ristoratori {
       Long.parseLong(number);
       return true;
     } catch(NumberFormatException e) {
+      System.out.println("Errore Ristoratori :290");
       return false;
     }
   }
@@ -300,6 +304,7 @@ public class Ristoratori {
       new URL(url);
       return true;
     } catch(MalformedURLException e) {
+      System.out.println("Errore Ristoratori :303");
       return false;
     }
   }
@@ -332,6 +337,7 @@ public class Ristoratori {
       ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
     }
     catch(Exception e) {
+      System.out.println("Errore caricamento :335");
       e.printStackTrace();
     }
   }

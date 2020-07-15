@@ -35,6 +35,7 @@ public class Security {
                 hashValue = sb.append(String.format("%x", b)).toString();
 
         } catch(Exception e) {
+            System.out.println("Errore Security :38");
             System.exit(0);
         }
 
