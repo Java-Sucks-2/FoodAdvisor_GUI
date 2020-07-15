@@ -306,6 +306,8 @@ public class C_Reviews {
       scrollPane.setViewportView(reviewsList);
       scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
       scrollPane.setAlignmentX(SwingConstants.LEFT);
+      scrollPane.getViewport().setViewPosition(new Point(0,0));
+      scrollPane.getVerticalScrollBar().setValue(0);
 
       body.add(scrollPane);
 

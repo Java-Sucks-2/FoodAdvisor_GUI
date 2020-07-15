@@ -35,7 +35,7 @@ public class Security {
                 hashValue = sb.append(String.format("%x", b)).toString();
 
         } catch(Exception e) {
-            /* Exception handling */
+            System.exit(0);
         }
 
         // Ritorno la stringa in SHA1
